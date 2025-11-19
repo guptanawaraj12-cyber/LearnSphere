@@ -1,81 +1,99 @@
-// Burger menu toggle
-const burger = document.querySelector('.burger');
-const nav = document.querySelector('.nav-links');
-burger.addEventListener('click', () => {
-  nav.classList.toggle('active');
+// ---------------- Particles ----------------
+particlesJS("particles-js", {
+  "particles": {
+    "number": { "value": 90 },
+    "color": { "value": ["#ff007f","#ff3d00","#f6ff00","#32ff45","#00eaff","#8b00ff"] },
+    "shape": { "type": "circle" },
+    "opacity": { "value": 0.7, "random": true },
+    "size": { "value": 4, "random": true },
+    "line_linked": { "enable": true, "distance": 130, "color": "#00eaff", "opacity": 0.3, "width": 1 },
+    "move": { "enable": true, "speed": 2.2, "direction": "none", "random": true, "straight": false, "out_mode": "out" }
+  },
+  "interactivity": { "events": { "onhover": { "enable": true, "mode": "grab" }, "onclick": { "enable": false } } },
+  "retina_detect": true
 });
 
-// Toggle Login/Register Forms
+// ---------------- Toggle Forms ----------------
 const loginForm = document.getElementById('loginForm');
 const registerForm = document.getElementById('registerForm');
 const loginToggle = document.getElementById('loginToggle');
 const registerToggle = document.getElementById('registerToggle');
 
-loginToggle.addEventListener('click', () => {
-  loginForm.style.display = 'block';
-  registerForm.style.display = 'none';
-  loginToggle.classList.add('active');
-  registerToggle.classList.remove('active');
+loginToggle.addEventListener('click', ()=>{
+  loginForm.style.display='block'; registerForm.style.display='none';
+  loginToggle.classList.add('active'); registerToggle.classList.remove('active');
+});
+registerToggle.addEventListener('click', ()=>{
+  registerForm.style.display='block'; loginForm.style.display='none';
+  registerToggle.classList.add('active'); loginToggle.classList.remove('active');
 });
 
-registerToggle.addEventListener('click', () => {
-  loginForm.style.display = 'none';
-  registerForm.style.display = 'block';
-  loginToggle.classList.remove('active');
-  registerToggle.classList.add('active');
-});
-
-// ---------------- Users & Session ----------------
-const usersKey = "gyanuUsers";
-
-// Session functions
-function setSession(user) {
-  localStorage.setItem('gyanuSession', JSON.stringify(user));
-}
-
-function getSession() {
-  return JSON.parse(localStorage.getItem('gyanuSession'));
-}
-
-function logout() {
-  localStorage.removeItem('gyanuSession');
-  alert("Logged out successfully!");
-  window.location.href = "login.html";
-}
+// ---------------- Firebase Setup ----------------
+const firebaseConfig = {
+  apiKey: "YOUR_API_KEY_HERE",
+  authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
+  projectId: "YOUR_PROJECT_ID",
+  storageBucket: "YOUR_PROJECT_ID.appspot.com",
+  messagingSenderId: "SENDER_ID",
+  appId: "APP_ID"
+};
+firebase.initializeApp(firebaseConfig);
+const auth = firebase.auth();
 
 // ---------------- Register ----------------
-registerForm.addEventListener('submit', (e) => {
+registerForm.addEventListener('submit', (e)=>{
   e.preventDefault();
   const name = document.getElementById('regName').value;
   const email = document.getElementById('regEmail').value;
   const password = document.getElementById('regPassword').value;
-
-  let users = JSON.parse(localStorage.getItem(usersKey)) || [];
-  if(users.find(u => u.email === email)){
-    alert("Email already registered!");
-    return;
-  }
-  users.push({name,email,password});
-  localStorage.setItem(usersKey, JSON.stringify(users));
-  alert("Registration successful!");
-  registerForm.reset();
-  loginToggle.click(); // switch to login
+  
+  auth.createUserWithEmailAndPassword(email, password)
+    .then(userCredential => {
+      const user = userCredential.user;
+      user.updateProfile({displayName:name});
+      localStorage.setItem('gyanuSession', JSON.stringify({name}));
+      alert("Registered successfully!");
+      window.location.href = "notes.html";
+    })
+    .catch(error=>alert(error.message));
 });
 
 // ---------------- Login ----------------
-loginForm.addEventListener('submit', (e) => {
+loginForm.addEventListener('submit', (e)=>{
   e.preventDefault();
   const email = document.getElementById('loginEmail').value;
   const password = document.getElementById('loginPassword').value;
 
-  let users = JSON.parse(localStorage.getItem(usersKey)) || [];
-  const user = users.find(u => u.email === email && u.password === password);
-  if(user){
-    setSession(user); // <-- session set
-    alert(`Welcome back, ${user.name}!`);
-    loginForm.reset();
-    window.location.href = "notes.html"; // redirect
-  } else {
-    alert("Invalid email or password!");
-  }
+  auth.signInWithEmailAndPassword(email, password)
+    .then(userCredential => {
+      const user = userCredential.user;
+      localStorage.setItem('gyanuSession', JSON.stringify({name:user.displayName||"User"}));
+      alert("Logged in successfully!");
+      window.location.href = "notes.html";
+    })
+    .catch(error=>alert(error.message));
+});
+
+// ---------------- Google Login ----------------
+document.getElementById('googleLogin').addEventListener('click', ()=>{
+  const provider = new firebase.auth.GoogleAuthProvider();
+  auth.signInWithPopup(provider)
+    .then(result=>{
+      const user = result.user;
+      localStorage.setItem('gyanuSession', JSON.stringify({name:user.displayName}));
+      window.location.href = "notes.html";
+    })
+    .catch(error=>alert(error.message));
+});
+
+// ---------------- Facebook Login ----------------
+document.getElementById('facebookLogin').addEventListener('click', ()=>{
+  const provider = new firebase.auth.FacebookAuthProvider();
+  auth.signInWithPopup(provider)
+    .then(result=>{
+      const user = result.user;
+      localStorage.setItem('gyanuSession', JSON.stringify({name:user.displayName}));
+      window.location.href = "notes.html";
+    })
+    .catch(error=>alert(error.message));
 });

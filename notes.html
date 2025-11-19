@@ -1,180 +1,112 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Gyanu Notes - All Notes</title>
-  <link rel="stylesheet" href="style.css">
-  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Student Notes</title>
 
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+<!-- Firebase scripts -->
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+
+<style>
+  body { font-family:'Segoe UI',sans-serif; margin:0; padding:0; background:#0d0d0d; color:white; overflow-x:hidden; }
+  h1 { text-align:center; margin:20px 0; }
+  .logout-btn { position:absolute; right:20px; top:20px; padding:10px 15px; cursor:pointer; border:none; border-radius:5px; background:#ff3366; color:white; }
+  .welcome { text-align:center; margin-bottom:20px; font-size:1.2em; }
+  .class-buttons { display:flex; justify-content:center; flex-wrap:wrap; gap:10px; margin-bottom:30px; }
+  .class-buttons button { padding:10px 20px; border:none; border-radius:8px; cursor:pointer; background:#1a1a1a; color:white; font-weight:bold; transition:0.3s; box-shadow:0 0 10px #00ffff; }
+  .class-buttons button.active, .class-buttons button:hover { background:#00ffff; color:#000; box-shadow:0 0 20px #00ffff; }
+  .subjects-container { display:grid; grid-template-columns:repeat(auto-fit,minmax(180px,1fr)); gap:20px; padding:0 20px; }
+  .subject-card { background:#1a1a1a; border-radius:12px; padding:20px; text-align:center; cursor:pointer; transition:0.3s; box-shadow:0 0 10px #ff00ff; }
+  .subject-card:hover { transform:translateY(-5px) scale(1.05); box-shadow:0 0 20px #ff00ff; }
+  .subject-card h3 { color:#00ffff; text-shadow:0 0 5px #00ffff, 0 0 10px #ff00ff; }
+  @media(max-width:768px){ .subjects-container{grid-template-columns:repeat(auto-fit,minmax(140px,1fr));} }
+</style>
 </head>
 <body>
-    <div id="particles-js"></div>
-  <!-- Navbar -->
-  <nav class="navbar">
-    <div class="logo">Gyanu Notes</div>
-    <ul class="nav-links">
-      <li><a href="index.html">Home</a></li>
-      <li><a href="notes.html">Notes</a></li>
-      <li><a href="about.html">About</a></li>
-      <li><a href="privacy.html">Privacy Policy</a></li>
-      <li><a href="contact.html">Contact</a></li>
-      <li id="authLink"><a href="login.html" class="login-btn">Login/Register</a></li>
-    </ul>
-    <div class="burger">
-      <div></div><div></div><div></div>
-    </div>
-  </nav>
 
-  <!-- Notes Page Hero -->
-  <section class="hero">
-    <div class="hero-content">
-      <h1>All <span>Notes</span></h1>
-      <p>Browse and find the notes you need.</p>
-      <div class="search-bar">
-        <input type="text" placeholder="Search notes..." id="searchInputNotes">
-        <button id="searchBtnNotes"><i class="fas fa-search"></i></button>
-      </div>
-    </div>
-  </section>
+<button class="logout-btn" id="logoutBtn">Logout</button>
+<h1>Student Notes</h1>
+<p class="welcome" id="welcomeMessage">Welcome!</p>
 
-  <!-- Notes List -->
-  <section class="notes-section">
-    <div class="notes-container" id="notesContainerNotes">
-      <!-- Notes cards will be inserted dynamically -->
-    </div>
-  </section>
+<div class="class-buttons">
+  <button data-class="8" class="active">Class 8</button>
+  <button data-class="9">Class 9</button>
+  <button data-class="10">Class 10</button>
+  <button data-class="11">Class 11</button>
+  <button data-class="12">Class 12</button>
+</div>
 
-  <!-- Footer -->
-  <footer>
-    <div class="socials">
-      <a href="#" target="_blank"><i class="fab fa-facebook-f"></i></a>
-      <a href="#" target="_blank"><i class="fab fa-twitter"></i></a>
-      <a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
-      <a href="#" target="_blank"><i class="fab fa-linkedin-in"></i></a>
-    </div>
-    <p>&copy; 2025 Gyanu Notes. All rights reserved.</p>
-  </footer>
+<div class="subjects-container" id="subjectsContainer"></div>
 
-  <footer class="fat-footer">
-  <div class="footer-container">
-    
-    <!-- Column 1: About -->
-    <div class="footer-col">
-      <h3>About Gyanu Notes</h3>
-      <p>Your futuristic platform for student notes, resources, and interactive learning. Access, share, and learn in style.</p>
-    </div>
-
-    <!-- Column 2: Quick Links -->
-    <div class="footer-col">
-      <h3>Quick Links</h3>
-      <ul>
-        <li><a href="index.html">Home</a></li>
-        <li><a href="notes.html">Notes</a></li>
-        <li><a href="about.html">About</a></li>
-        <li><a href="contact.html">Contact</a></li>
-        <li><a href="privacy.html">Privacy Policy</a></li>
-      </ul>
-    </div>
-
-    <!-- Column 3: Social Media -->
-    <div class="footer-col">
-      <h3>Follow Us</h3>
-      <div class="socials">
-        <a href="#" target="_blank"><i class="fab fa-facebook-f"></i></a>
-        <a href="#" target="_blank"><i class="fab fa-twitter"></i></a>
-        <a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
-        <a href="#" target="_blank"><i class="fab fa-linkedin-in"></i></a>
-      </div>
-    </div>
-
-    <!-- Column 4: Newsletter -->
-    <div class="footer-col">
-      <h3>Newsletter</h3>
-      <p>Subscribe to get the latest notes and updates!</p>
-      <form id="newsletterForm">
-        <input type="email" placeholder="Your Email" required>
-        <button type="submit"><i class="fas fa-paper-plane"></i></button>
-      </form>
-    </div>
-
-  </div>
-
-  <div class="footer-bottom">
-    <p>&copy; 2025 Gyanu Notes. All rights reserved.</p>
-  </div>
-</footer>
-
-  <script src="notes.js"></script>
-</body>
 <script>
-  const authLink = document.getElementById('authLink');
-  const sessionUser = JSON.parse(localStorage.getItem('gyanuSession'));
+document.addEventListener("DOMContentLoaded", () => {
+  // Initialize Firebase
+  const firebaseConfig = {
+  apiKey: "AIzaSyCg2DammNHbiNwH6Yc_0jngX83mGhrK2vI",
+  authDomain: "gyanu-notes.firebaseapp.com",
+  projectId: "gyanu-notes",
+  storageBucket: "gyanu-notes.firebasestorage.app",
+  messagingSenderId: "53515556086",
+  appId: "1:53515556086:web:1986f0db90076ea3a988d7",
+  measurementId: "G-Z7Q8KVFTC5"
+};
+  firebase.initializeApp(firebaseConfig);
+  const auth = firebase.auth();
 
-  if(sessionUser){
-    authLink.innerHTML = `<a href="#" style="color:#0ff;">Logout (${sessionUser.name})</a>`;
-    authLink.querySelector('a').addEventListener('click', () => {
-      localStorage.removeItem('gyanuSession');
-      alert("Logged out successfully!");
-      window.location.href = "index.html";
+  const welcomeMessage = document.getElementById("welcomeMessage");
+  const logoutBtn = document.getElementById("logoutBtn");
+  const subjectsContainer = document.getElementById("subjectsContainer");
+  const classButtons = document.querySelectorAll(".class-buttons button");
+
+  const subjects = {
+    8: ["Math", "Science", "English", "Social Studies", "Computer", "Nepali"],
+    9: ["Math", "Science", "English", "Social Studies", "Computer", "Nepali"],
+    10: ["Math", "Science", "English", "Social Studies", "Computer", "Nepali"],
+    11: ["Physics", "Chemistry", "Biology", "Math", "English", "Computer"],
+    12: ["Physics", "Chemistry", "Biology", "Math", "English", "Computer"]
+  };
+
+  // Protect page: redirect if not logged in
+  auth.onAuthStateChanged(user => {
+    if(user){
+      const name = user.displayName ? user.displayName : user.email;
+      welcomeMessage.textContent = `Welcome, ${name}!`;
+    } else {
+      window.location.href = "login.html";
+    }
+  });
+
+  // Logout
+  logoutBtn.addEventListener("click", () => {
+    auth.signOut().then(() => window.location.href = "login.html");
+  });
+
+  // Show subjects for selected class
+  function showSubjects(classNumber){
+    subjectsContainer.innerHTML = "";
+    subjects[classNumber].forEach(sub => {
+      const card = document.createElement("div");
+      card.classList.add("subject-card");
+      card.innerHTML = `<h3>${sub}</h3>`;
+      subjectsContainer.appendChild(card);
     });
   }
-</script>
 
-<!-- Newsletter JS -->
-<script>
-const newsletterForm = document.getElementById('newsletterForm');
-newsletterForm.addEventListener('submit', (e) => {
-  e.preventDefault();
-  alert("Thank you for subscribing!");
-  newsletterForm.reset();
+  // Initialize with Class 8
+  showSubjects(8);
+
+  // Class button click
+  classButtons.forEach(btn => {
+    btn.addEventListener("click", () => {
+      classButtons.forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+      showSubjects(btn.dataset.class);
+    });
+  });
 });
 </script>
 
-<script>
-
-particlesJS("particles-js", {
-  "particles": {
-    "number": { "value": 90 },
-    "color": { 
-      "value": [
-        "#ff007f", // Neon Pink
-        "#ff3d00", // Cyber Orange
-        "#f6ff00", // Electric Yellow
-        "#32ff45", // Hologram Green
-        "#00eaff", // Aqua Blue
-        "#8b00ff"  // Deep Violet
-      ]
-    },
-    "shape": { "type": "circle" },
-    "opacity": { "value": 0.7, "random": true },
-    "size": { "value": 4, "random": true },
-    "line_linked": { 
-      "enable": true,
-      "distance": 130,
-      "color": "#00eaff", 
-      "opacity": 0.3,
-      "width": 1
-    },
-    "move": {
-      "enable": true,
-      "speed": 2.2,
-      "direction": "none",
-      "random": true,
-      "straight": false,
-      "out_mode": "out"
-    }
-  },
-  "interactivity": {
-    "events": {
-      "onhover": { "enable": true, "mode": "grab" },
-      "onclick": { "enable": false }
-    }
-  },
-  "retina_detect": true
-});
-</script>
-
-
+</body>
 </html>
