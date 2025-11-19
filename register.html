@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Contact EduNotes</title>
+  <title>Register - EduNotes</title>
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -22,17 +22,28 @@
   </header>
 
   <section class="contact-section">
-    <h2>Contact Us</h2>
+    <h2>Register</h2>
     <form>
-      <input type="text" placeholder="Your Name" required>
-      <input type="email" placeholder="Your Email" required>
-      <textarea placeholder="Message" required></textarea>
-      <button type="submit">Send</button>
+      <input type="text" placeholder="Full Name" required>
+      <input type="email" placeholder="Email" required>
+      <input type="text" placeholder="Username" required>
+      <input type="password" placeholder="Password" required>
+      <button type="submit">Register</button>
     </form>
+    <p style="margin-top:15px;">Already have an account? <a href="login.html" style="color:#ffeb3b;">Login here</a></p>
   </section>
 
   <footer>
     <p>© 2025 EduNotes. All rights reserved.</p>
   </footer>
+
+  <script>
+    // Hamburger menu toggle
+    const menuToggle = document.getElementById('menuToggle');
+    const navList = document.getElementById('navList');
+    menuToggle.addEventListener('click', () => {
+      navList.classList.toggle('show');
+    });
+  </script>
 </body>
 </html>

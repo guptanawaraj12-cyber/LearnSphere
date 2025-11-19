@@ -1,82 +1,113 @@
-// Mobile Menu Toggle
-const menuToggle = document.querySelector('.menu-toggle');
-const navLinks = document.querySelector('nav ul');
+const notesContainer = document.getElementById('notesContainer');
+const classFilter = document.getElementById('classFilter');
+const subjectFilter = document.getElementById('subjectFilter');
+
+const noteContentDiv = document.getElementById('noteContent');
+const noteTitleEl = document.getElementById('noteTitle');
+const noteTextEl = document.getElementById('noteText');
+const downloadBtn = document.getElementById('downloadBtn');
+
+// Hamburger menu toggle
+const menuToggle = document.getElementById('menuToggle');
+const navList = document.getElementById('navList');
 menuToggle.addEventListener('click', () => {
-  navLinks.classList.toggle('active');
+  navList.classList.toggle('show');
 });
 
-// Scroll effect for menu
-const nav = document.querySelector('nav');
-window.addEventListener('scroll', () => {
-  if (window.scrollY > 50) {
-    nav.classList.add('scrolled');
-  } else {
-    nav.classList.remove('scrolled');
-  }
-});
+// Full sample notes for Classes 8–12 NEB subjects
+const notes = [
+  // Class 8
+  { title: "Math Chapter 1", class: 8, subject: "Math", content: "Class 8 Math Chapter 1 content..." },
+  { title: "Science Chapter 1", class: 8, subject: "Science", content: "Class 8 Science Chapter 1 content..." },
+  { title: "English Chapter 1", class: 8, subject: "English", content: "Class 8 English Chapter 1 content..." },
 
-// Toggle login/register forms with sliding animation
-const loginCard = document.getElementById('login-card');
-const registerCard = document.getElementById('register-card');
-const showRegister = document.getElementById('show-register');
-const showLogin = document.getElementById('show-login');
+  // Class 9
+  { title: "Math Chapter 1", class: 9, subject: "Math", content: "Class 9 Math Chapter 1 content..." },
+  { title: "Physics Chapter 1", class: 9, subject: "Physics", content: "Class 9 Physics Chapter 1 content..." },
+  { title: "Nepali Chapter 1", class: 9, subject: "Nepali", content: "Class 9 Nepali Chapter 1 content..." },
 
-showRegister.addEventListener('click', () => {
-  loginCard.classList.remove('visible');
-  loginCard.classList.add('hidden-left');
+  // Class 10
+  { title: "Math Chapter 1", class: 10, subject: "Math", content: "Class 10 Math Chapter 1 content..." },
+  { title: "Chemistry Chapter 1", class: 10, subject: "Chemistry", content: "Class 10 Chemistry Chapter 1 content..." },
+  { title: "English Chapter 1", class: 10, subject: "English", content: "Class 10 English Chapter 1 content..." },
 
-  registerCard.classList.remove('hidden-right');
-  registerCard.classList.add('visible');
-});
+  // Class 11
+  { title: "Physics Chapter 1", class: 11, subject: "Physics", content: "Class 11 Physics Chapter 1 content..." },
+  { title: "Chemistry Chapter 1", class: 11, subject: "Chemistry", content: "Class 11 Chemistry Chapter 1 content..." },
+  { title: "Biology Chapter 1", class: 11, subject: "Biology", content: "Class 11 Biology Chapter 1 content..." },
+  { title: "Math Chapter 1", class: 11, subject: "Math", content: "Class 11 Math Chapter 1 content..." },
 
-showLogin.addEventListener('click', () => {
-  registerCard.classList.remove('visible');
-  registerCard.classList.add('hidden-right');
+  // Class 12
+  { title: "Physics Chapter 1", class: 12, subject: "Physics", content: "Class 12 Physics Chapter 1 content..." },
+  { title: "Chemistry Chapter 1", class: 12, subject: "Chemistry", content: "Class 12 Chemistry Chapter 1 content..." },
+  { title: "Biology Chapter 1", class: 12, subject: "Biology", content: "Class 12 Biology Chapter 1 content..." },
+  { title: "Math Chapter 1", class: 12, subject: "Math", content: "Class 12 Math Chapter 1 content..." },
+  { title: "Economics Chapter 1", class: 12, subject: "Economics", content: "Class 12 Economics Chapter 1 content..." }
+];
 
-  loginCard.classList.remove('hidden-left');
-  loginCard.classList.add('visible');
-});
+// Display notes list
+function displayNotes(filteredNotes) {
+  notesContainer.innerHTML = '';
+  noteContentDiv.style.display = 'none';
+  downloadBtn.style.display = 'inline-block';
 
-
-// Wait for the DOM to load
-document.addEventListener("DOMContentLoaded", function() {
-
-  const particlesContainer = document.getElementById('particles');
-
-  // Make sure the container exists
-  if (!particlesContainer) return;
-
-  const particleCount = 40; // number of particles
-
-  for (let i = 0; i < particleCount; i++) {
-    const particle = document.createElement('div');
-    particle.classList.add('particle');
-
-    // Random position
-    particle.style.left = Math.random() * window.innerWidth + 'px';
-    particle.style.top = Math.random() * window.innerHeight + 'px';
-
-    // Random size
-    const size = 4 + Math.random() * 8;
-    particle.style.width = size + 'px';
-    particle.style.height = size + 'px';
-
-    // Random animation duration & delay
-    particle.style.animationDuration = 15 + Math.random() * 20 + 's';
-    particle.style.animationDelay = Math.random() * 20 + 's';
-
-    // Random gradient color (blue-teal-purple tones)
-    const colors = [
-      'rgba(90,103,216,0.7)',
-      'rgba(32,58,67,0.5)',
-      'rgba(75,192,192,0.6)',
-      'rgba(106,90,205,0.5)'
-    ];
-    const color = colors[Math.floor(Math.random() * colors.length)];
-    particle.style.background = `radial-gradient(circle, ${color} 0%, rgba(0,0,0,0) 100%)`;
-
-    particlesContainer.appendChild(particle);
+  if (filteredNotes.length === 0) {
+    noteContentDiv.style.display = 'block';
+    noteTitleEl.textContent = "";
+    noteTextEl.textContent = "Sorry, note is not available.";
+    downloadBtn.style.display = 'none';
+    return;
   }
 
-});
+  filteredNotes.forEach(note => {
+    const noteCard = document.createElement('div');
+    noteCard.className = 'note-card';
+    noteCard.innerHTML = `
+      <h3>${note.title}</h3>
+      <p>Class: ${note.class} | Subject: ${note.subject}</p>
+      <button class="viewBtn">View Note</button>
+    `;
+    notesContainer.appendChild(noteCard);
 
+    noteCard.querySelector('.viewBtn').addEventListener('click', () => showNote(note));
+  });
+}
+
+// Show note content
+function showNote(note) {
+  noteTitleEl.textContent = note.title;
+  noteTextEl.textContent = note.content;
+  noteContentDiv.style.display = 'block';
+  downloadBtn.style.display = 'inline-block';
+
+  downloadBtn.onclick = () => {
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF();
+    const lines = doc.splitTextToSize(note.content, 180);
+    doc.text(lines, 10, 10);
+    doc.save(`${note.title}.pdf`);
+  };
+
+  noteContentDiv.scrollIntoView({ behavior: 'smooth' });
+}
+
+// Filter notes
+function filterNotes() {
+  const selectedClass = classFilter.value;
+  const selectedSubject = subjectFilter.value;
+
+  const filtered = notes.filter(note => {
+    const matchesClass = selectedClass === 'all' || note.class == selectedClass;
+    const matchesSubject = selectedSubject === 'all' || note.subject === selectedSubject;
+    return matchesClass && matchesSubject;
+  });
+
+  displayNotes(filtered);
+}
+
+// Initial display
+displayNotes(notes);
+
+// Event listeners
+classFilter.addEventListener('change', filterNotes);
+subjectFilter.addEventListener('change', filterNotes);

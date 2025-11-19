@@ -3,73 +3,36 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Gyanu Notes - Login/Register</title>
-  <!-- Font Awesome CDN for social icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <title>Login - EduNotes</title>
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-  <!-- Navigation -->
-  <nav>
-    <h2>Gyanu Notes</h2>
-    <div class="menu-toggle">☰</div>
-    <ul>
-      <li><a href="index.html">Home</a></li>
-      <li><a href="notes.html">Notes</a></li>
-      <li><a href="about.html">About</a></li>
-      <li><a href="contact.html">Contact</a></li>
-      <li><a href="login.html">Login/Register</a></li>
-    </ul>
-  </nav>
+  <header>
+    <div class="logo">EduNotes</div>
+    <nav>
+      <ul id="navList">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="notes.html">Notes</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="login.html">Login</a></li>
+      </ul>
+      <div id="menuToggle">&#9776;</div>
+    </nav>
+  </header>
 
-  <!-- Floating Particles -->
-<div id="particles"></div>
-
- <div class="floating-social">
-  <a href="https://facebook.com/yourpage" target="_blank"><i class="fab fa-facebook-f"></i></a>
-  <a href="https://twitter.com/yourpage" target="_blank"><i class="fab fa-twitter"></i></a>
-  <a href="https://instagram.com/yourpage" target="_blank"><i class="fab fa-instagram"></i></a>
-  <a href="https://linkedin.com/in/yourprofile" target="_blank"><i class="fab fa-linkedin-in"></i></a>
-  <a href="https://youtube.com/yourchannel" target="_blank"><i class="fab fa-youtube"></i></a>
-</div>
-
-
-  <!-- Login/Register Section -->
-  <section class="login-container">
-    <!-- Login Form -->
-    <div class="login-card visible" id="login-card">
-      <h2>Login</h2>
-      <form>
-        <input type="email" placeholder="Email" required>
-        <input type="password" placeholder="Password" required>
-        <input type="submit" value="Login">
-      </form>
-      <div class="toggle-link" id="show-register">Register Now</div>
-    </div>
-
-    <!-- Register Form -->
-    <div class="login-card hidden-right" id="register-card">
-      <h2>Register</h2>
-      <form>
-        <input type="text" placeholder="Full Name" required>
-        <input type="email" placeholder="Email" required>
-        <input type="password" placeholder="Password" required>
-        <input type="submit" value="Register">
-      </form>
-      <div class="toggle-link" id="show-login">Back to Login</div>
-    </div>
+  <section class="contact-section">
+    <h2>Login</h2>
+    <form>
+      <input type="text" placeholder="Username" required>
+      <input type="password" placeholder="Password" required>
+      <button type="submit">Login</button>
+    </form>
+    <p style="margin-top:15px;">No account? <a href="register.html" style="color:#ffeb3b;">Register here</a></p>
   </section>
 
-  <!-- Social Media Icons -->
-<div class="social-icons">
-  <a href="https://facebook.com/yourpage" target="_blank"><i class="fab fa-facebook-f"></i></a>
-  <a href="https://twitter.com/yourpage" target="_blank"><i class="fab fa-twitter"></i></a>
-  <a href="https://instagram.com/yourpage" target="_blank"><i class="fab fa-instagram"></i></a>
-  <a href="https://linkedin.com/in/yourprofile" target="_blank"><i class="fab fa-linkedin-in"></i></a>
-  <a href="https://youtube.com/yourchannel" target="_blank"><i class="fab fa-youtube"></i></a>
-</div>
-
-
-  <script src="java/script.js"></script>
+  <footer>
+    <p>© 2025 EduNotes. All rights reserved.</p>
+  </footer>
 </body>
 </html>

@@ -3,53 +3,94 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Gyanu Notes - Notes</title>
+  <title>EduNotes - Notes</title>
   <link rel="stylesheet" href="css/style.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
 </head>
 <body>
-  <nav>
-    <h2>Gyanu Notes</h2>
-    <div class="menu-toggle">☰</div>
-    <ul>
-      <li><a href="index.html">Home</a></li>
-      <li><a href="notes.html">Notes</a></li>
-      <li><a href="about.html">About</a></li>
-      <li><a href="contact.html">Contact</a></li>
-      <li><a href="login.html">Login/Register</a></li>
-    </ul>
-  </nav>
-  
+  <div id="particles-js"></div>
 
- <section class="main-container notes-page">
-  <h1 class="page-title">Notes</h1>
+  <header>
+    <div class="logo">EduNotes</div>
+    <nav>
+      <ul id="navList">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="notes.html">Notes</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="login.html">Login</a></li>
+      </ul>
+      <div id="menuToggle">&#9776;</div>
+    </nav>
+  </header>
 
-  <!-- Search Bar -->
-  <div class="search-container">
-    <input type="text" id="searchNotes" placeholder="Search notes...">
-  </div>
-
-  <!-- Notes Cards Container -->
-  <div class="notes-cards">
-    <div class="note-card">
-      <h2>Mathematics</h2>
-      <p>Algebra, Geometry, Calculus...</p>
-      <a href="notes/math.html" class="btn">View</a>
+  <section class="notes-section">
+    <h2>Notes</h2>
+    <div class="filters">
+      <select id="classFilter">
+        <option value="all">Select Class</option>
+        <option value="8">Class 8</option>
+        <option value="9">Class 9</option>
+        <option value="10">Class 10</option>
+        <option value="11">Class 11</option>
+        <option value="12">Class 12</option>
+      </select>
+      <select id="subjectFilter">
+        <option value="all">Select Subject</option>
+        <option value="Math">Math</option>
+        <option value="Physics">Physics</option>
+        <option value="Chemistry">Chemistry</option>
+        <option value="Biology">Biology</option>
+        <option value="English">English</option>
+        <option value="Nepali">Nepali</option>
+        <option value="Computer">Computer</option>
+        <option value="Social Studies">Social Studies</option>
+        <option value="Economics">Economics</option>
+        <option value="Accounting">Accounting</option>
+        <option value="History">History</option>
+        <option value="Geography">Geography</option>
+        <option value="Political Science">Political Science</option>
+      </select>
     </div>
-    <div class="note-card">
-      <h2>Physics</h2>
-      <p>Mechanics, Thermodynamics...</p>
-      <a href="notes/physics.html" class="btn">View</a>
-    </div>
-    <div class="note-card">
-      <h2>Chemistry</h2>
-      <p>Organic, Inorganic...</p>
-      <a href="notes/chemistry.html" class="btn">View</a>
-    </div>
-    <!-- Add more cards as needed -->
-  </div>
-</section>
 
+    <div class="notes-container" id="notesContainer"></div>
+    <div id="noteContent" class="note-content" style="display:none;">
+      <h3 id="noteTitle"></h3>
+      <div id="noteText" style="white-space: pre-wrap;"></div>
+      <button id="downloadBtn">Download as PDF</button>
+    </div>
+  </section>
+
+  <footer>
+    <p>© 2025 EduNotes. All rights reserved.</p>
+  </footer>
 
   <script src="java/script.js"></script>
+  <script>
+    // Hamburger menu toggle
+    const menuToggle = document.getElementById('menuToggle');
+    const navList = document.getElementById('navList');
+    menuToggle.addEventListener('click', () => {
+      navList.classList.toggle('show');
+    });
+
+    // Particles
+    particlesJS("particles-js", {
+      "particles": {
+        "number": { "value": 80 },
+        "color": { "value": ["#87cefa","#ff7eb9","#7afcff","#ffb347"] },
+        "shape": { "type": "circle" },
+        "opacity": { "value": 0.5, "random": true },
+        "size": { "value": 3, "random": true },
+        "line_linked": { "enable": true, "distance": 150, "color": "#fff", "opacity": 0.4, "width": 1 },
+        "move": { "enable": true, "speed": 2, "direction": "none", "random": true, "straight": false, "out_mode": "out" }
+      },
+      "interactivity": {
+        "events": { "onhover": { "enable": true, "mode": "grab" } }
+      },
+      "retina_detect": true
+    });
+  </script>
 </body>
 </html>
