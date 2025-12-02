@@ -339,7 +339,7 @@ if (adminLoginForm) {
         const password = document.getElementById('adminPassword').value.trim();
         
         // Simple authentication (in production, use proper backend authentication)
-        if (username === 'admin' && password === 'admin123') {
+        if (username === 'nawaraj' && password === '25december2007') {
             localStorage.setItem('adminLoggedIn', 'true');
             isAdminLoggedIn = true;
             showMessage(loginMessage, 'Login successful! Redirecting...', 'success');
