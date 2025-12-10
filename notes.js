@@ -46,6 +46,33 @@ const notesDatabase = {
             date: "2024-02-15",
             views: 1420,
             tags: ["thermodynamics", "heat", "energy"]
+        },
+        {
+            id: 50,
+            title: "Waves - Sound and Light",
+            description: "Complete guide to wave motion, sound waves, light waves, interference and diffraction",
+            class: "11",
+            date: "2024-02-10",
+            views: 1850,
+            tags: ["waves", "sound", "light", "interference", "diffraction"]
+        },
+        {
+            id: 51,
+            title: "Optics - Ray and Wave Optics",
+            description: "Reflection, refraction, lenses, mirrors, interference, diffraction and polarizatio",
+            class: "12",
+            date: "2024-02-12",
+            views: 2150,
+            tags: ["optics", "light", "reflection", "refraction", "lenses"]
+        },
+        {
+            id: 52,
+            title: "Modern Physics - Atoms and Nuclei",
+            description: "Atomic models, radioactivity, nuclear reactions, and quantum physics",
+            class: "12",
+            date: "2024-02-14",
+            views: 1920,
+            tags: ["modern physics", "atoms", "nuclei", "radioactivity", "quantum"]
         }
     ],
 
