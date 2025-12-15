@@ -3,7 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Book Details - Gyanu Note</title>
+    
+    <!-- Dynamic meta tags will be set by JavaScript -->
+    <title>Class Notes - Gyanu Note</title>
+    <meta name="description" content="Complete study notes for students">
+    <meta name="keywords" content="class notes, study materials">
+    <meta name="author" content="Gyanu Note">
+    <meta name="robots" content="index, follow">
+    
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -21,8 +28,8 @@
             </div>
             <ul class="nav-links">
                 <li><a href="index.html">Home</a></li>
-                <li><a href="index.html#classes">Notes</a></li>
-                <li><a href="books.html" class="active">Books</a></li>
+                <li><a href="index.html#classes" class="active">Notes</a></li>
+                <li><a href="books.html">Books</a></li>
                 <li><a href="about.html">About</a></li>
                 <li><a href="contact.html">Contact</a></li>
             </ul>
@@ -34,38 +41,47 @@
         </div>
     </nav>
 
-    <div class="book-detail-container">
+    <div class="page-header" id="pageHeader">
         <div class="container">
-            <div class="book-header">
-                <button onclick="history.back()" class="back-btn">
-                    <i class="fas fa-arrow-left"></i> Back to Books
-                </button>
-                <h1 id="bookTitle">Loading...</h1>
-                <div class="book-meta-info">
-                    <span id="bookAuthor"></span>
-                    <span id="bookPublisher"></span>
-                    <span id="bookClass"></span>
-                </div>
+            <h1 id="pageTitle">Class Notes</h1>
+            <p id="pageSubtitle">Complete Study Materials</p>
+            <div class="breadcrumb" id="breadcrumb">
+                <a href="index.html">Home</a> / <a href="index.html#classes">Notes</a> / <span>Loading...</span>
             </div>
-
-            <div class="book-actions">
-                <button id="downloadBtn" class="btn-action">
-                    <i class="fas fa-download"></i> Download PDF
-                </button>
-                <button id="printBtn" class="btn-action">
-                    <i class="fas fa-print"></i> Print
-                </button>
-                <button id="shareBtn" class="btn-action">
-                    <i class="fas fa-share-alt"></i> Share
-                </button>
-            </div>
-
-            <div class="book-content" id="bookContent">
-                <!-- Book content will be loaded here -->
-            </div>
-            
         </div>
     </div>
+
+    <section class="seo-content-section">
+        <div class="container">
+            <div class="content-wrapper">
+                <article class="main-content" id="mainContent">
+                    <!-- Content will be loaded dynamically -->
+                    <div class="loading">
+                        <i class="fas fa-spinner fa-spin"></i>
+                        <p>Loading notes...</p>
+                    </div>
+                </article>
+                
+                <aside class="sidebar" id="sidebar">
+                    <!-- Sidebar will be loaded dynamically -->
+                </aside>
+            </div>
+        </div>
+    </section>
+
+    <section class="notes-section">
+        <div class="container">
+            <h2 id="notesHeading">Browse Notes</h2>
+            <div class="notes-grid" id="notesContainer"></div>
+        </div>
+    </section>
+
+    <section class="related-subjects" id="relatedSubjects">
+        <div class="container">
+            <h2 id="relatedHeading">Explore Other Subjects</h2>
+            <div class="subjects-grid" id="relatedContainer"></div>
+        </div>
+    </section>
 
     <footer class="footer">
         <div class="container">
@@ -89,13 +105,13 @@
                         <a href="https://linkedin.com" target="_blank" aria-label="LinkedIn">
                             <i class="fab fa-linkedin"></i>
                         </a>
+              
                     </div>
                 </div>
                 <div class="footer-section">
                     <h3>Quick Links</h3>
                     <ul>
                         <li><a href="index.html">Home</a></li>
-                        <li><a href="index.html#classes">Notes</a></li>
                         <li><a href="books.html">Books</a></li>
                         <li><a href="about.html">About</a></li>
                         <li><a href="contact.html">Contact</a></li>
@@ -108,9 +124,7 @@
         </div>
     </footer>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-    <script src="books-data.js"></script>
-    <script src="book-detail.js"></script>
-    <script src="script.js"></script>
+    <script src="notes-data.js"></script>
+    <script src="class-notes-dynamic.js"></script>
 </body>
 </html>

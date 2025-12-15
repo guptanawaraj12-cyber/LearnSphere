@@ -3,7 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Recommended Books - Gyanu Note</title>
+    
+    <title>Recommended Books - Class 8 to 12 | Gyanu Note</title>
+    <meta name="description" content="Best recommended textbooks and guide books for Class 8, 9, 10, 11, and 12. Free PDF downloads and purchase links for all subjects.">
+    <meta name="keywords" content="class 8 books, class 9 books, class 10 books, class 11 books, class 12 books, textbooks Nepal, guide books, NEB books">
+    <meta name="author" content="Gyanu Note">
+    <meta name="robots" content="index, follow">
+    
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -37,406 +43,135 @@
     <div class="page-header">
         <div class="container">
             <h1>Recommended Books</h1>
-            <p>Curated collection of best textbooks and reference materials</p>
+            <p>Best textbooks and guide books for all classes and subjects</p>
+            <div class="breadcrumb">
+                <a href="index.html">Home</a> / <span>Books</span>
+            </div>
         </div>
     </div>
 
+    <!-- Books Filter Section -->
+    <section class="books-filter-section">
+        <div class="container">
+            <div class="filter-container">
+                <div class="filter-group">
+                    <label for="classFilter">
+                        <i class="fas fa-graduation-cap"></i> Select Class
+                    </label>
+                    <select id="classFilter" class="filter-select">
+                        <option value="all">All Classes</option>
+                        <option value="8">Class 8</option>
+                        <option value="9">Class 9</option>
+                        <option value="10">Class 10</option>
+                        <option value="11">Class 11</option>
+                        <option value="12">Class 12</option>
+                    </select>
+                </div>
+
+                <div class="filter-group">
+                    <label for="subjectFilter">
+                        <i class="fas fa-book"></i> Select Subject
+                    </label>
+                    <select id="subjectFilter" class="filter-select">
+                        <option value="all">All Subjects</option>
+                        <option value="science">Science</option>
+                        <option value="math">Mathematics</option>
+                        <option value="english">English</option>
+                        <option value="nepali">Nepali</option>
+                        <option value="computer">Computer Science</option>
+                        <option value="optional-math">Optional Mathematics</option>
+                        <option value="economics">Economics</option>
+                        <option value="accounts">Accountancy</option>
+                        <option value="physics">Physics</option>
+                        <option value="chemistry">Chemistry</option>
+                        <option value="biology">Biology</option>
+                    </select>
+                </div>
+
+                <div class="filter-group">
+                    <label for="searchBooks">
+                        <i class="fas fa-search"></i> Search Books
+                    </label>
+                    <input type="text" id="searchBooks" class="filter-input" placeholder="Search by title, author, or publisher...">
+                </div>
+
+                <button id="resetFilters" class="reset-btn">
+                    <i class="fas fa-redo"></i> Reset Filters
+                </button>
+            </div>
+
+            <div class="filter-results">
+                <p id="resultsCount">Showing all books</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Books Grid Section -->
     <section class="books-section">
         <div class="container">
-            <!-- Filter Section -->
-            <!-- Filter Section -->
-<div class="books-filter">
-    <div class="filter-group">
-        <label for="bookClassFilter">Class Level</label>
-        <select id="bookClassFilter">
-            <option value="all">All Classes</option>
-            <option value="11">Class 11</option>
-            <option value="12">Class 12</option>
-            <option value="bachelor">Bachelor's</option>
-            <option value="master">Master's</option>
-        </select>
-    </div>
-    <div class="filter-group">
-        <label for="bookSubjectFilter">Subject</label>
-        <select id="bookSubjectFilter">
-            <option value="all">All Subjects</option>
-            <option value="physics">Physics</option>
-            <option value="chemistry">Chemistry</option>
-            <option value="biology">Biology</option>
-            <option value="mathematics">Mathematics</option>
-            <option value="computer">Computer Science</option>
-            <option value="english">English</option>
-            <option value="accountancy">Accountancy</option>
-            <option value="economics">Economics</option>
-            <option value="business">Business Studies</option>
-        </select>
-    </div>
-    <div class="filter-group">
-        <label for="bookSearch">Search Books</label>
-        <input type="text" id="bookSearch" placeholder="Search by title, author...">
-    </div>
-</div>
-
-            <!-- Class 11 Books -->
-            <div class="books-category" data-class="11">
-                <h2 class="category-title">Class 11 Books</h2>
-                
-                <h3 class="subject-heading">Physics</h3>
-                <div class="books-grid">
-                    <div class="book-card" data-subject="physics">
-                        <div class="book-image">
-                            <i class="fas fa-book"></i>
-                        </div>
-                        <div class="book-info">
-                            <h4>Physics Class 11</h4>
-                            <p class="author">By NEB Curriculum</p>
-                            <p class="publisher">Publisher: CDC Nepal</p>
-                            <div class="book-meta">
-                                <span class="badge-subject">Physics</span>
-                                <span class="badge-class">Class 11</span>
-                            </div>
-                            <p class="description">Complete textbook following NEB curriculum covering mechanics, heat, and optics.</p>
-                            <div class="book-links">
-                                <a href="#" class="btn-book"><i class="fas fa-download"></i> Download</a>
-                                <a href="#" class="btn-book-secondary"><i class="fas fa-eye"></i> Preview</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="book-card" data-subject="physics">
-                        <div class="book-image">
-                            <i class="fas fa-book"></i>
-                        </div>
-                        <div class="book-info">
-                            <h4>Fundamentals of Physics</h4>
-                            <p class="author">By Halliday, Resnick & Walker</p>
-                            <p class="publisher">Publisher: Wiley</p>
-                            <div class="book-meta">
-                                <span class="badge-subject">Physics</span>
-                                <span class="badge-class">Class 11</span>
-                            </div>
-                            <p class="description">Comprehensive physics reference book with detailed explanations and problems.</p>
-                            <div class="book-links">
-                                <a href="#" class="btn-book"><i class="fas fa-external-link-alt"></i> View Online</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <h3 class="subject-heading">Chemistry</h3>
-                <div class="books-grid">
-                    <div class="book-card" data-subject="chemistry">
-                        <div class="book-image">
-                            <i class="fas fa-book"></i>
-                        </div>
-                        <div class="book-info">
-                            <h4>Chemistry Class 11</h4>
-                            <p class="author">By NEB Curriculum</p>
-                            <p class="publisher">Publisher: CDC Nepal</p>
-                            <div class="book-meta">
-                                <span class="badge-subject">Chemistry</span>
-                                <span class="badge-class">Class 11</span>
-                            </div>
-                            <p class="description">Official NEB textbook covering general and physical chemistry concepts.</p>
-                            <div class="book-links">
-                                <a href="#" class="btn-book"><i class="fas fa-download"></i> Download</a>
-                                <a href="#" class="btn-book-secondary"><i class="fas fa-eye"></i> Preview</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="book-card" data-subject="chemistry">
-                        <div class="book-image">
-                            <i class="fas fa-book"></i>
-                        </div>
-                        <div class="book-info">
-                            <h4>Modern's ABC of Chemistry</h4>
-                            <p class="author">By S.P. Jauhar</p>
-                            <p class="publisher">Publisher: Modern Publishers</p>
-                            <div class="book-meta">
-                                <span class="badge-subject">Chemistry</span>
-                                <span class="badge-class">Class 11</span>
-                            </div>
-                            <p class="description">Popular reference book with solved examples and practice problems.</p>
-                            <div class="book-links">
-                                <a href="#" class="btn-book"><i class="fas fa-external-link-alt"></i> View Online</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <h3 class="subject-heading">Mathematics</h3>
-                <div class="books-grid">
-                    <div class="book-card" data-subject="mathematics">
-                        <div class="book-image">
-                            <i class="fas fa-book"></i>
-                        </div>
-                        <div class="book-info">
-                            <h4>Mathematics Class 11</h4>
-                            <p class="author">By NEB Curriculum</p>
-                            <p class="publisher">Publisher: CDC Nepal</p>
-                            <div class="book-meta">
-                                <span class="badge-subject">Mathematics</span>
-                                <span class="badge-class">Class 11</span>
-                            </div>
-                            <p class="description">Complete mathematics textbook with algebra, trigonometry, and calculus.</p>
-                            <div class="book-links">
-                                <a href="#" class="btn-book"><i class="fas fa-download"></i> Download</a>
-                                <a href="#" class="btn-book-secondary"><i class="fas fa-eye"></i> Preview</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="book-card" data-subject="mathematics">
-                        <div class="book-image">
-                            <i class="fas fa-book"></i>
-                        </div>
-                        <div class="book-info">
-                            <h4>R.D. Sharma Mathematics</h4>
-                            <p class="author">By R.D. Sharma</p>
-                            <p class="publisher">Publisher: Dhanpat Rai</p>
-                            <div class="book-meta">
-                                <span class="badge-subject">Mathematics</span>
-                                <span class="badge-class">Class 11</span>
-                            </div>
-                            <p class="description">Comprehensive problem-solving book with detailed solutions.</p>
-                            <div class="book-links">
-                                <a href="#" class="btn-book"><i class="fas fa-external-link-alt"></i> View Online</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <div class="books-grid" id="booksGrid">
+                <!-- Books will be loaded here by JavaScript -->
             </div>
 
-            <!-- Class 12 Books -->
-            <div class="books-category" data-class="12">
-                <h2 class="category-title">Class 12 Books</h2>
-                
-                <h3 class="subject-heading">Physics</h3>
-                <div class="books-grid">
-                    <div class="book-card" data-subject="physics">
-                        <div class="book-image">
-                            <i class="fas fa-book"></i>
-                        </div>
-                        <div class="book-info">
-                            <h4>Physics Class 12</h4>
-                            <p class="author">By NEB Curriculum</p>
-                            <p class="publisher">Publisher: CDC Nepal</p>
-                            <div class="book-meta">
-                                <span class="badge-subject">Physics</span>
-                                <span class="badge-class">Class 12</span>
-                            </div>
-                            <p class="description">Advanced physics covering electricity, magnetism, and modern physics.</p>
-                            <div class="book-links">
-                                <a href="#" class="btn-book"><i class="fas fa-download"></i> Download</a>
-                                <a href="#" class="btn-book-secondary"><i class="fas fa-eye"></i> Preview</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <div id="noBooksMessage" class="no-books-message" style="display: none;">
+                <i class="fas fa-book-open"></i>
+                <h3>No Books Found</h3>
+                <p>Try adjusting your filters or search terms</p>
+            </div>
+        </div>
+    </section>
 
-                <h3 class="subject-heading">Chemistry</h3>
-                <div class="books-grid">
-                    <div class="book-card" data-subject="chemistry">
-                        <div class="book-image">
-                            <i class="fas fa-book"></i>
-                        </div>
-                        <div class="book-info">
-                            <h4>Chemistry Class 12</h4>
-                            <p class="author">By NEB Curriculum</p>
-                            <p class="publisher">Publisher: CDC Nepal</p>
-                            <div class="book-meta">
-                                <span class="badge-subject">Chemistry</span>
-                                <span class="badge-class">Class 12</span>
-                            </div>
-                            <p class="description">Organic and inorganic chemistry with practical applications.</p>
-                            <div class="book-links">
-                                <a href="#" class="btn-book"><i class="fas fa-download"></i> Download</a>
-                                <a href="#" class="btn-book-secondary"><i class="fas fa-eye"></i> Preview</a>
-                            </div>
-                        </div>
-                    </div>
+    <!-- Books Info Section -->
+    <section class="books-info-section">
+        <div class="container">
+            <h2>Why Choose These Books?</h2>
+            <div class="info-grid">
+                <div class="info-card">
+                    <i class="fas fa-check-circle"></i>
+                    <h3>Official Textbooks</h3>
+                    <p>All books recommended by CDC Nepal and NEB curriculum</p>
                 </div>
-
-                <h3 class="subject-heading">Mathematics</h3>
-                <div class="books-grid">
-                    <div class="book-card" data-subject="mathematics">
-                        <div class="book-image">
-                            <i class="fas fa-book"></i>
-                        </div>
-                        <div class="book-info">
-                            <h4>Mathematics Class 12</h4>
-                            <p class="author">By NEB Curriculum</p>
-                            <p class="publisher">Publisher: CDC Nepal</p>
-                            <div class="book-meta">
-                                <span class="badge-subject">Mathematics</span>
-                                <span class="badge-class">Class 12</span>
-                            </div>
-                            <p class="description">Advanced calculus, vectors, and statistics for Class 12.</p>
-                            <div class="book-links">
-                                <a href="#" class="btn-book"><i class="fas fa-download"></i> Download</a>
-                                <a href="#" class="btn-book-secondary"><i class="fas fa-eye"></i> Preview</a>
-                            </div>
-                        </div>
-                    </div>
+                <div class="info-card">
+                    <i class="fas fa-star"></i>
+                    <h3>Best Guide Books</h3>
+                    <p>Top-rated guide books from trusted publishers</p>
+                </div>
+                <div class="info-card">
+                    <i class="fas fa-download"></i>
+                    <h3>Free Downloads</h3>
+                    <p>Many books available for free PDF download</p>
+                </div>
+                <div class="info-card">
+                    <i class="fas fa-shopping-cart"></i>
+                    <h3>Easy Purchase</h3>
+                    <p>Direct links to buy books online or from stores</p>
                 </div>
             </div>
+        </div>
+    </section>
 
-            <!-- Bachelor's Books -->
-            <div class="books-category" data-class="bachelor">
-                <h2 class="category-title">Bachelor's Level Books</h2>
-                
-                <h3 class="subject-heading">Computer Science</h3>
-                <div class="books-grid">
-                    <div class="book-card" data-subject="computer">
-                        <div class="book-image">
-                            <i class="fas fa-book"></i>
-                        </div>
-                        <div class="book-info">
-                            <h4>Data Structures and Algorithms</h4>
-                            <p class="author">By Cormen, Leiserson, Rivest & Stein</p>
-                            <p class="publisher">Publisher: MIT Press</p>
-                            <div class="book-meta">
-                                <span class="badge-subject">Computer</span>
-                                <span class="badge-class">Bachelor's</span>
-                            </div>
-                            <p class="description">The definitive guide to algorithms and data structures.</p>
-                            <div class="book-links">
-                                <a href="#" class="btn-book"><i class="fas fa-external-link-alt"></i> View Online</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="book-card" data-subject="computer">
-                        <div class="book-image">
-                            <i class="fas fa-book"></i>
-                        </div>
-                        <div class="book-info">
-                            <h4>Database System Concepts</h4>
-                            <p class="author">By Silberschatz, Korth & Sudarshan</p>
-                            <p class="publisher">Publisher: McGraw-Hill</p>
-                            <div class="book-meta">
-                                <span class="badge-subject">Computer</span>
-                                <span class="badge-class">Bachelor's</span>
-                            </div>
-                            <p class="description">Comprehensive database management systems textbook.</p>
-                            <div class="book-links">
-                                <a href="#" class="btn-book"><i class="fas fa-external-link-alt"></i> View Online</a>
-                            </div>
-                        </div>
-                    </div>
+    <!-- Popular Publishers Section -->
+    <section class="publishers-section">
+        <div class="container">
+            <h2>Popular Publishers</h2>
+            <div class="publishers-grid">
+                <div class="publisher-card">
+                    <h3>CDC Nepal</h3>
+                    <p>Curriculum Development Centre - Official textbooks</p>
                 </div>
-
-                <h3 class="subject-heading">Business & Management</h3>
-                <div class="books-grid">
-                    <div class="book-card" data-subject="business">
-                        <div class="book-image">
-                            <i class="fas fa-book"></i>
-                        </div>
-                        <div class="book-info">
-                            <h4>Principles of Management</h4>
-                            <p class="author">By P.C. Tripathi & P.N. Reddy</p>
-                            <p class="publisher">Publisher: Tata McGraw-Hill</p>
-                            <div class="book-meta">
-                                <span class="badge-subject">Business</span>
-                                <span class="badge-class">Bachelor's</span>
-                            </div>
-                            <p class="description">Fundamental concepts of management and organizational behavior.</p>
-                            <div class="book-links">
-                                <a href="#" class="btn-book"><i class="fas fa-external-link-alt"></i> View Online</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="book-card" data-subject="accountancy">
-                        <div class="book-image">
-                            <i class="fas fa-book"></i>
-                        </div>
-                        <div class="book-info">
-                            <h4>Financial Accounting</h4>
-                            <p class="author">By T.S. Grewal</p>
-                            <p class="publisher">Publisher: S. Chand</p>
-                            <div class="book-meta">
-                                <span class="badge-subject">Accountancy</span>
-                                <span class="badge-class">Bachelor's</span>
-                            </div>
-                            <p class="description">Complete guide to financial accounting principles and practices.</p>
-                            <div class="book-links">
-                                <a href="#" class="btn-book"><i class="fas fa-external-link-alt"></i> View Online</a>
-                            </div>
-                        </div>
-                    </div>
+                <div class="publisher-card">
+                    <h3>Asmita Publication</h3>
+                    <p>Comprehensive guide books and solutions</p>
                 </div>
-
-                <h3 class="subject-heading">Economics</h3>
-                <div class="books-grid">
-                    <div class="book-card" data-subject="economics">
-                        <div class="book-image">
-                            <i class="fas fa-book"></i>
-                        </div>
-                        <div class="book-info">
-                            <h4>Microeconomics</h4>
-                            <p class="author">By Robert Pindyck & Daniel Rubinfeld</p>
-                            <p class="publisher">Publisher: Pearson</p>
-                            <div class="book-meta">
-                                <span class="badge-subject">Economics</span>
-                                <span class="badge-class">Bachelor's</span>
-                            </div>
-                            <p class="description">Comprehensive microeconomic theory and applications.</p>
-                            <div class="book-links">
-                                <a href="#" class="btn-book"><i class="fas fa-external-link-alt"></i> View Online</a>
-                            </div>
-                        </div>
-                    </div>
+                <div class="publisher-card">
+                    <h3>Sukunda Pustak Bhawan</h3>
+                    <p>Quality educational materials and guides</p>
+                </div>
+                <div class="publisher-card">
+                    <h3>Heritage Publishers</h3>
+                    <p>Trusted name in educational publishing</p>
                 </div>
             </div>
-
-            <!-- Master's Books -->
-            <div class="books-category" data-class="master">
-                <h2 class="category-title">Master's Level Books</h2>
-                
-                <h3 class="subject-heading">Business Administration</h3>
-                <div class="books-grid">
-                    <div class="book-card" data-subject="business">
-                        <div class="book-image">
-                            <i class="fas fa-book"></i>
-                        </div>
-                        <div class="book-info">
-                            <h4>Strategic Management</h4>
-                            <p class="author">By Fred R. David</p>
-                            <p class="publisher">Publisher: Pearson</p>
-                            <div class="book-meta">
-                                <span class="badge-subject">Business</span>
-                                <span class="badge-class">Master's</span>
-                            </div>
-                            <p class="description">Advanced strategic management concepts and case studies.</p>
-                            <div class="book-links">
-                                <a href="#" class="btn-book"><i class="fas fa-external-link-alt"></i> View Online</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="book-card" data-subject="business">
-                        <div class="book-image">
-                            <i class="fas fa-book"></i>
-                        </div>
-                        <div class="book-info">
-                            <h4>Marketing Management</h4>
-                            <p class="author">By Philip Kotler & Kevin Lane Keller</p>
-                            <p class="publisher">Publisher: Pearson</p>
-                            <div class="book-meta">
-                                <span class="badge-subject">Business</span>
-                                <span class="badge-class">Master's</span>
-                            </div>
-                            <p class="description">The definitive guide to modern marketing management.</p>
-                            <div class="book-links">
-                                <a href="#" class="btn-book"><i class="fas fa-external-link-alt"></i> View Online</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
         </div>
     </section>
 
@@ -447,11 +182,22 @@
                     <h3>Gyanu Note</h3>
                     <p>Your Complete Study Companion</p>
                     <div class="social-icons">
-                        <a href="https://www.facebook.com/share/1Be5qfJhsP/" target="_blank"><i class="fab fa-facebook"></i></a>
-                        <a href="https://twitter.com" target="_blank"><i class="fab fa-twitter"></i></a>
-                        <a href="https://www.instagram.com/itz.nawaraj?igsh=MXJsbGhvc2EzOXc1bQ==" target="_blank"><i class="fab fa-instagram"></i></a>
-                        <a href="https://youtube.com" target="_blank"><i class="fab fa-youtube"></i></a>
-                        <a href="https://linkedin.com" target="_blank"><i class="fab fa-linkedin"></i></a>
+                        <a href="https://www.facebook.com/share/1Be5qfJhsP/" target="_blank" aria-label="Facebook">
+                            <i class="fab fa-facebook"></i>
+                        </a>
+                        <a href="https://twitter.com" target="_blank" aria-label="Twitter">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="https://www.instagram.com/itz.nawaraj?igsh=MXJsbGhvc2EzOXc1bQ==" target="_blank" aria-label="Instagram">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="https://youtube.com" target="_blank" aria-label="YouTube">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                        <a href="https://linkedin.com" target="_blank" aria-label="LinkedIn">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                
                     </div>
                 </div>
                 <div class="footer-section">
@@ -467,17 +213,18 @@
                 <div class="footer-section">
                     <h3>Popular Classes</h3>
                     <ul>
-                        <li><a href="class.html?class=11">Class 11 Notes</a></li>
-                        <li><a href="class.html?class=12">Class 12 Notes</a></li>
-                        <li><a href="class.html?class=bachelor">Bachelor's Notes</a></li>
-                        <li><a href="class.html?class=master">Master's Notes</a></li>
+                        <li><a href="class-overview.html?class=8">Class 8 Notes</a></li>
+                        <li><a href="class-overview.html?class=9">Class 9 Notes</a></li>
+                        <li><a href="class-overview.html?class=10">Class 10 Notes</a></li>
+                        <li><a href="class-overview.html?class=11">Class 11 Notes</a></li>
+                        <li><a href="class-overview.html?class=12">Class 12 Notes</a></li>
                     </ul>
                 </div>
                 <div class="footer-section">
                     <h3>Contact</h3>
-                    <p><i class="fas fa-envelope"></i> guptagyanendra32@gmail.com</p>
-                    <p><i class="fas fa-phone"></i> +977 9814412941</p>
-                    <p><i class="fas fa-map-marker-alt"></i> Nawalparasi, Nepal</p>
+                    <p><i class="fas fa-envelope"></i> info@gyanunote.com</p>
+                    <p><i class="fas fa-phone"></i> +977 9800000000</p>
+                    <p><i class="fas fa-map-marker-alt"></i> Kathmandu, Nepal</p>
                 </div>
             </div>
             <div class="footer-bottom">
@@ -487,6 +234,6 @@
     </footer>
 
     <script src="books-data.js"></script>
-<script src="books.js"></script>
+    <script src="books.js"></script>
 </body>
 </html>

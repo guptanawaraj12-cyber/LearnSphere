@@ -46,7 +46,7 @@ document.getElementById('downloadBtn').addEventListener('click', function() {
                 ${bookContent.innerHTML}
             </div>
             <div style="margin-top: 40px; padding-top: 20px; border-top: 1px solid #ccc; text-align: center; color: #666;">
-                <p>Downloaded from Gyanu Note - www.gyanunote.com</p>
+                <p>Downloaded from Gyanu Note - www.nawarajgupta.com</p>
             </div>
         </div>
     `;

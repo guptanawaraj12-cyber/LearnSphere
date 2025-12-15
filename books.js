@@ -1,233 +1,194 @@
 // ==================== BOOKS PAGE JAVASCRIPT ====================
-// This file handles filtering and displaying books from books-data.js
 
-// Get filter elements
-const bookClassFilter = document.getElementById('bookClassFilter');
-const bookSubjectFilter = document.getElementById('bookSubjectFilter');
-const bookSearch = document.getElementById('bookSearch');
+let allBooks = [];
+let filteredBooks = [];
 
-// Function to display books on page load
-function displayAllBooks() {
-    const container = document.querySelector('.books-section .container');
-    
-    // Clear existing content except filters
-    const filterSection = document.querySelector('.books-filter');
-    container.innerHTML = '';
-    container.appendChild(filterSection);
-    
-    // Display books by class
-    displayBooksByClass('11', 'Class 11 Books');
-    displayBooksByClass('12', 'Class 12 Books');
-    displayBooksByClass('bachelor', "Bachelor's Level Books");
-    displayBooksByClass('master', "Master's Level Books");
+// Initialize page
+function initializeBooksPage() {
+    loadAllBooks();
+    displayBooks(allBooks);
+    setupEventListeners();
 }
 
-// Function to display books for a specific class
-function displayBooksByClass(classLevel, title) {
-    const container = document.querySelector('.books-section .container');
+// Load all books from database
+function loadAllBooks() {
+    allBooks = [];
     
-    // Create category section
-    const categoryDiv = document.createElement('div');
-    categoryDiv.className = 'books-category';
-    categoryDiv.setAttribute('data-class', classLevel);
-    
-    // Add category title
-    const categoryTitle = document.createElement('h2');
-    categoryTitle.className = 'category-title';
-    categoryTitle.textContent = title;
-    categoryDiv.appendChild(categoryTitle);
-    
-    // Get books for this class
-    let classBooks;
-    if (classLevel === '11') {
-        classBooks = booksDatabase.class11;
-    } else if (classLevel === '12') {
-        classBooks = booksDatabase.class12;
-    } else if (classLevel === 'bachelor') {
-        classBooks = booksDatabase.bachelor;
-    } else if (classLevel === 'master') {
-        classBooks = booksDatabase.master;
-    }
-    
-    // Display books by subject
-    if (classBooks) {
-        Object.keys(classBooks).forEach(subject => {
-            const books = classBooks[subject];
-            
-            if (books && books.length > 0) {
-                // Add subject heading
-                const subjectHeading = document.createElement('h3');
-                subjectHeading.className = 'subject-heading';
-                subjectHeading.textContent = capitalizeFirst(subject);
-                categoryDiv.appendChild(subjectHeading);
-                
-                // Create books grid
-                const booksGrid = document.createElement('div');
-                booksGrid.className = 'books-grid';
-                
-                // Add each book
-                books.forEach(book => {
-                    const bookCard = createBookCard(book);
-                    booksGrid.appendChild(bookCard);
+    // Loop through all classes
+    Object.keys(booksDatabase).forEach(classNum => {
+        // Loop through all subjects in each class
+        Object.keys(booksDatabase[classNum]).forEach(subject => {
+            // Add each book with class and subject info
+            booksDatabase[classNum][subject].forEach(book => {
+                allBooks.push({
+                    ...book,
+                    class: classNum,
+                    subject: subject,
+                    subjectName: subjectNames[subject] || subject
                 });
-                
-                categoryDiv.appendChild(booksGrid);
-            }
+            });
         });
+    });
+    
+    filteredBooks = [...allBooks];
+}
+
+// Display books in grid
+function displayBooks(books) {
+    const grid = document.getElementById('booksGrid');
+    const noMessage = document.getElementById('noBooksMessage');
+    const resultsCount = document.getElementById('resultsCount');
+    
+    if (books.length === 0) {
+        grid.innerHTML = '';
+        noMessage.style.display = 'block';
+        resultsCount.textContent = 'No books found';
+        return;
     }
     
-    container.appendChild(categoryDiv);
-}
-
-// Function to create a book card
-// Function to create a book card
-function createBookCard(book) {
-    const card = document.createElement('div');
-    card.className = 'book-card';
-    card.setAttribute('data-subject', book.subject);
-    card.setAttribute('data-class', book.class);
+    noMessage.style.display = 'none';
+    resultsCount.textContent = `Showing ${books.length} book${books.length !== 1 ? 's' : ''}`;
     
-    // Create gradient colors based on subject
-    const gradients = {
-        physics: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-        chemistry: 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)',
-        biology: 'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)',
-        mathematics: 'linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)',
-        computer: 'linear-gradient(135deg, #fa709a 0%, #fee140 100%)',
-        accountancy: 'linear-gradient(135deg, #30cfd0 0%, #330867 100%)',
-        economics: 'linear-gradient(135deg, #a8edea 0%, #fed6e3 100%)',
-        business: 'linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%)',
-        english: 'linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%)'
-    };
-    
-    const gradient = gradients[book.subject] || 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)';
-    
-    card.innerHTML = `
-        <div class="book-image" style="background: ${gradient};">
-            <i class="fas fa-book"></i>
-        </div>
-        <div class="book-info">
-            <h4>${book.title}</h4>
-            <p class="author"><i class="fas fa-user"></i> ${book.author}</p>
-            <p class="publisher"><i class="fas fa-building"></i> ${book.publisher}</p>
-            <div class="book-meta">
-                <span class="badge-subject">${capitalizeFirst(book.subject)}</span>
-                <span class="badge-class">${book.class === 'bachelor' ? "Bachelor's" : book.class === 'master' ? "Master's" : 'Class ' + book.class}</span>
+    grid.innerHTML = books.map(book => `
+        <div class="book-card" data-class="${book.class}" data-subject="${book.subject}">
+            <div class="book-image">
+                <img src="${book.coverImage}" alt="${book.title}" onerror="this.src='images/books/placeholder.jpg'">
+                <div class="book-badge">Class ${book.class}</div>
+                ${book.price === 'Free' || book.price === 'निःशुल्क' ? 
+                    '<div class="free-badge">FREE</div>' : ''}
             </div>
-            <p class="description">${book.description}</p>
-            ${book.isbn ? `<p class="isbn"><strong>ISBN:</strong> ${book.isbn}</p>` : ''}
-            ${book.pages ? `<p class="pages"><strong>Pages:</strong> ${book.pages}</p>` : ''}
-            <div class="book-links">
-                <a href="${book.downloadLink}" class="btn-book"><i class="fas fa-download"></i> Download</a>
-                <a href="${book.previewLink}" class="btn-book-secondary"><i class="fas fa-eye"></i> Preview</a>
-            </div>
-        </div>
-    `;
-    
-    return card;
-}
-
-// Helper function to capitalize first letter
-function capitalizeFirst(str) {
-    const words = {
-        'physics': 'Physics',
-        'chemistry': 'Chemistry',
-        'biology': 'Biology',
-        'mathematics': 'Mathematics',
-        'computer': 'Computer Science',
-        'accountancy': 'Accountancy',
-        'economics': 'Economics',
-        'business': 'Business Studies',
-        'english': 'English'
-    };
-    return words[str] || str.charAt(0).toUpperCase() + str.slice(1);
-}
-
-// Filter books function
-function filterBooks() {
-    const classValue = bookClassFilter ? bookClassFilter.value : 'all';
-    const subjectValue = bookSubjectFilter ? bookSubjectFilter.value : 'all';
-    const searchValue = bookSearch ? bookSearch.value.toLowerCase() : '';
-    
-    const categories = document.querySelectorAll('.books-category');
-    
-    categories.forEach(category => {
-        const categoryClass = category.getAttribute('data-class');
-        let categoryVisible = false;
-        
-        // Check if category matches class filter
-        if (classValue === 'all' || categoryClass === classValue) {
-            const bookCards = category.querySelectorAll('.book-card');
             
-            bookCards.forEach(card => {
-                const cardSubject = card.getAttribute('data-subject');
-                const cardTitle = card.querySelector('h4').textContent.toLowerCase();
-                const cardAuthor = card.querySelector('.author').textContent.toLowerCase();
-                const cardDescription = card.querySelector('.description').textContent.toLowerCase();
+            <div class="book-content">
+                <div class="book-subject-tag">${book.subjectName}</div>
+                <h3 class="book-title">${book.title}</h3>
+                <p class="book-author">
+                    <i class="fas fa-user"></i> ${book.author}
+                </p>
+                <p class="book-publisher">
+                    <i class="fas fa-building"></i> ${book.publisher}
+                </p>
+                <p class="book-description">${book.description}</p>
                 
-                // Check all filters
-                const matchesSubject = subjectValue === 'all' || cardSubject === subjectValue;
-                const matchesSearch = searchValue === '' || 
-                                     cardTitle.includes(searchValue) || 
-                                     cardAuthor.includes(searchValue) ||
-                                     cardDescription.includes(searchValue);
+                <div class="book-meta">
+                    <span><i class="fas fa-file-alt"></i> ${book.pages} pages</span>
+                    <span><i class="fas fa-language"></i> ${book.language}</span>
+                </div>
                 
-                if (matchesSubject && matchesSearch) {
-                    card.style.display = 'flex';
-                    categoryVisible = true;
-                } else {
-                    card.style.display = 'none';
-                }
-            });
-            
-            // Show/hide subject headings
-            const subjectHeadings = category.querySelectorAll('.subject-heading');
-            subjectHeadings.forEach(heading => {
-                const nextGrid = heading.nextElementSibling;
-                if (nextGrid && nextGrid.classList.contains('books-grid')) {
-                    const visibleCards = nextGrid.querySelectorAll('.book-card[style="display: flex;"], .book-card:not([style*="display"])');
-                    if (visibleCards.length === 0) {
-                        heading.style.display = 'none';
-                        nextGrid.style.display = 'none';
-                    } else {
-                        heading.style.display = 'block';
-                        nextGrid.style.display = 'grid';
+                <div class="book-price">
+                    <span class="price-tag">${book.price}</span>
+                </div>
+                
+                <div class="book-actions">
+                    ${book.downloadLink !== '#' ? 
+                        `<a href="${book.downloadLink}" class="btn-download" download>
+                            <i class="fas fa-download"></i> Download
+                        </a>` : 
+                        `<button class="btn-download btn-disabled" disabled>
+                            <i class="fas fa-download"></i> Coming Soon
+                        </button>`
                     }
-                }
-            });
-            
-            // Show/hide category based on visible cards
-            category.style.display = categoryVisible ? 'block' : 'none';
-        } else {
-            category.style.display = 'none';
-        }
+                    ${book.buyLink !== '#' ? 
+                        `<a href="${book.buyLink}" class="btn-buy" target="_blank">
+                            <i class="fas fa-shopping-cart"></i> Buy Now
+                        </a>` : 
+                        `<button class="btn-buy btn-disabled" disabled>
+                            <i class="fas fa-shopping-cart"></i> Not Available
+                        </button>`
+                    }
+                </div>
+                
+                <div class="book-isbn">
+                    <small>ISBN: ${book.isbn}</small>
+                </div>
+            </div>
+        </div>
+    `).join('');
+}
+
+// Setup event listeners
+function setupEventListeners() {
+    const classFilter = document.getElementById('classFilter');
+    const subjectFilter = document.getElementById('subjectFilter');
+    const searchInput = document.getElementById('searchBooks');
+    const resetBtn = document.getElementById('resetFilters');
+    
+    // Class filter
+    classFilter.addEventListener('change', applyFilters);
+    
+    // Subject filter
+    subjectFilter.addEventListener('change', applyFilters);
+    
+    // Search input
+    searchInput.addEventListener('input', applyFilters);
+    
+    // Reset button
+    resetBtn.addEventListener('click', resetFilters);
+    
+    // Mobile menu
+    const hamburger = document.querySelector('.hamburger');
+    const navLinks = document.querySelector('.nav-links');
+    if (hamburger) {
+        hamburger.addEventListener('click', () => navLinks.classList.toggle('active'));
+    }
+}
+
+// Apply filters
+function applyFilters() {
+    const classFilter = document.getElementById('classFilter').value;
+    const subjectFilter = document.getElementById('subjectFilter').value;
+    const searchTerm = document.getElementById('searchBooks').value.toLowerCase();
+    
+    filteredBooks = allBooks.filter(book => {
+        // Class filter
+        const classMatch = classFilter === 'all' || book.class === classFilter;
+        
+        // Subject filter
+        const subjectMatch = subjectFilter === 'all' || book.subject === subjectFilter;
+        
+        // Search filter
+        const searchMatch = searchTerm === '' || 
+            book.title.toLowerCase().includes(searchTerm) ||
+            book.author.toLowerCase().includes(searchTerm) ||
+            book.publisher.toLowerCase().includes(searchTerm) ||
+            book.description.toLowerCase().includes(searchTerm);
+        
+        return classMatch && subjectMatch && searchMatch;
     });
+    
+    displayBooks(filteredBooks);
 }
 
-// Event listeners for filters
-if (bookClassFilter) {
-    bookClassFilter.addEventListener('change', filterBooks);
+// Reset filters
+function resetFilters() {
+    document.getElementById('classFilter').value = 'all';
+    document.getElementById('subjectFilter').value = 'all';
+    document.getElementById('searchBooks').value = '';
+    
+    filteredBooks = [...allBooks];
+    displayBooks(filteredBooks);
 }
 
-if (bookSubjectFilter) {
-    bookSubjectFilter.addEventListener('change', filterBooks);
+// Check URL parameters for direct filtering
+function checkURLParams() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const classParam = urlParams.get('class');
+    const subjectParam = urlParams.get('subject');
+    
+    if (classParam) {
+        document.getElementById('classFilter').value = classParam;
+    }
+    
+    if (subjectParam) {
+        document.getElementById('subjectFilter').value = subjectParam;
+    }
+    
+    if (classParam || subjectParam) {
+        applyFilters();
+    }
 }
 
-if (bookSearch) {
-    bookSearch.addEventListener('input', filterBooks);
-}
-
-// Display books on page load
-document.addEventListener('DOMContentLoaded', function() {
-    displayAllBooks();
+// Initialize when page loads
+document.addEventListener('DOMContentLoaded', () => {
+    initializeBooksPage();
+    checkURLParams();
 });
-
-// Mobile menu (if needed)
-const hamburger = document.querySelector('.hamburger');
-const navLinks = document.querySelector('.nav-links');
-
-if (hamburger) {
-    hamburger.addEventListener('click', () => {
-        navLinks.classList.toggle('active');
-    });
-}
