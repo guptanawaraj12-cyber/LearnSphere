@@ -4,9 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <title>Class Notes - Gyanu Note</title>
-    <meta name="description" content="Complete study notes for all subjects">
-    <meta name="keywords" content="class notes, study materials">
+    <title>Class Books - Gyanu Note</title>
+    <meta name="description" content="Recommended books for students">
+    <meta name="keywords" content="books, textbooks, guide books">
     <meta name="author" content="Gyanu Note">
     <meta name="robots" content="index, follow">
     
@@ -27,8 +27,8 @@
             </div>
             <ul class="nav-links">
                 <li><a href="index.html">Home</a></li>
-                <li><a href="index.html#classes" class="active">Notes</a></li>
-                <li><a href="books.html">Books</a></li>
+                <li><a href="index.html#classes">Notes</a></li>
+                <li><a href="books.html" class="active">Books</a></li>
                 <li><a href="about.html">About</a></li>
                 <li><a href="contact.html">Contact</a></li>
             </ul>
@@ -42,64 +42,54 @@
 
     <div class="page-header" id="pageHeader">
         <div class="container">
-            <h1 id="pageTitle">Class Notes</h1>
-            <p id="pageSubtitle">Complete Study Materials for All Subjects</p>
+            <h1 id="pageTitle">Class Books</h1>
+            <p id="pageSubtitle">Recommended textbooks and guide books</p>
             <div class="breadcrumb" id="breadcrumb">
-                <a href="index.html">Home</a> / <a href="index.html#classes">Notes</a> / <span>Loading...</span>
+                <a href="index.html">Home</a> / <a href="books.html">Books</a> / <span>Loading...</span>
             </div>
         </div>
     </div>
 
-    <section class="class-subjects-section">
+    <!-- Back Button -->
+    <section class="back-section">
         <div class="container">
-            <div class="class-intro" id="classIntro">
-                <!-- Will be loaded by JavaScript -->
-            </div>
+            <a href="books.html" class="back-btn">
+                <i class="fas fa-arrow-left"></i> Back to All Classes
+            </a>
+        </div>
+    </section>
 
-            <div class="subjects-grid-large" id="subjectsGrid">
-                <!-- Will be loaded by JavaScript -->
+    <!-- Search Bar -->
+    <section class="search-section">
+        <div class="container">
+            <div class="search-box-large">
+                <i class="fas fa-search"></i>
+                <input type="text" id="searchBooks" placeholder="Search books by title, author, or publisher...">
             </div>
         </div>
     </section>
 
-    <section class="study-tips-section">
+    <!-- Subjects Grid -->
+    <section class="subjects-books-section">
         <div class="container">
-            <h2 id="tipsHeading">Study Tips</h2>
-            <div class="tips-grid">
-                <div class="tip-card">
-                    <i class="fas fa-clock"></i>
-                    <h3>Time Management</h3>
-                    <p>Create a study schedule and stick to it. Allocate specific time for each subject daily.</p>
-                </div>
-                <div class="tip-card">
-                    <i class="fas fa-pencil-alt"></i>
-                    <h3>Practice Regularly</h3>
-                    <p>Solve practice problems daily, especially for Math and Science subjects.</p>
-                </div>
-                <div class="tip-card">
-                    <i class="fas fa-book-reader"></i>
-                    <h3>Read Thoroughly</h3>
-                    <p>Read your textbooks carefully and make notes of important points.</p>
-                </div>
-                <div class="tip-card">
-                    <i class="fas fa-users"></i>
-                    <h3>Group Study</h3>
-                    <p>Study with friends to discuss difficult topics and clear doubts.</p>
-                </div>
+            <div class="section-header">
+                <h2 id="sectionTitle">Browse Books by Subject</h2>
+                <p id="sectionSubtitle">Click on a subject to view all books</p>
+            </div>
+
+            <div id="subjectsContainer" class="subjects-accordion">
+                <!-- Subjects will be loaded here by JavaScript -->
+            </div>
+
+            <div id="noResults" class="no-results" style="display: none;">
+                <i class="fas fa-search"></i>
+                <h3>No Books Found</h3>
+                <p>Try a different search term</p>
             </div>
         </div>
     </section>
 
-    <section class="related-classes-section">
-        <div class="container">
-            <h2>Explore Other Classes</h2>
-            <div class="classes-grid" id="relatedClasses">
-                <!-- Will be loaded by JavaScript -->
-            </div>
-        </div>
-    </section>
-
-    <footer id="contact" class="footer">
+   <footer id="contact" class="footer">
         <div class="container">
             <div class="footer-content">
                 <div class="footer-section">
@@ -154,7 +144,7 @@
             </div>
         </div>
     </footer>
-
-    <script src="class-overview.js"></script>
+    <script src="books-data.js"></script>
+    <script src="class-books.js"></script>
 </body>
 </html>

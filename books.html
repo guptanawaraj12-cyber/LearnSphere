@@ -42,81 +42,114 @@
 
     <div class="page-header">
         <div class="container">
-            <h1>Recommended Books</h1>
-            <p>Best textbooks and guide books for all classes and subjects</p>
+            <h1>📚 Recommended Books</h1>
+            <p>Select your class to view recommended textbooks and guide books</p>
             <div class="breadcrumb">
                 <a href="index.html">Home</a> / <span>Books</span>
             </div>
         </div>
     </div>
 
-    <!-- Books Filter Section -->
-    <section class="books-filter-section">
+    <!-- Class Selection Section -->
+    <section class="class-selection-section">
         <div class="container">
-            <div class="filter-container">
-                <div class="filter-group">
-                    <label for="classFilter">
-                        <i class="fas fa-graduation-cap"></i> Select Class
-                    </label>
-                    <select id="classFilter" class="filter-select">
-                        <option value="all">All Classes</option>
-                        <option value="8">Class 8</option>
-                        <option value="9">Class 9</option>
-                        <option value="10">Class 10</option>
-                        <option value="11">Class 11</option>
-                        <option value="12">Class 12</option>
-                    </select>
-                </div>
-
-                <div class="filter-group">
-                    <label for="subjectFilter">
-                        <i class="fas fa-book"></i> Select Subject
-                    </label>
-                    <select id="subjectFilter" class="filter-select">
-                        <option value="all">All Subjects</option>
-                        <option value="science">Science</option>
-                        <option value="math">Mathematics</option>
-                        <option value="english">English</option>
-                        <option value="nepali">Nepali</option>
-                        <option value="computer">Computer Science</option>
-                        <option value="optional-math">Optional Mathematics</option>
-                        <option value="economics">Economics</option>
-                        <option value="accounts">Accountancy</option>
-                        <option value="physics">Physics</option>
-                        <option value="chemistry">Chemistry</option>
-                        <option value="biology">Biology</option>
-                    </select>
-                </div>
-
-                <div class="filter-group">
-                    <label for="searchBooks">
-                        <i class="fas fa-search"></i> Search Books
-                    </label>
-                    <input type="text" id="searchBooks" class="filter-input" placeholder="Search by title, author, or publisher...">
-                </div>
-
-                <button id="resetFilters" class="reset-btn">
-                    <i class="fas fa-redo"></i> Reset Filters
-                </button>
+            <div class="section-intro">
+                <h2>Choose Your Class</h2>
+                <p>Browse books organized by class and subject</p>
             </div>
 
-            <div class="filter-results">
-                <p id="resultsCount">Showing all books</p>
-            </div>
-        </div>
-    </section>
+            <div class="class-cards-grid">
+                <!-- Class 8 -->
+                <a href="class-books.html?class=8" class="class-book-card">
+                    <div class="class-icon">
+                        <i class="fas fa-book-open"></i>
+                    </div>
+                    <h3>Class 8 Books</h3>
+                    <p>Textbooks and guides for all Class 8 subjects</p>
+                    <div class="subjects-preview">
+                        <span><i class="fas fa-flask"></i> Science</span>
+                        <span><i class="fas fa-calculator"></i> Math</span>
+                        <span><i class="fas fa-book"></i> English</span>
+                        <span class="more">+3 more</span>
+                    </div>
+                    <div class="view-books-btn">
+                        View Books <i class="fas fa-arrow-right"></i>
+                    </div>
+                </a>
 
-    <!-- Books Grid Section -->
-    <section class="books-section">
-        <div class="container">
-            <div class="books-grid" id="booksGrid">
-                <!-- Books will be loaded here by JavaScript -->
-            </div>
+                <!-- Class 9 -->
+                <a href="class-books.html?class=9" class="class-book-card">
+                    <div class="class-icon">
+                        <i class="fas fa-book-open"></i>
+                    </div>
+                    <h3>Class 9 Books</h3>
+                    <p>Complete collection for Class 9 students</p>
+                    <div class="subjects-preview">
+                        <span><i class="fas fa-flask"></i> Science</span>
+                        <span><i class="fas fa-calculator"></i> Math</span>
+                        <span><i class="fas fa-chart-line"></i> Economics</span>
+                        <span class="more">+5 more</span>
+                    </div>
+                    <div class="view-books-btn">
+                        View Books <i class="fas fa-arrow-right"></i>
+                    </div>
+                </a>
 
-            <div id="noBooksMessage" class="no-books-message" style="display: none;">
-                <i class="fas fa-book-open"></i>
-                <h3>No Books Found</h3>
-                <p>Try adjusting your filters or search terms</p>
+                <!-- Class 10 -->
+                <a href="class-books.html?class=10" class="class-book-card featured">
+                    <div class="featured-badge">Board Exam</div>
+                    <div class="class-icon">
+                        <i class="fas fa-book-open"></i>
+                    </div>
+                    <h3>Class 10 Books</h3>
+                    <p>Board exam preparation books and guides</p>
+                    <div class="subjects-preview">
+                        <span><i class="fas fa-flask"></i> Science</span>
+                        <span><i class="fas fa-calculator"></i> Math</span>
+                        <span><i class="fas fa-book"></i> English</span>
+                        <span class="more">+5 more</span>
+                    </div>
+                    <div class="view-books-btn">
+                        View Books <i class="fas fa-arrow-right"></i>
+                    </div>
+                </a>
+
+                <!-- Class 11 -->
+                <a href="class-books.html?class=11" class="class-book-card">
+                    <div class="class-icon">
+                        <i class="fas fa-book-open"></i>
+                    </div>
+                    <h3>Class 11 Books</h3>
+                    <p>Advanced level NEB curriculum books</p>
+                    <div class="subjects-preview">
+                        <span><i class="fas fa-atom"></i> Physics</span>
+                        <span><i class="fas fa-flask"></i> Chemistry</span>
+                        <span><i class="fas fa-dna"></i> Biology</span>
+                        <span class="more">+3 more</span>
+                    </div>
+                    <div class="view-books-btn">
+                        View Books <i class="fas fa-arrow-right"></i>
+                    </div>
+                </a>
+
+                <!-- Class 12 -->
+                <a href="class-books.html?class=12" class="class-book-card featured">
+                    <div class="featured-badge">Board Exam</div>
+                    <div class="class-icon">
+                        <i class="fas fa-book-open"></i>
+                    </div>
+                    <h3>Class 12 Books</h3>
+                    <p>Complete board exam preparation materials</p>
+                    <div class="subjects-preview">
+                        <span><i class="fas fa-atom"></i> Physics</span>
+                        <span><i class="fas fa-flask"></i> Chemistry</span>
+                        <span><i class="fas fa-calculator"></i> Math</span>
+                        <span class="more">+3 more</span>
+                    </div>
+                    <div class="view-books-btn">
+                        View Books <i class="fas fa-arrow-right"></i>
+                    </div>
+                </a>
             </div>
         </div>
     </section>
@@ -124,7 +157,7 @@
     <!-- Books Info Section -->
     <section class="books-info-section">
         <div class="container">
-            <h2>Why Choose These Books?</h2>
+            <h2>Why Choose Our Recommended Books?</h2>
             <div class="info-grid">
                 <div class="info-card">
                     <i class="fas fa-check-circle"></i>
@@ -156,18 +189,22 @@
             <h2>Popular Publishers</h2>
             <div class="publishers-grid">
                 <div class="publisher-card">
+                    <i class="fas fa-building"></i>
                     <h3>CDC Nepal</h3>
                     <p>Curriculum Development Centre - Official textbooks</p>
                 </div>
                 <div class="publisher-card">
+                    <i class="fas fa-book-open"></i>
                     <h3>Asmita Publication</h3>
                     <p>Comprehensive guide books and solutions</p>
                 </div>
                 <div class="publisher-card">
+                    <i class="fas fa-graduation-cap"></i>
                     <h3>Sukunda Pustak Bhawan</h3>
                     <p>Quality educational materials and guides</p>
                 </div>
                 <div class="publisher-card">
+                    <i class="fas fa-bookmark"></i>
                     <h3>Heritage Publishers</h3>
                     <p>Trusted name in educational publishing</p>
                 </div>
@@ -175,7 +212,7 @@
         </div>
     </section>
 
-    <footer class="footer">
+   <footer id="contact" class="footer">
         <div class="container">
             <div class="footer-content">
                 <div class="footer-section">
@@ -197,14 +234,15 @@
                         <a href="https://linkedin.com" target="_blank" aria-label="LinkedIn">
                             <i class="fab fa-linkedin"></i>
                         </a>
-                
+                        
                     </div>
                 </div>
+         
                 <div class="footer-section">
                     <h3>Quick Links</h3>
                     <ul>
                         <li><a href="index.html">Home</a></li>
-                        <li><a href="index.html#classes">Notes</a></li>
+                        <li><a href="#classes">Notes</a></li>
                         <li><a href="books.html">Books</a></li>
                         <li><a href="about.html">About</a></li>
                         <li><a href="contact.html">Contact</a></li>
@@ -213,18 +251,17 @@
                 <div class="footer-section">
                     <h3>Popular Classes</h3>
                     <ul>
-                        <li><a href="class-overview.html?class=8">Class 8 Notes</a></li>
-                        <li><a href="class-overview.html?class=9">Class 9 Notes</a></li>
-                        <li><a href="class-overview.html?class=10">Class 10 Notes</a></li>
-                        <li><a href="class-overview.html?class=11">Class 11 Notes</a></li>
-                        <li><a href="class-overview.html?class=12">Class 12 Notes</a></li>
+                        <li><a href="class.html?class=11">Class 11 Notes</a></li>
+                        <li><a href="class.html?class=12">Class 12 Notes</a></li>
+                        <li><a href="class.html?class=bachelor">Bachelor's Notes</a></li>
+                        <li><a href="class.html?class=master">Master's Notes</a></li>
                     </ul>
                 </div>
                 <div class="footer-section">
                     <h3>Contact</h3>
-                    <p><i class="fas fa-envelope"></i> info@gyanunote.com</p>
-                    <p><i class="fas fa-phone"></i> +977 9800000000</p>
-                    <p><i class="fas fa-map-marker-alt"></i> Kathmandu, Nepal</p>
+                    <p><i class="fas fa-envelope"></i> guptagyanendra32@gmail.com</p>
+                    <p><i class="fas fa-phone"></i> +977 9814412941</p>
+                    <p><i class="fas fa-map-marker-alt"></i> Nawalparasi, Nepal</p>
                 </div>
             </div>
             <div class="footer-bottom">
@@ -233,7 +270,6 @@
         </div>
     </footer>
 
-    <script src="books-data.js"></script>
-    <script src="books.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>
