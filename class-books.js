@@ -79,7 +79,7 @@ function createBookCard(book) {
     return `
         <div class="book-card" data-title="${book.title.toLowerCase()}" data-author="${book.author.toLowerCase()}" data-publisher="${book.publisher.toLowerCase()}">
             <div class="book-image">
-                <img src="${book.coverImage}" alt="${book.title}" onerror="this.src='https://via.placeholder.com/280x350/6366f1/ffffff?text=Book+Cover'">
+               <img src="${book.coverImage}" alt="${book.title}" onerror="this.src='images/books/placeholder.jpg'">
                 ${book.price === 'Free' || book.price === 'निःशुल्क' ? 
                     '<div class="free-badge">FREE</div>' : ''}
             </div>
