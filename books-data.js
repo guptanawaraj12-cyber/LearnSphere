@@ -392,9 +392,9 @@ const booksDatabase = {
                 description: 'Advanced programming and web development',
                 coverImage: 'images/books/class-10-computer.jpg',
                 price: 'Free',
-                downloadLink: '#',
+                downloadLink: 'https://drive.google.com/uc?export=download&id=1HVZmoIk3j1ID_cGMiLiC1KppmKCbXNvg',
                 buyLink: '#',
-                pages: 220,
+                pages: 257,
                 language: 'English',
                 isbn: '978-9937-0-0027-0'
             }
@@ -611,14 +611,14 @@ const booksDatabase = {
             {
                 id: 'b12p1',
                 title: 'Physics - Class 12',
-                author: 'CDC Nepal',
-                publisher: 'Curriculum Development Centre',
-                description: 'Official Physics textbook for Class 12 NEB Board',
+                author: 'Asmita Publication',
+                publisher: 'Asmita Books',
+                description: 'Physics textbook for Class 12 NEB Board',
                 coverImage: 'images/books/class-12-physics.jpg',
                 price: 'Free',
-                downloadLink: '#',
+                downloadLink: 'https://drive.google.com/uc?export=download&id=1KElS1kqnBuc32_hi6TDz4s6CHB4q-T1s',
                 buyLink: '#',
-                pages: 370,
+                pages: 778,
                 language: 'English',
                 isbn: '978-9937-0-0041-0'
             },
@@ -655,14 +655,14 @@ const booksDatabase = {
             {
                 id: 'b12c1',
                 title: 'Chemistry - Class 12',
-                author: 'CDC Nepal',
-                publisher: 'Curriculum Development Centre',
-                description: 'Official Chemistry textbook for Class 12 NEB Board',
+                author: 'Asmita Publication',
+                publisher: 'Asmita Books',
+                description: 'Chemistry textbook for Class 12 NEB Board',
                 coverImage: 'images/books/class-12-chemistry.jpg',
                 price: 'Free',
-                downloadLink: '#',
+                downloadLink: 'https://drive.google.com/uc?export=download&id=1yUFXPTzw2ikgImAAfRd4JDb2TbmggibF',
                 buyLink: '#',
-                pages: 350,
+                pages: 666,
                 language: 'English',
                 isbn: '978-9937-0-0044-0'
             },
@@ -748,11 +748,11 @@ const booksDatabase = {
                 author: 'CDC Nepal',
                 publisher: 'Curriculum Development Centre',
                 description: 'Official English textbook for Class 12 NEB Board',
-                coverImage: 'images/books/class-12-english.jpg',
+                coverImage: 'images/books/class-12-english.jpg', // ← Local
                 price: 'Free',
-                downloadLink: '#',
+                downloadLink: 'https://drive.google.com/uc?export=download&id=16-GdbrWP8wqjNhFuyyWXVhRgFeTzIca9', // ← Google Drive
                 buyLink: '#',
-                pages: 300,
+                pages: 308,
                 language: 'English',
                 isbn: '978-9937-0-0050-0'
             }
@@ -766,9 +766,9 @@ const booksDatabase = {
                 description: 'कक्षा १२ को आधिकारिक नेपाली पाठ्यपुस्तक',
                 coverImage: 'images/books/class-12-nepali.jpg',
                 price: 'निःशुल्क',
-                downloadLink: '#',
+                downloadLink: 'https://drive.google.com/uc?export=download&id=1PExU7BN3bUlAM5_5lCO2TlNYRWUEMdRq',
                 buyLink: '#',
-                pages: 320,
+                pages: 191,
                 language: 'Nepali',
                 isbn: '978-9937-0-0051-0'
             }
