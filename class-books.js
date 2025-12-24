@@ -79,7 +79,7 @@ function createBookCard(book) {
     return `
         <div class="book-card" data-title="${book.title.toLowerCase()}" data-author="${book.author.toLowerCase()}" data-publisher="${book.publisher.toLowerCase()}">
             <div class="book-image">
-               <img src="${book.coverImage}" alt="${book.title}" onerror="this.src='images/books/placeholder.jpg'">
+                <img src="${book.coverImage}" alt="${book.title}" onerror="this.src='images/books/placeholder.jpg'">
                 ${book.price === 'Free' || book.price === 'निःशुल्क' ? 
                     '<div class="free-badge">FREE</div>' : ''}
             </div>
@@ -105,21 +105,20 @@ function createBookCard(book) {
                 
                 <div class="book-actions">
                     ${book.downloadLink !== '#' ? 
-                        `<a href="${book.downloadLink}" class="btn-download" download>
+                        `<button class="btn-preview" onclick="previewBook('${book.downloadLink}', '${book.title.replace(/'/g, "\\'")}')">
+                            <i class="fas fa-eye"></i> Preview
+                        </button>
+                        <a href="${book.downloadLink}" class="btn-download" download>
                             <i class="fas fa-download"></i> Download
                         </a>` : 
-                        `<button class="btn-download btn-disabled" disabled>
+                        `<button class="btn-preview btn-disabled" disabled>
+                            <i class="fas fa-eye"></i> Preview
+                        </button>
+                        <button class="btn-download btn-disabled" disabled>
                             <i class="fas fa-download"></i> Coming Soon
                         </button>`
                     }
-                    ${book.buyLink !== '#' ? 
-                        `<a href="${book.buyLink}" class="btn-buy" target="_blank">
-                            <i class="fas fa-shopping-cart"></i> Buy Now
-                        </a>` : 
-                        `<button class="btn-buy btn-disabled" disabled>
-                            <i class="fas fa-shopping-cart"></i> Not Available
-                        </button>`
-                    }
+                    
                 </div>
                 
                 <div class="book-isbn">
@@ -129,6 +128,74 @@ function createBookCard(book) {
         </div>
     `;
 }
+
+// Preview book function
+function previewBook(pdfUrl, bookTitle) {
+    // Create modal
+    const modal = document.createElement('div');
+    modal.className = 'pdf-preview-modal';
+    modal.id = 'pdfPreviewModal';
+    
+    // Convert Google Drive link to embed format if needed
+    let embedUrl = pdfUrl;
+    if (pdfUrl.includes('drive.google.com')) {
+        // Extract file ID from Google Drive URL
+        const fileIdMatch = pdfUrl.match(/[-\w]{25,}/);
+        if (fileIdMatch) {
+            embedUrl = `https://drive.google.com/file/d/${fileIdMatch[0]}/preview`;
+        }
+    }
+    
+    modal.innerHTML = `
+        <div class="pdf-modal-overlay" onclick="closePdfPreview()"></div>
+        <div class="pdf-modal-content">
+            <div class="pdf-modal-header">
+                <h3><i class="fas fa-book-open"></i> ${bookTitle}</h3>
+                <div class="pdf-modal-actions">
+                    <a href="${pdfUrl}" class="btn-download-modal" download>
+                        <i class="fas fa-download"></i> Download
+                    </a>
+                    <button class="btn-close-modal" onclick="closePdfPreview()">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="pdf-modal-body">
+                <iframe src="${embedUrl}" class="pdf-iframe" frameborder="0"></iframe>
+            </div>
+            <div class="pdf-modal-footer">
+                <p><i class="fas fa-info-circle"></i> Preview mode - Download for full access</p>
+            </div>
+        </div>
+    `;
+    
+    document.body.appendChild(modal);
+    document.body.style.overflow = 'hidden'; // Prevent background scrolling
+    
+    // Animate modal
+    setTimeout(() => {
+        modal.classList.add('active');
+    }, 10);
+}
+
+// Close PDF preview
+function closePdfPreview() {
+    const modal = document.getElementById('pdfPreviewModal');
+    if (modal) {
+        modal.classList.remove('active');
+        setTimeout(() => {
+            modal.remove();
+            document.body.style.overflow = ''; // Restore scrolling
+        }, 300);
+    }
+}
+
+// Close on ESC key
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+        closePdfPreview();
+    }
+});
 
 // Toggle subject accordion
 function toggleSubject(subject) {

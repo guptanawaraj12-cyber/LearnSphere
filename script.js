@@ -144,3 +144,95 @@ if (applyFilters) {
         window.location.href = url;
     });
 }
+// ==================== LATEST UPDATES SECTION ====================
+
+// Load updates on homepage
+function loadLatestUpdates() {
+    const updatesGrid = document.getElementById('updatesGrid');
+    
+    if (!updatesGrid) return; // Not on homepage
+    
+    const updates = getRecentUpdates(6); // Get 6 most recent
+    
+    updatesGrid.innerHTML = updates.map(update => `
+        <a href="${update.link}" class="update-card ${update.type}">
+            <div class="update-badge ${update.badge.toLowerCase()}">${update.badge}</div>
+            
+            <div class="update-icon">
+                <i class="${update.icon}"></i>
+            </div>
+            
+            <div class="update-content">
+                <div class="update-meta">
+                    <span class="update-class">Class ${update.class}</span>
+                    <span class="update-subject">${update.subject}</span>
+                </div>
+                
+                <h3 class="update-title">${update.title}</h3>
+                <p class="update-description">${update.description}</p>
+                
+                <div class="update-footer">
+                    <span class="update-date">
+                        <i class="fas fa-clock"></i> ${formatUpdateDate(update.date)}
+                    </span>
+                    <span class="update-arrow">
+                        <i class="fas fa-arrow-right"></i>
+                    </span>
+                </div>
+            </div>
+        </a>
+    `).join('');
+}
+
+// View all updates button
+document.addEventListener('DOMContentLoaded', () => {
+    loadLatestUpdates();
+    
+    const viewAllBtn = document.getElementById('viewAllUpdates');
+    if (viewAllBtn) {
+        viewAllBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            // Show all updates (you can create a separate page or modal)
+            showAllUpdates();
+        });
+    }
+});
+
+// Show all updates (expand the grid)
+function showAllUpdates() {
+    const updatesGrid = document.getElementById('updatesGrid');
+    const viewAllBtn = document.getElementById('viewAllUpdates');
+    
+    const allUpdates = latestUpdates; // Show all
+    
+    updatesGrid.innerHTML = allUpdates.map(update => `
+        <a href="${update.link}" class="update-card ${update.type}">
+            <div class="update-badge ${update.badge.toLowerCase()}">${update.badge}</div>
+            
+            <div class="update-icon">
+                <i class="${update.icon}"></i>
+            </div>
+            
+            <div class="update-content">
+                <div class="update-meta">
+                    <span class="update-class">Class ${update.class}</span>
+                    <span class="update-subject">${update.subject}</span>
+                </div>
+                
+                <h3 class="update-title">${update.title}</h3>
+                <p class="update-description">${update.description}</p>
+                
+                <div class="update-footer">
+                    <span class="update-date">
+                        <i class="fas fa-clock"></i> ${formatUpdateDate(update.date)}
+                    </span>
+                    <span class="update-arrow">
+                        <i class="fas fa-arrow-right"></i>
+                    </span>
+                </div>
+            </div>
+        </a>
+    `).join('');
+    
+    viewAllBtn.style.display = 'none'; // Hide button after showing all
+}
