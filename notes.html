@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notes - Gyanu Notes</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+</head>
+<body>
+   <nav class="navbar">
+    <div class="container">
+        <div class="nav-wrapper">
+            <a href="index.html" class="logo">
+                <i class="fas fa-graduation-cap"></i>
+                <span>Gyanu Notes</span>
+            </a>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="notes.html" class="active">Notes</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <!-- Auth links will be added dynamically -->
+            </ul>
+            <button class="theme-toggle" id="themeToggle">
+                <i class="fas fa-moon"></i>
+            </button>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </div>
+</nav>
+
+    <section class="page-header">
+        <div class="container">
+            <h1>Study <span class="gradient-text">Notes</span></h1>
+            <p>Select your class or program to access notes</p>
+        </div>
+    </section>
+
+    <section class="notes-section">
+        <div class="container">
+            <!-- School Level -->
+            <div class="level-section">
+                <h2 class="level-title"><i class="fas fa-school"></i> School Level</h2>
+                <div class="class-grid">
+                    <div class="class-card" onclick="showSubjects('class8')">
+                        <div class="class-icon">8</div>
+                        <h3>Class 8</h3>
+                        <p>6 Subjects Available</p>
+                    </div>
+                    <div class="class-card" onclick="showSubjects('class9')">
+                        <div class="class-icon">9</div>
+                        <h3>Class 9</h3>
+                        <p>8 Subjects Available</p>
+                    </div>
+                    <div class="class-card" onclick="showSubjects('class10')">
+                        <div class="class-icon">10</div>
+                        <h3>Class 10</h3>
+                        <p>8 Subjects Available</p>
+                    </div>
+                    <div class="class-card" onclick="showSubjects('class11')">
+                        <div class="class-icon">11</div>
+                        <h3>Class 11</h3>
+                        <p>6 Subjects Available</p>
+                    </div>
+                    <div class="class-card" onclick="showSubjects('class12')">
+                        <div class="class-icon">12</div>
+                        <h3>Class 12</h3>
+                        <p>6 Subjects Available</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CTEVT Level -->
+            <div class="level-section">
+                <h2 class="level-title"><i class="fas fa-user-md"></i> CTEVT Level</h2>
+                <div class="ctevt-grid">
+                    <div class="ctevt-card" onclick="showCTEVTProgram('ha')">
+                        <div class="ctevt-icon">
+                            <i class="fas fa-stethoscope"></i>
+                        </div>
+                        <h3>Health Assistant (HA)</h3>
+                        <p>3 Year Program</p>
+                    </div>
+                    <div class="ctevt-card" onclick="showCTEVTProgram('pharmacy')">
+                        <div class="ctevt-icon">
+                            <i class="fas fa-pills"></i>
+                        </div>
+                        <h3>Pharmacy</h3>
+                        <p>3 Year Program</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal for Subjects -->
+    <div id="subjectModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2 id="modalTitle">Select Subject</h2>
+            <div id="subjectList" class="subject-list"></div>
+        </div>
+    </div>
+
+    <!-- Modal for Note Content -->
+    <div id="noteModal" class="modal">
+        <div class="modal-content note-content-modal">
+            <span class="close" onclick="closeNoteModal()">&times;</span>
+            <div class="note-header">
+                <h2 id="noteTitle">Note Title</h2>
+                <button class="btn btn-primary" onclick="downloadPDF()">
+                    <i class="fas fa-download"></i> Download PDF
+                </button>
+            </div>
+            <div id="noteContent" class="note-content">
+                <!-- Note content will be loaded here -->
+            </div>
+        </div>
+    </div>
+
+ <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <i class="fas fa-graduation-cap"></i>
+                        <span>Gyanu Notes</span>
+                    </div>
+                    <p class="footer-description">
+                        Gyanu Notes is your trusted educational platform providing comprehensive study materials for students from Class 8 to 12 and CTEVT programs. We believe in making quality education accessible to everyone.
+                    </p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="notes.html">Notes</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact Us</h3>
+                    <ul class="contact-info">
+                        <li>
+                            <i class="fas fa-envelope"></i>
+                            <a href="mailto:gyanunotes@gmail.com">info@gyanunote.com</a>
+                        </li>
+                        <li>
+                            <i class="fas fa-phone"></i>
+                            <a href="tel:+9779814414941">+977 9814414941</a>
+                        </li>
+                        <li>
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Nawalparasi, Nepal</span>
+                        </li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Follow Us</h3>
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/share/1BAyrJsdKf/" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                        <a href="https://www.instagram.com/gyanunotes?igsh=MWQzNDE1NG4xczE1Mw==" class="social-link"><i class="fab fa-instagram"></i></a>
+                        <a href="https://youtube.com/@gyanunotes?si=UevKtAS66s3tPCyY" class="social-link"><i class="fab fa-youtube"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="footer-bottom-left">
+                    <p>&copy; 2024 Gyanu Notes. All rights reserved.</p>
+                </div>
+                <div class="footer-bottom-right">
+                    <a href="privacy.html">Privacy Policy</a>
+                    <span>|</span>
+                    <a href="terms.html">Terms of Service</a>
+                    <span>|</span>
+                    <a href="disclaimer.html">Disclaimer</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- Firebase SDKs -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-storage-compat.js"></script>
+    
+    <!-- PDF Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    
+    <script src="firebase-config.js"></script>
+    <script src="auth.js"></script>
+    <script src="database.js"></script>
+    <script src="script.js"></script>
+    <script src="notes.js"></script>
+    <script src="nav-auth.js"></script>
+</body>
+</html>
+</body>
+</html>

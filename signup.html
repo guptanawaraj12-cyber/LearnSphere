@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up - Gyanu Notes</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .auth-container {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: var(--spacing-xl);
+            background: var(--bg-secondary);
+        }
+        
+        .auth-card {
+            background: var(--bg-primary);
+            padding: var(--spacing-2xl);
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--border);
+            max-width: 400px;
+            width: 100%;
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .auth-header {
+            text-align: center;
+            margin-bottom: var(--spacing-2xl);
+        }
+        
+        .auth-header h1 {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: var(--spacing-sm);
+            color: var(--text-primary);
+        }
+        
+        .auth-header p {
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+        
+        .divider {
+            display: flex;
+            align-items: center;
+            margin: var(--spacing-lg) 0;
+            color: var(--text-tertiary);
+            font-size: 13px;
+        }
+        
+        .divider::before,
+        .divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: var(--border);
+        }
+        
+        .divider span {
+            padding: 0 var(--spacing-md);
+        }
+        
+        .btn-google {
+            width: 100%;
+            background: white;
+            color: var(--text-primary);
+            border: 1px solid var(--border);
+            margin-bottom: var(--spacing-md);
+        }
+        
+        [data-theme="dark"] .btn-google {
+            background: var(--bg-secondary);
+        }
+        
+        .btn-google:hover {
+            background: var(--bg-secondary);
+        }
+        
+        .btn-google i {
+            color: #4285f4;
+        }
+        
+        .auth-footer {
+            text-align: center;
+            margin-top: var(--spacing-lg);
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+        
+        .auth-footer a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+        
+        .auth-footer a:hover {
+            text-decoration: underline;
+        }
+        
+        .password-strength {
+            margin-top: var(--spacing-sm);
+            font-size: 12px;
+        }
+        
+        .strength-bar {
+            height: 4px;
+            background: var(--border);
+            border-radius: 2px;
+            margin-top: var(--spacing-xs);
+            overflow: hidden;
+        }
+        
+        .strength-fill {
+            height: 100%;
+            width: 0%;
+            transition: all 0.3s ease;
+        }
+        
+        .strength-weak { background: #ff4444; width: 33%; }
+        .strength-medium { background: #ffaa00; width: 66%; }
+        .strength-strong { background: #00cc66; width: 100%; }
+    </style>
+</head>
+<body>
+    <div class="auth-container">
+        <div class="auth-card">
+            <div class="auth-header">
+                <h1>Create Account</h1>
+                <p>Join Gyanu Notes today</p>
+            </div>
+            
+            <button class="btn btn-google" onclick="handleGoogleSignup()">
+                <i class="fab fa-google"></i> Continue with Google
+            </button>
+            
+            <div class="divider">
+                <span>or</span>
+            </div>
+            
+            <form id="signupForm">
+                <div class="form-group">
+                    <label for="displayName">Full Name</label>
+                    <input type="text" id="displayName" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" required minlength="6">
+                    <div class="password-strength">
+                        <div class="strength-bar">
+                            <div class="strength-fill" id="strengthFill"></div>
+                        </div>
+                        <span id="strengthText"></span>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="confirmPassword">Confirm Password</label>
+                    <input type="password" id="confirmPassword" required>
+                </div>
+                
+                <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: var(--spacing-md);">
+                    Create Account
+                </button>
+            </form>
+            
+            <div class="auth-footer">
+                Already have an account? <a href="login.html">Login</a>
+            </div>
+            
+            <div class="auth-footer" style="margin-top: var(--spacing-md);">
+                <a href="index.html">← Back to Home</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Firebase SDKs -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-storage-compat.js"></script>
+    
+    <script src="firebase-config.js"></script>
+    <script src="script.js"></script>
+    <script src="auth.js"></script>
+    
+    <script>
+        // Password Strength Checker
+        document.getElementById('password').addEventListener('input', (e) => {
+            const password = e.target.value;
+            const strengthFill = document.getElementById('strengthFill');
+            const strengthText = document.getElementById('strengthText');
+            
+            let strength = 0;
+            if (password.length >= 6) strength++;
+            if (password.length >= 10) strength++;
+            if (/[a-z]/.test(password) && /[A-Z]/.test(password)) strength++;
+            if (/\d/.test(password)) strength++;
+            if (/[^a-zA-Z\d]/.test(password)) strength++;
+            
+            strengthFill.className = 'strength-fill';
+            
+            if (strength <= 2) {
+                strengthFill.classList.add('strength-weak');
+                strengthText.textContent = 'Weak password';
+                strengthText.style.color = '#ff4444';
+            } else if (strength <= 4) {
+                strengthFill.classList.add('strength-medium');
+                strengthText.textContent = 'Medium password';
+                strengthText.style.color = '#ffaa00';
+            } else {
+                strengthFill.classList.add('strength-strong');
+                strengthText.textContent = 'Strong password';
+                strengthText.style.color = '#00cc66';
+            }
+        });
+        
+        // Handle Signup Form
+        document.getElementById('signupForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const displayName = document.getElementById('displayName').value;
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            
+            // Validate passwords match
+            if (password !== confirmPassword) {
+                showNotification('error', 'Passwords do not match!');
+                return;
+            }
+            
+            // Validate password strength
+            if (password.length < 6) {
+                showNotification('error', 'Password must be at least 6 characters!');
+                return;
+            }
+            
+            try {
+                await signUp(email, password, displayName);
+                window.location.href = 'dashboard.html';
+            } catch (error) {
+                console.error('Signup failed:', error);
+            }
+        });
+        
+        // Handle Google Signup
+        async function handleGoogleSignup() {
+            try {
+                await loginWithGoogle();
+                window.location.href = 'dashboard.html';
+            } catch (error) {
+                console.error('Google signup failed:', error);
+            }
+        }
+        
+        // Redirect if already logged in
+        auth.onAuthStateChanged(user => {
+            if (user) {
+                window.location.href = 'dashboard.html';
+            }
+        });
+    </script>
+</body>
+</html>

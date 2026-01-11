@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Gyanu Notes</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .auth-container {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: var(--spacing-xl);
+            background: var(--bg-secondary);
+        }
+        
+        .auth-card {
+            background: var(--bg-primary);
+            padding: var(--spacing-2xl);
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--border);
+            max-width: 400px;
+            width: 100%;
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .auth-header {
+            text-align: center;
+            margin-bottom: var(--spacing-2xl);
+        }
+        
+        .auth-header h1 {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: var(--spacing-sm);
+            color: var(--text-primary);
+        }
+        
+        .auth-header p {
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+        
+        .divider {
+            display: flex;
+            align-items: center;
+            margin: var(--spacing-lg) 0;
+            color: var(--text-tertiary);
+            font-size: 13px;
+        }
+        
+        .divider::before,
+        .divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: var(--border);
+        }
+        
+        .divider span {
+            padding: 0 var(--spacing-md);
+        }
+        
+        .btn-google {
+            width: 100%;
+            background: white;
+            color: var(--text-primary);
+            border: 1px solid var(--border);
+            margin-bottom: var(--spacing-md);
+        }
+        
+        [data-theme="dark"] .btn-google {
+            background: var(--bg-secondary);
+        }
+        
+        .btn-google:hover {
+            background: var(--bg-secondary);
+        }
+        
+        .btn-google i {
+            color: #4285f4;
+        }
+        
+        .auth-footer {
+            text-align: center;
+            margin-top: var(--spacing-lg);
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+        
+        .auth-footer a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+        
+        .auth-footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="auth-container">
+        <div class="auth-card">
+            <div class="auth-header">
+                <h1>Welcome Back</h1>
+                <p>Login to access your notes</p>
+            </div>
+            
+            <button class="btn btn-google" onclick="handleGoogleLogin()">
+                <i class="fab fa-google"></i> Continue with Google
+            </button>
+            
+            <div class="divider">
+                <span>or</span>
+            </div>
+            
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" required>
+                </div>
+                
+                <div class="auth-footer" style="text-align: right; margin-top: var(--spacing-sm); margin-bottom: var(--spacing-lg);">
+                    <a href="#" onclick="handleForgotPassword(event)">Forgot password?</a>
+                </div>
+                
+                <button type="submit" class="btn btn-primary" style="width: 100%;">
+                    Login
+                </button>
+            </form>
+            
+            <div class="auth-footer">
+                Don't have an account? <a href="signup.html">Sign up</a>
+            </div>
+            
+            <div class="auth-footer" style="margin-top: var(--spacing-md);">
+                <a href="index.html">← Back to Home</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Firebase SDKs -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-storage-compat.js"></script>
+    
+    <script src="firebase-config.js"></script>
+    <script src="script.js"></script>
+    <script src="auth.js"></script>
+    
+    <script>
+        // Handle Login Form
+        document.getElementById('loginForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            
+            try {
+                await login(email, password);
+                window.location.href = 'dashboard.html';
+            } catch (error) {
+                console.error('Login failed:', error);
+            }
+        });
+        
+        // Handle Google Login
+        async function handleGoogleLogin() {
+            try {
+                await loginWithGoogle();
+                window.location.href = 'dashboard.html';
+            } catch (error) {
+                console.error('Google login failed:', error);
+            }
+        }
+        
+        // Handle Forgot Password
+        async function handleForgotPassword(e) {
+            e.preventDefault();
+            const email = prompt('Enter your email address:');
+            if (email) {
+                try {
+                    await resetPassword(email);
+                } catch (error) {
+                    console.error('Password reset failed:', error);
+                }
+            }
+        }
+        
+        // Redirect if already logged in
+        auth.onAuthStateChanged(user => {
+            if (user) {
+                window.location.href = 'dashboard.html';
+            }
+        });
+    </script>
+</body>
+</html>
