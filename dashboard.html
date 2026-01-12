@@ -249,29 +249,59 @@
 </head>
 <body>
     <nav class="navbar">
-        <div class="container">
-            <div class="nav-wrapper">
-                <div class="logo">
-                    <i class="fas fa-graduation-cap"></i>
-                    <span>Gyanu Notes</span>
-                </div>
-                <ul class="nav-menu">
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="notes.html">Notes</a></li>
-                    <li><a href="dashboard.html" class="active">Dashboard</a></li>
-                    <li><a href="#" onclick="logout()">Logout</a></li>
-                </ul>
-                <button class="theme-toggle" id="themeToggle">
-                    <i class="fas fa-moon"></i>
-                </button>
-                <div class="hamburger">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </div>
+    <div class="container">
+        <div class="nav-wrapper">
+            <a href="index.html" class="logo">
+                <i class="fas fa-graduation-cap"></i>
+                <span>Gyanu Notes</span>
+            </a>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="notes.html">Notes</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            
+            <!-- Add Search Icon -->
+            <button class="search-toggle" id="searchToggle" title="Search Notes (Ctrl+K)">
+                <i class="fas fa-search"></i>
+            </button>
+            
+            <button class="theme-toggle" id="themeToggle">
+                <i class="fas fa-moon"></i>
+            </button>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
             </div>
         </div>
-    </nav>
+    </div>
+</nav>
+
+<!-- Search Modal (Add after navbar) -->
+<div class="search-modal" id="searchModal">
+    <div class="search-modal-overlay"></div>
+    <div class="search-modal-content">
+        <div class="search-modal-header">
+            <h3><i class="fas fa-search"></i> Search Notes</h3>
+            <button class="close-search" id="closeSearch">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="search-modal-body">
+            <input 
+                type="text" 
+                id="modalSearchInput" 
+                placeholder="Type to search notes, subjects, topics..." 
+                autocomplete="off"
+            >
+            <p class="search-shortcut">
+                Press <kbd>Enter</kbd> to search or <kbd>Esc</kbd> to close
+            </p>
+        </div>
+    </div>
+</div>
 
     <div class="dashboard-container">
         <div class="dashboard-header">
@@ -403,7 +433,7 @@
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-storage-compat.js"></script>
+    
     
     <script src="firebase-config.js"></script>
     <script src="script.js"></script>

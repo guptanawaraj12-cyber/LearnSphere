@@ -102,3 +102,77 @@ navLinks.forEach(link => {
         link.classList.remove('active');
     }
 });
+
+// ==================== SEARCH MODAL ====================
+
+const searchToggle = document.getElementById('searchToggle');
+const searchModal = document.getElementById('searchModal');
+const closeSearch = document.getElementById('closeSearch');
+const modalSearchInput = document.getElementById('modalSearchInput');
+
+// Open search modal
+if (searchToggle) {
+    searchToggle.addEventListener('click', () => {
+        searchModal.classList.add('active');
+        setTimeout(() => {
+            modalSearchInput.focus();
+        }, 100);
+    });
+}
+
+// Close search modal
+if (closeSearch) {
+    closeSearch.addEventListener('click', () => {
+        searchModal.classList.remove('active');
+        modalSearchInput.value = '';
+    });
+}
+
+// Close on overlay click
+if (searchModal) {
+    const overlay = searchModal.querySelector('.search-modal-overlay');
+    if (overlay) {
+        overlay.addEventListener('click', () => {
+            searchModal.classList.remove('active');
+            modalSearchInput.value = '';
+        });
+    }
+}
+
+// Search on Enter
+if (modalSearchInput) {
+    modalSearchInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+            const query = modalSearchInput.value.trim();
+            if (query) {
+                window.location.href = `notes.html?search=${encodeURIComponent(query)}`;
+            } else {
+                window.location.href = 'notes.html';
+            }
+        }
+    });
+}
+
+// Global keyboard shortcuts
+document.addEventListener('keydown', (e) => {
+    // Ctrl+K or Cmd+K to open search
+    if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+        e.preventDefault();
+        if (searchModal) {
+            searchModal.classList.add('active');
+            setTimeout(() => {
+                if (modalSearchInput) modalSearchInput.focus();
+            }, 100);
+        }
+    }
+    
+    // Escape to close
+    if (e.key === 'Escape') {
+        if (searchModal && searchModal.classList.contains('active')) {
+            searchModal.classList.remove('active');
+            if (modalSearchInput) modalSearchInput.value = '';
+        }
+    }
+});
+
+console.log('🔍 Search modal initialized');

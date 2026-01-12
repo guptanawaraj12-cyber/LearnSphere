@@ -6,125 +6,922 @@
     <title>Notes - Gyanu Notes</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
 </head>
 <body>
-   <nav class="navbar">
-    <div class="container">
-        <div class="nav-wrapper">
-            <a href="index.html" class="logo">
-                <i class="fas fa-graduation-cap"></i>
-                <span>Gyanu Notes</span>
-            </a>
-            <ul class="nav-menu" id="navMenu">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="notes.html" class="active">Notes</a></li>
-                <li><a href="about.html">About</a></li>
-                <li><a href="contact.html">Contact</a></li>
-                <!-- Auth links will be added dynamically -->
-            </ul>
-            <button class="theme-toggle" id="themeToggle">
-                <i class="fas fa-moon"></i>
-            </button>
-            <div class="hamburger">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-        </div>
-    </div>
-</nav>
-
-    <section class="page-header">
+    <!-- Navigation -->
+    <nav class="navbar">
         <div class="container">
-            <h1>Study <span class="gradient-text">Notes</span></h1>
-            <p>Select your class or program to access notes</p>
-        </div>
-    </section>
-
-    <section class="notes-section">
-        <div class="container">
-            <!-- School Level -->
-            <div class="level-section">
-                <h2 class="level-title"><i class="fas fa-school"></i> School Level</h2>
-                <div class="class-grid">
-                    <div class="class-card" onclick="showSubjects('class8')">
-                        <div class="class-icon">8</div>
-                        <h3>Class 8</h3>
-                        <p>6 Subjects Available</p>
-                    </div>
-                    <div class="class-card" onclick="showSubjects('class9')">
-                        <div class="class-icon">9</div>
-                        <h3>Class 9</h3>
-                        <p>8 Subjects Available</p>
-                    </div>
-                    <div class="class-card" onclick="showSubjects('class10')">
-                        <div class="class-icon">10</div>
-                        <h3>Class 10</h3>
-                        <p>8 Subjects Available</p>
-                    </div>
-                    <div class="class-card" onclick="showSubjects('class11')">
-                        <div class="class-icon">11</div>
-                        <h3>Class 11</h3>
-                        <p>6 Subjects Available</p>
-                    </div>
-                    <div class="class-card" onclick="showSubjects('class12')">
-                        <div class="class-icon">12</div>
-                        <h3>Class 12</h3>
-                        <p>6 Subjects Available</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- CTEVT Level -->
-            <div class="level-section">
-                <h2 class="level-title"><i class="fas fa-user-md"></i> CTEVT Level</h2>
-                <div class="ctevt-grid">
-                    <div class="ctevt-card" onclick="showCTEVTProgram('ha')">
-                        <div class="ctevt-icon">
-                            <i class="fas fa-stethoscope"></i>
-                        </div>
-                        <h3>Health Assistant (HA)</h3>
-                        <p>3 Year Program</p>
-                    </div>
-                    <div class="ctevt-card" onclick="showCTEVTProgram('pharmacy')">
-                        <div class="ctevt-icon">
-                            <i class="fas fa-pills"></i>
-                        </div>
-                        <h3>Pharmacy</h3>
-                        <p>3 Year Program</p>
-                    </div>
+            <div class="nav-wrapper">
+                <a href="index.html" class="logo">
+                    <i class="fas fa-graduation-cap"></i>
+                    <span>Gyanu Notes</span>
+                </a>
+                <ul class="nav-menu" id="navMenu">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="notes.html" class="active">Notes</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+                
+                <!-- Search Icon -->
+                <button class="search-toggle" id="searchToggle" title="Search Notes (Ctrl+K)">
+                    <i class="fas fa-search"></i>
+                </button>
+                
+                <button class="theme-toggle" id="themeToggle">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
                 </div>
             </div>
         </div>
-    </section>
+    </nav>
 
-    <!-- Modal for Subjects -->
-    <div id="subjectModal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeModal()">&times;</span>
-            <h2 id="modalTitle">Select Subject</h2>
-            <div id="subjectList" class="subject-list"></div>
-        </div>
-    </div>
-
-    <!-- Modal for Note Content -->
-    <div id="noteModal" class="modal">
-        <div class="modal-content note-content-modal">
-            <span class="close" onclick="closeNoteModal()">&times;</span>
-            <div class="note-header">
-                <h2 id="noteTitle">Note Title</h2>
-                <button class="btn btn-primary" onclick="downloadPDF()">
-                    <i class="fas fa-download"></i> Download PDF
+    <!-- Search Modal -->
+    <div class="search-modal" id="searchModal">
+        <div class="search-modal-overlay"></div>
+        <div class="search-modal-content">
+            <div class="search-modal-header">
+                <h3><i class="fas fa-search"></i> Search Notes</h3>
+                <button class="close-search" id="closeSearch">
+                    <i class="fas fa-times"></i>
                 </button>
             </div>
-            <div id="noteContent" class="note-content">
-                <!-- Note content will be loaded here -->
+            <div class="search-modal-body">
+                <input 
+                    type="text" 
+                    id="modalSearchInput" 
+                    placeholder="Type to search notes, subjects, topics..." 
+                    autocomplete="off"
+                >
+                <p class="search-shortcut">
+                    Press <kbd>Enter</kbd> to search or <kbd>Esc</kbd> to close
+                </p>
             </div>
         </div>
     </div>
 
- <footer class="footer">
+    <!-- Page Header -->
+    <div class="page-header">
+        <div class="container">
+            <h1>Study Notes</h1>
+            <p>Access comprehensive notes for all subjects</p>
+        </div>
+    </div>
+
+    <!-- Search Section -->
+    <section class="search-section">
+        <div class="container">
+            <div class="search-container">
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input 
+                        type="text" 
+                        id="searchInput" 
+                        placeholder="Search for notes, subjects, topics, chapters..." 
+                        autocomplete="off"
+                    >
+                    <button id="clearSearch" style="display: none;">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <div id="searchResults" class="search-results" style="display: none;"></div>
+            </div>
+        </div>
+    </section>
+
+    <style>
+        .search-section {
+            padding: var(--spacing-2xl) 0;
+            background: var(--bg-secondary);
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .search-container {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+        }
+        
+        .search-box {
+            position: relative;
+            display: flex;
+            align-items: center;
+            background: var(--bg-primary);
+            border: 2px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 0 var(--spacing-lg);
+            transition: all var(--transition-base);
+        }
+        
+        .search-box:focus-within {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(0, 112, 243, 0.1);
+        }
+        
+        .search-box i.fa-search {
+            color: var(--text-tertiary);
+            font-size: 18px;
+            margin-right: var(--spacing-md);
+        }
+        
+        .search-box input {
+            flex: 1;
+            border: none;
+            background: transparent;
+            padding: var(--spacing-lg) 0;
+            font-size: 16px;
+            color: var(--text-primary);
+            outline: none;
+        }
+        
+        .search-box input::placeholder {
+            color: var(--text-tertiary);
+        }
+        
+        .search-box button {
+            background: none;
+            border: none;
+            color: var(--text-tertiary);
+            cursor: pointer;
+            padding: var(--spacing-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all var(--transition-fast);
+        }
+        
+        .search-box button:hover {
+            color: var(--text-primary);
+        }
+        
+        .search-results {
+            position: absolute;
+            top: calc(100% + 10px);
+            left: 0;
+            right: 0;
+            background: var(--bg-primary);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-xl);
+            max-height: 500px;
+            overflow-y: auto;
+            z-index: 1000;
+        }
+        
+        .search-result-item {
+            padding: var(--spacing-lg);
+            border-bottom: 1px solid var(--border);
+            cursor: pointer;
+            transition: all var(--transition-fast);
+        }
+        
+        .search-result-item:last-child {
+            border-bottom: none;
+        }
+        
+        .search-result-item:hover {
+            background: var(--bg-secondary);
+        }
+        
+        .search-result-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: var(--spacing-sm);
+        }
+        
+        .search-result-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 4px;
+        }
+        
+        .search-result-meta {
+            font-size: 13px;
+            color: var(--text-secondary);
+            display: flex;
+            gap: var(--spacing-md);
+            flex-wrap: wrap;
+        }
+        
+        .search-result-meta span {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        
+        .search-result-snippet {
+            font-size: 14px;
+            color: var(--text-secondary);
+            line-height: 1.5;
+            margin-top: var(--spacing-sm);
+        }
+        
+        .search-highlight {
+            background: rgba(0, 112, 243, 0.2);
+            color: var(--primary);
+            font-weight: 600;
+            padding: 2px 4px;
+            border-radius: 3px;
+        }
+        
+        .search-no-results {
+            padding: var(--spacing-2xl);
+            text-align: center;
+            color: var(--text-secondary);
+        }
+        
+        .search-no-results i {
+            font-size: 48px;
+            color: var(--text-tertiary);
+            margin-bottom: var(--spacing-md);
+            display: block;
+        }
+        
+        .search-stats {
+            padding: var(--spacing-md) var(--spacing-lg);
+            background: var(--bg-secondary);
+            border-bottom: 1px solid var(--border);
+            font-size: 13px;
+            color: var(--text-secondary);
+        }
+        
+        /* Mobile responsive */
+        @media (max-width: 768px) {
+            .search-box input {
+                font-size: 14px;
+            }
+            
+            .search-results {
+                max-height: 400px;
+            }
+        }
+    </style>
+
+    <!-- Notes Content -->
+    <section class="notes-section">
+        <div class="container">
+            <!-- Level Selection Tabs -->
+            <div class="level-tabs">
+                <button class="level-tab active" onclick="showLevel('school')">
+                    <i class="fas fa-school"></i> School (8-10)
+                </button>
+                <button class="level-tab" onclick="showLevel('college')">
+                    <i class="fas fa-university"></i> College (11-12)
+                </button>
+                <button class="level-tab" onclick="showLevel('ctevt')">
+                    <i class="fas fa-user-md"></i> CTEVT
+                </button>
+            </div>
+
+            <!-- School Section (8-10) -->
+            <section id="school" class="level-section">
+                <div class="container">
+                    <h2 style="margin-bottom: var(--spacing-2xl); color: var(--text-primary);">School Level (8-10)</h2>
+                    
+                    <!-- Class 8 -->
+                    <div class="class-card">
+                        <div class="class-header">
+                            <h3><i class="fas fa-book"></i> Class 8</h3>
+                            <p>Foundation building year</p>
+                        </div>
+                        <div class="subjects-grid">
+                            <div class="subject-card" onclick="openNotes('Class 8', 'Mathematics')">
+                                <div class="subject-icon">
+                                    <i class="fas fa-calculator"></i>
+                                </div>
+                                <h4>Mathematics</h4>
+                                <p>Numbers, Algebra, Geometry</p>
+                            </div>
+                            <div class="subject-card" onclick="openNotes('Class 8', 'Science')">
+                                <div class="subject-icon">
+                                    <i class="fas fa-flask"></i>
+                                </div>
+                                <h4>Science</h4>
+                                <p>Physics, Chemistry, Biology</p>
+                            </div>
+                            <div class="subject-card" onclick="openNotes('Class 8', 'English')">
+                                <div class="subject-icon">
+                                    <i class="fas fa-book-open"></i>
+                                </div>
+                                <h4>English</h4>
+                                <p>Grammar & Literature</p>
+                            </div>
+                            <div class="subject-card" onclick="openNotes('Class 8', 'Social Studies')">
+                                <div class="subject-icon">
+                                    <i class="fas fa-globe"></i>
+                                </div>
+                                <h4>Social Studies</h4>
+                                <p>History, Geography, Civics</p>
+                            </div>
+                            <div class="subject-card" onclick="openNotes('Class 8', 'Nepali')">
+                                <div class="subject-icon">
+                                    <i class="fas fa-language"></i>
+                                </div>
+                                <h4>Nepali</h4>
+                                <p>व्याकरण र साहित्य</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Class 9 -->
+                    <div class="class-card">
+                        <div class="class-header">
+                            <h3><i class="fas fa-book"></i> Class 9</h3>
+                            <p>Intermediate level</p>
+                        </div>
+                        <div class="subjects-grid">
+                            <div class="subject-card" onclick="openNotes('Class 9', 'Mathematics')">
+                                <div class="subject-icon">
+                                    <i class="fas fa-calculator"></i>
+                                </div>
+                                <h4>Mathematics</h4>
+                                <p>Algebra, Geometry, Statistics</p>
+                            </div>
+                            <div class="subject-card" onclick="openNotes('Class 9', 'Science')">
+                                <div class="subject-icon">
+                                    <i class="fas fa-atom"></i>
+                                </div>
+                                <h4>Science</h4>
+                                <p>Matter, Life Processes</p>
+                            </div>
+                            <div class="subject-card" onclick="openNotes('Class 9', 'English')">
+                                <div class="subject-icon">
+                                    <i class="fas fa-book-open"></i>
+                                </div>
+                                <h4>English</h4>
+                                <p>Advanced Grammar</p>
+                            </div>
+                            <div class="subject-card" onclick="openNotes('Class 9', 'Social Studies')">
+                                <div class="subject-icon">
+                                    <i class="fas fa-landmark"></i>
+                                </div>
+                                <h4>Social Studies</h4>
+                                <p>Democracy, Economics</p>
+                            </div>
+                            <div class="subject-card" onclick="openNotes('Class 9', 'Nepali')">
+                                <div class="subject-icon">
+                                    <i class="fas fa-language"></i>
+                                </div>
+                                <h4>Nepali</h4>
+                                <p>भाषा र साहित्य</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Class 10 -->
+                    <div class="class-card">
+                        <div class="class-header">
+                            <h3><i class="fas fa-graduation-cap"></i> Class 10</h3>
+                            <p>Board exam preparation</p>
+                        </div>
+                        <div class="subjects-grid">
+                            <div class="subject-card" onclick="openNotes('Class 10', 'Mathematics')">
+                                <div class="subject-icon">
+                                    <i class="fas fa-calculator"></i>
+                                </div>
+                                <h4>Mathematics</h4>
+                                <p>Complete SEE/CBSE Syllabus</p>
+                            </div>
+                            <div class="subject-card" onclick="openNotes('Class 10', 'Science')">
+                                <div class="subject-icon">
+                                    <i class="fas fa-microscope"></i>
+                                </div>
+                                <h4>Science</h4>
+                                <p>Physics, Chemistry, Biology</p>
+                            </div>
+                            <div class="subject-card" onclick="openNotes('Class 10', 'English')">
+                                <div class="subject-icon">
+                                    <i class="fas fa-book-open"></i>
+                                </div>
+                                <h4>English</h4>
+                                <p>Literature & Writing</p>
+                            </div>
+                            <div class="subject-card" onclick="openNotes('Class 10', 'Social Studies')">
+                                <div class="subject-icon">
+                                    <i class="fas fa-map-marked-alt"></i>
+                                </div>
+                                <h4>Social Studies</h4>
+                                <p>History, Geography, Civics</p>
+                            </div>
+                            <div class="subject-card" onclick="openNotes('Class 10', 'Nepali')">
+                                <div class="subject-icon">
+                                    <i class="fas fa-language"></i>
+                                </div>
+                                <h4>Nepali</h4>
+                                <p>पूर्ण पाठ्यक्रम</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- College Section (11-12) -->
+            <section id="college" class="level-section" style="display: none;">
+                <div class="container">
+                    <h2 style="margin-bottom: var(--spacing-2xl); color: var(--text-primary);">College Level (11-12)</h2>
+                    
+                    <!-- Class 11 -->
+                    <div class="class-card">
+                        <div class="class-header">
+                            <h3><i class="fas fa-book-open"></i> Class 11</h3>
+                            <p>Foundation for higher secondary education</p>
+                        </div>
+                        <div class="subjects-grid">
+                            <div class="subject-card" onclick="openNotes('Class 11', 'Mathematics')">
+                                <div class="subject-icon">
+                                    <i class="fas fa-calculator"></i>
+                                </div>
+                                <h4>Mathematics</h4>
+                                <p>Sets, Functions, Trigonometry</p>
+                            </div>
+                            <div class="subject-card" onclick="openNotes('Class 11', 'Physics')">
+                                <div class="subject-icon">
+                                    <i class="fas fa-atom"></i>
+                                </div>
+                                <h4>Physics</h4>
+                                <p>Mechanics, Thermodynamics</p>
+                            </div>
+                            <div class="subject-card" onclick="openNotes('Class 11', 'Chemistry')">
+                                <div class="subject-icon">
+                                    <i class="fas fa-flask"></i>
+                                </div>
+                                <h4>Chemistry</h4>
+                                <p>Atomic Structure, Bonding</p>
+                            </div>
+                            <div class="subject-card" onclick="openNotes('Class 11', 'Biology')">
+                                <div class="subject-icon">
+                                    <i class="fas fa-dna"></i>
+                                </div>
+                                <h4>Biology</h4>
+                                <p>Cell Biology, Diversity</p>
+                            </div>
+                            <div class="subject-card" onclick="openNotes('Class 11', 'English')">
+                                <div class="subject-icon">
+                                    <i class="fas fa-book"></i>
+                                </div>
+                                <h4>English</h4>
+                                <p>Literature & Grammar</p>
+                            </div>
+                            <div class="subject-card" onclick="openNotes('Class 11', 'Accountancy')">
+                                <div class="subject-icon">
+                                    <i class="fas fa-file-invoice-dollar"></i>
+                                </div>
+                                <h4>Accountancy</h4>
+                                <p>Financial Accounting</p>
+                            </div>
+                            <div class="subject-card" onclick="openNotes('Class 11', 'Economics')">
+                                <div class="subject-icon">
+                                    <i class="fas fa-chart-line"></i>
+                                </div>
+                                <h4>Economics</h4>
+                                <p>Microeconomics</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Class 12 -->
+                    <div class="class-card">
+                        <div class="class-header">
+                            <h3><i class="fas fa-graduation-cap"></i> Class 12</h3>
+                            <p>Final year of higher secondary education</p>
+                        </div>
+                        <div class="subjects-grid">
+                            <div class="subject-card" onclick="openNotes('Class 12', 'Mathematics')">
+                                <div class="subject-icon">
+                                    <i class="fas fa-calculator"></i>
+                                </div>
+                                <h4>Mathematics</h4>
+                                <p>Calculus, Vectors, Probability</p>
+                            </div>
+                            <div class="subject-card" onclick="openNotes('Class 12', 'Physics')">
+                                <div class="subject-icon">
+                                    <i class="fas fa-atom"></i>
+                                </div>
+                                <h4>Physics</h4>
+                                <p>Electromagnetism, Optics</p>
+                            </div>
+                            <div class="subject-card" onclick="openNotes('Class 12', 'Chemistry')">
+                                <div class="subject-icon">
+                                    <i class="fas fa-flask"></i>
+                                </div>
+                                <h4>Chemistry</h4>
+                                <p>Organic, Inorganic, Physical</p>
+                            </div>
+                            <div class="subject-card" onclick="openNotes('Class 12', 'Biology')">
+                                <div class="subject-icon">
+                                    <i class="fas fa-dna"></i>
+                                </div>
+                                <h4>Biology</h4>
+                                <p>Reproduction, Genetics</p>
+                            </div>
+                            <div class="subject-card" onclick="openNotes('Class 12', 'English')">
+                                <div class="subject-icon">
+                                    <i class="fas fa-book"></i>
+                                </div>
+                                <h4>English</h4>
+                                <p>Advanced Literature</p>
+                            </div>
+                            <div class="subject-card" onclick="openNotes('Class 12', 'Accountancy')">
+                                <div class="subject-icon">
+                                    <i class="fas fa-file-invoice-dollar"></i>
+                                </div>
+                                <h4>Accountancy</h4>
+                                <p>Company Accounts</p>
+                            </div>
+                            <div class="subject-card" onclick="openNotes('Class 12', 'Economics')">
+                                <div class="subject-icon">
+                                    <i class="fas fa-chart-line"></i>
+                                </div>
+                                <h4>Economics</h4>
+                                <p>Macroeconomics</p>
+                            </div>
+                            <div class="subject-card" onclick="openNotes('Class 12', 'Business Studies')">
+                                <div class="subject-icon">
+                                    <i class="fas fa-briefcase"></i>
+                                </div>
+                                <h4>Business Studies</h4>
+                                <p>Management Principles</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+           <!-- CTEVT Section -->
+<section id="ctevt" class="level-section" style="display: none;">
+    <div class="container">
+        <h2 style="margin-bottom: var(--spacing-2xl); color: var(--text-primary);">CTEVT Programs</h2>
+        
+        <!-- Health Assistant (HA) -->
+        <div class="class-card">
+            <div class="class-header">
+                <h3><i class="fas fa-user-md"></i> Health Assistant (HA)</h3>
+                <p>Three-year diploma program in health sciences</p>
+            </div>
+            
+            <!-- HA Year 1 -->
+            <h4 style="margin: var(--spacing-xl) 0 var(--spacing-lg) 0; color: var(--text-primary); font-size: 20px;">
+                <i class="fas fa-calendar-alt"></i> First Year
+            </h4>
+            <div class="subjects-grid">
+                <div class="subject-card" onclick="openNotes('HA Year 1', 'Physics')">
+                    <div class="subject-icon">
+                        <i class="fas fa-atom"></i>
+                    </div>
+                    <h4>Physics</h4>
+                    <p>Year 1</p>
+                </div>
+                <div class="subject-card" onclick="openNotes('HA Year 1', 'Chemistry')">
+                    <div class="subject-icon">
+                        <i class="fas fa-flask"></i>
+                    </div>
+                    <h4>Chemistry</h4>
+                    <p>Year 1</p>
+                </div>
+                <div class="subject-card" onclick="openNotes('HA Year 1', 'Zoology')">
+                    <div class="subject-icon">
+                        <i class="fas fa-frog"></i>
+                    </div>
+                    <h4>Zoology</h4>
+                    <p>Year 1</p>
+                </div>
+                <div class="subject-card" onclick="openNotes('HA Year 1', 'Botany')">
+                    <div class="subject-icon">
+                        <i class="fas fa-leaf"></i>
+                    </div>
+                    <h4>Botany</h4>
+                    <p>Year 1</p>
+                </div>
+                <div class="subject-card" onclick="openNotes('HA Year 1', 'Anatomy')">
+                    <div class="subject-icon">
+                        <i class="fas fa-bone"></i>
+                    </div>
+                    <h4>Anatomy</h4>
+                    <p>Year 1</p>
+                </div>
+                <div class="subject-card" onclick="openNotes('HA Year 1', 'Mathematics')">
+                    <div class="subject-icon">
+                        <i class="fas fa-calculator"></i>
+                    </div>
+                    <h4>Mathematics</h4>
+                    <p>Year 1</p>
+                </div>
+            </div>
+            
+            <!-- HA Year 2 -->
+            <h4 style="margin: var(--spacing-2xl) 0 var(--spacing-lg) 0; color: var(--text-primary); font-size: 20px;">
+                <i class="fas fa-calendar-alt"></i> Second Year
+            </h4>
+            <div class="subjects-grid">
+                <div class="subject-card" onclick="openNotes('HA Year 2', 'Medicine I')">
+                    <div class="subject-icon">
+                        <i class="fas fa-stethoscope"></i>
+                    </div>
+                    <h4>Medicine I</h4>
+                    <p>Year 2</p>
+                </div>
+                <div class="subject-card" onclick="openNotes('HA Year 2', 'Surgery I')">
+                    <div class="subject-icon">
+                        <i class="fas fa-scalpel"></i>
+                    </div>
+                    <h4>Surgery I</h4>
+                    <p>Year 2</p>
+                </div>
+                <div class="subject-card" onclick="openNotes('HA Year 2', 'Chemical Pathology')">
+                    <div class="subject-icon">
+                        <i class="fas fa-vial"></i>
+                    </div>
+                    <h4>Chemical Pathology</h4>
+                    <p>Year 2</p>
+                </div>
+                <div class="subject-card" onclick="openNotes('HA Year 2', 'Obstetrics and Gynecology')">
+                    <div class="subject-icon">
+                        <i class="fas fa-baby"></i>
+                    </div>
+                    <h4>Obstetrics and Gynecology</h4>
+                    <p>Year 2</p>
+                </div>
+                <div class="subject-card" onclick="openNotes('HA Year 2', 'Basic Medical Procedures and First Aid')">
+                    <div class="subject-icon">
+                        <i class="fas fa-first-aid"></i>
+                    </div>
+                    <h4>Basic Medical Procedures and First Aid</h4>
+                    <p>Year 2</p>
+                </div>
+                <div class="subject-card" onclick="openNotes('HA Year 2', 'Pharmacology and Pharmacy')">
+                    <div class="subject-icon">
+                        <i class="fas fa-pills"></i>
+                    </div>
+                    <h4>Pharmacology and Pharmacy</h4>
+                    <p>Year 2</p>
+                </div>
+                <div class="subject-card" onclick="openNotes('HA Year 2', 'Environmental Health')">
+                    <div class="subject-icon">
+                        <i class="fas fa-tree"></i>
+                    </div>
+                    <h4>Environmental Health</h4>
+                    <p>Year 2</p>
+                </div>
+                <div class="subject-card" onclick="openNotes('HA Year 2', 'Health Education')">
+                    <div class="subject-icon">
+                        <i class="fas fa-chalkboard-teacher"></i>
+                    </div>
+                    <h4>Health Education</h4>
+                    <p>Year 2</p>
+                </div>
+                <div class="subject-card" onclick="openNotes('HA Year 2', 'Primary Health Care / Family Health')">
+                    <div class="subject-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h4>Primary Health Care / Family Health</h4>
+                    <p>Year 2</p>
+                </div>
+            </div>
+            
+            <!-- HA Year 3 -->
+            <h4 style="margin: var(--spacing-2xl) 0 var(--spacing-lg) 0; color: var(--text-primary); font-size: 20px;">
+                <i class="fas fa-calendar-alt"></i> Third Year
+            </h4>
+            <div class="subjects-grid">
+                <div class="subject-card" onclick="openNotes('HA Year 3', 'Medicine II')">
+                    <div class="subject-icon">
+                        <i class="fas fa-stethoscope"></i>
+                    </div>
+                    <h4>Medicine II</h4>
+                    <p>Year 3</p>
+                </div>
+                <div class="subject-card" onclick="openNotes('HA Year 3', 'Surgery II')">
+                    <div class="subject-icon">
+                        <i class="fas fa-scalpel"></i>
+                    </div>
+                    <h4>Surgery II</h4>
+                    <p>Year 3</p>
+                </div>
+                <div class="subject-card" onclick="openNotes('HA Year 3', 'Health Management')">
+                    <div class="subject-icon">
+                        <i class="fas fa-tasks"></i>
+                    </div>
+                    <h4>Health Management</h4>
+                    <p>Year 3</p>
+                </div>
+                <div class="subject-card" onclick="openNotes('HA Year 3', 'Epidemiology and Community Diagnosis')">
+                    <div class="subject-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h4>Epidemiology and Community Diagnosis</h4>
+                    <p>Year 3</p>
+                </div>
+                <div class="subject-card" onclick="openNotes('HA Year 3', 'Comprehensive Clinical Practicum')">
+                    <div class="subject-icon">
+                        <i class="fas fa-hospital"></i>
+                    </div>
+                    <h4>Comprehensive Clinical Practicum</h4>
+                    <p>Year 3</p>
+                </div>
+                <div class="subject-card" onclick="openNotes('HA Year 3', 'Comprehensive Community Field Practicum')">
+                    <div class="subject-icon">
+                        <i class="fas fa-map-marked-alt"></i>
+                    </div>
+                    <h4>Comprehensive Community Field Practicum</h4>
+                    <p>Year 3</p>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Pharmacy -->
+        <div class="class-card">
+            <div class="class-header">
+                <h3><i class="fas fa-prescription-bottle"></i> Pharmacy</h3>
+                <p>Three-year diploma program in pharmaceutical sciences</p>
+            </div>
+            
+            <!-- Pharmacy Year 1 -->
+            <h4 style="margin: var(--spacing-xl) 0 var(--spacing-lg) 0; color: var(--text-primary); font-size: 20px;">
+                <i class="fas fa-calendar-alt"></i> First Year
+            </h4>
+            <div class="subjects-grid">
+                <div class="subject-card" onclick="openNotes('Pharmacy Year 1', 'Physics')">
+                    <div class="subject-icon">
+                        <i class="fas fa-atom"></i>
+                    </div>
+                    <h4>Physics</h4>
+                    <p>Year 1</p>
+                </div>
+                <div class="subject-card" onclick="openNotes('Pharmacy Year 1', 'Chemistry')">
+                    <div class="subject-icon">
+                        <i class="fas fa-flask"></i>
+                    </div>
+                    <h4>Chemistry</h4>
+                    <p>Year 1</p>
+                </div>
+                <div class="subject-card" onclick="openNotes('Pharmacy Year 1', 'Zoology')">
+                    <div class="subject-icon">
+                        <i class="fas fa-frog"></i>
+                    </div>
+                    <h4>Zoology</h4>
+                    <p>Year 1</p>
+                </div>
+                <div class="subject-card" onclick="openNotes('Pharmacy Year 1', 'Botany')">
+                    <div class="subject-icon">
+                        <i class="fas fa-leaf"></i>
+                    </div>
+                    <h4>Botany</h4>
+                    <p>Year 1</p>
+                </div>
+                <div class="subject-card" onclick="openNotes('Pharmacy Year 1', 'Anatomy')">
+                    <div class="subject-icon">
+                        <i class="fas fa-bone"></i>
+                    </div>
+                    <h4>Anatomy</h4>
+                    <p>Year 1</p>
+                </div>
+                <div class="subject-card" onclick="openNotes('Pharmacy Year 1', 'Mathematics')">
+                    <div class="subject-icon">
+                        <i class="fas fa-calculator"></i>
+                    </div>
+                    <h4>Mathematics</h4>
+                    <p>Year 1</p>
+                </div>
+            </div>
+            
+            <!-- Pharmacy Year 2 -->
+            <h4 style="margin: var(--spacing-2xl) 0 var(--spacing-lg) 0; color: var(--text-primary); font-size: 20px;">
+                <i class="fas fa-calendar-alt"></i> Second Year
+            </h4>
+            <div class="subjects-grid">
+                <div class="subject-card" onclick="openNotes('Pharmacy Year 2', 'Pharmacognosy')">
+                    <div class="subject-icon">
+                        <i class="fas fa-seedling"></i>
+                    </div>
+                    <h4>Pharmacognosy</h4>
+                    <p>Year 2</p>
+                </div>
+                <div class="subject-card" onclick="openNotes('Pharmacy Year 2', 'Biochemistry and Microbiology')">
+                    <div class="subject-icon">
+                        <i class="fas fa-microscope"></i>
+                    </div>
+                    <h4>Biochemistry and Microbiology</h4>
+                    <p>Year 2</p>
+                </div>
+                <div class="subject-card" onclick="openNotes('Pharmacy Year 2', 'Pathology')">
+                    <div class="subject-icon">
+                        <i class="fas fa-disease"></i>
+                    </div>
+                    <h4>Pathology</h4>
+                    <p>Year 2</p>
+                </div>
+                <div class="subject-card" onclick="openNotes('Pharmacy Year 2', 'Pharmacology')">
+                    <div class="subject-icon">
+                        <i class="fas fa-pills"></i>
+                    </div>
+                    <h4>Pharmacology</h4>
+                    <p>Year 2</p>
+                </div>
+                <div class="subject-card" onclick="openNotes('Pharmacy Year 2', 'Pharmaceutical Management')">
+                    <div class="subject-icon">
+                        <i class="fas fa-briefcase"></i>
+                    </div>
+                    <h4>Pharmaceutical Management</h4>
+                    <p>Year 2</p>
+                </div>
+                <div class="subject-card" onclick="openNotes('Pharmacy Year 2', 'Health Education, Health Care System, and First Aid')">
+                    <div class="subject-icon">
+                        <i class="fas fa-heartbeat"></i>
+                    </div>
+                    <h4>Health Education, Health Care System, and First Aid</h4>
+                    <p>Year 2</p>
+                </div>
+            </div>
+            
+            <!-- Pharmacy Year 3 -->
+            <h4 style="margin: var(--spacing-2xl) 0 var(--spacing-lg) 0; color: var(--text-primary); font-size: 20px;">
+                <i class="fas fa-calendar-alt"></i> Third Year
+            </h4>
+            <div class="subjects-grid">
+                <div class="subject-card" onclick="openNotes('Pharmacy Year 3', 'Pharmacology and Therapeutics')">
+                    <div class="subject-icon">
+                        <i class="fas fa-capsules"></i>
+                    </div>
+                    <h4>Pharmacology and Therapeutics</h4>
+                    <p>Year 3</p>
+                </div>
+                <div class="subject-card" onclick="openNotes('Pharmacy Year 3', 'Pharmaceutics')">
+                    <div class="subject-icon">
+                        <i class="fas fa-mortar-pestle"></i>
+                    </div>
+                    <h4>Pharmaceutics</h4>
+                    <p>Year 3</p>
+                </div>
+                <div class="subject-card" onclick="openNotes('Pharmacy Year 3', 'Pharmaceutical Chemistry')">
+                    <div class="subject-icon">
+                        <i class="fas fa-atom"></i>
+                    </div>
+                    <h4>Pharmaceutical Chemistry</h4>
+                    <p>Year 3</p>
+                </div>
+                <div class="subject-card" onclick="openNotes('Pharmacy Year 3', 'Hospital and Clinical Pharmacy')">
+                    <div class="subject-icon">
+                        <i class="fas fa-hospital"></i>
+                    </div>
+                    <h4>Hospital and Clinical Pharmacy</h4>
+                    <p>Year 3</p>
+                </div>
+                <div class="subject-card" onclick="openNotes('Pharmacy Year 3', 'Forensic and Community Pharmacy')">
+                    <div class="subject-icon">
+                        <i class="fas fa-balance-scale"></i>
+                    </div>
+                    <h4>Forensic and Community Pharmacy</h4>
+                    <p>Year 3</p>
+                </div>
+                <div class="subject-card" onclick="openNotes('Pharmacy Year 3', 'Pharmacoepidemiology and Environmental Health')">
+                    <div class="subject-icon">
+                        <i class="fas fa-globe"></i>
+                    </div>
+                    <h4>Pharmacoepidemiology and Environmental Health</h4>
+                    <p>Year 3</p>
+                </div>
+                <div class="subject-card" onclick="openNotes('Pharmacy Year 3', 'Comprehensive Professional Field Practice')">
+                    <div class="subject-icon">
+                        <i class="fas fa-user-md"></i>
+                    </div>
+                    <h4>Comprehensive Professional Field Practice</h4>
+                    <p>Year 3</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+    <!-- Notes Modal -->
+    <div id="noteModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="noteTitle">Note Title</h2>
+                <div class="modal-actions">
+                    <button class="icon-btn" onclick="downloadPDF()" title="Download PDF">
+                        <i class="fas fa-download"></i>
+                    </button>
+                    <button class="icon-btn" onclick="printNotes()" title="Print">
+                        <i class="fas fa-print"></i>
+                    </button>
+                    <button class="close-btn" onclick="closeModal()">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="modal-body" id="noteContent">
+                <!-- Content will be loaded here -->
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
         <div class="container">
             <div class="footer-content">
                 <div class="footer-section">
@@ -188,11 +985,12 @@
         </div>
     </footer>
     
-    <!-- Firebase SDKs -->
+
+    <!-- Scripts -->
+    <!-- Firebase SDKs (NO STORAGE) -->
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-storage-compat.js"></script>
     
     <!-- PDF Library -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
@@ -201,10 +999,8 @@
     <script src="auth.js"></script>
     <script src="database.js"></script>
     <script src="script.js"></script>
+    <script src="content.js"></script>
     <script src="notes.js"></script>
     <script src="nav-auth.js"></script>
-    <script src="content.js"></script>
-</body>
-</html>
 </body>
 </html>
