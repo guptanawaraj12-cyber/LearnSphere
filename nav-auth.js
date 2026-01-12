@@ -1,6 +1,9 @@
 // ==================== DYNAMIC NAVIGATION AUTH LINKS ====================
 
 // Wait for Firebase to load
+// ==================== DYNAMIC NAVIGATION AUTH LINKS ====================
+
+// Wait for Firebase to load
 document.addEventListener('DOMContentLoaded', () => {
     // Check if Firebase is loaded
     if (typeof firebase === 'undefined') {
@@ -44,20 +47,7 @@ function updateNavigation() {
             dashboardLi.innerHTML = '<a href="dashboard.html"><i class="fas fa-user"></i> Dashboard</a>';
             navMenu.appendChild(dashboardLi);
             
-            // Check if admin
-            try {
-                if (typeof isAdmin === 'function') {
-                    const adminAccess = await isAdmin();
-                    if (adminAccess) {
-                        const adminLi = document.createElement('li');
-                        adminLi.className = 'auth-link';
-                        adminLi.innerHTML = '<a href="admin.html"><i class="fas fa-crown"></i> Admin</a>';
-                        navMenu.appendChild(adminLi);
-                    }
-                }
-            } catch (error) {
-                console.log('Could not check admin status:', error);
-            }
+            // REMOVED: Admin link check
             
             // Add Logout link
             const logoutLi = document.createElement('li');

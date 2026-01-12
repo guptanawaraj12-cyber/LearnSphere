@@ -141,13 +141,3 @@ async function updateUserProfile(data) {
         throw error;
     }
 }
-
-// Check if user is admin
-async function isAdmin() {
-    try {
-        const userData = await getCurrentUserData();
-        return userData.role === 'admin';
-    } catch (error) {
-        return false;
-    }
-}

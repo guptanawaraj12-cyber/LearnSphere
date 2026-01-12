@@ -14,18 +14,19 @@ const firebaseConfig = {
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
 
-// Initialize Services
+// Initialize Services (WITHOUT Storage)
 const auth = firebase.auth();
 const db = firebase.firestore();
-const storage = firebase.storage();
 
 // Google Auth Provider
 const googleProvider = new firebase.auth.GoogleAuthProvider();
+googleProvider.setCustomParameters({
+    prompt: 'select_account'
+});
 
 // Export for use in other files
 window.auth = auth;
 window.db = db;
-window.storage = storage;
 window.googleProvider = googleProvider;
 
-console.log('🔥 Firebase initialized successfully!');
+console.log('🔥 Firebase initialized successfully (Auth + Firestore only)!');

@@ -457,3 +457,159 @@ auth.onAuthStateChanged((user) => {
         navMenu.appendChild(signupLi);
     }
 });
+// ==================== LOAD CONTENT FROM content.js ====================
+
+// ==================== STATIC CONTENT ONLY (NO FIREBASE QUERIES) ====================
+
+// Check if content.js is loaded
+if (typeof notesContent === 'undefined') {
+    console.error('❌ content.js not loaded!');
+    window.notesContent = {};
+}
+
+// Load notes from content.js (static content)
+openNotes = function(className, subject) {
+    closeModal();
+    
+    const noteModal = document.getElementById('noteModal');
+    const noteTitle = document.getElementById('noteTitle');
+    const noteContent = document.getElementById('noteContent');
+    
+    noteTitle.textContent = `${subject} - ${className}`;
+    noteContent.innerHTML = '<p style="text-align: center; padding: 2rem;"><i class="fas fa-spinner fa-spin"></i> Loading notes...</p>';
+    
+    noteModal.style.display = 'block';
+    
+    // Small delay for smooth animation
+    setTimeout(() => {
+        // Check if content exists in content.js
+        if (notesContent[className] && notesContent[className][subject]) {
+            const subjectData = notesContent[className][subject];
+            
+            console.log('✅ Loading notes from content.js:', className, subject);
+            
+            // Build content HTML
+            let contentHTML = `
+                <div style="margin-bottom: 2rem; padding-bottom: 1rem; border-bottom: 1px solid var(--border);">
+                    <h2 style="color: var(--text-primary); margin-bottom: 0.5rem; font-size: 28px;">${subjectData.title}</h2>
+                    <p style="color: var(--text-secondary); font-size: 14px;">${subjectData.description}</p>
+                </div>
+            `;
+            
+            // Add all topics
+            subjectData.topics.forEach((topic, index) => {
+                contentHTML += `
+                    <div style="background: var(--bg-secondary); padding: 1.5rem; border-radius: var(--radius-lg); margin-bottom: 1.5rem; border: 1px solid var(--border);">
+                        <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 1rem; flex-wrap: wrap; gap: 1rem;">
+                            <h3 style="color: var(--text-primary); margin: 0; font-size: 20px;">${topic.title}</h3>
+                            <div style="display: flex; gap: 0.5rem;">
+                                ${topic.pdfUrl ? `
+                                    <a href="${topic.pdfUrl}" target="_blank" class="icon-btn" title="Download PDF" style="text-decoration: none;">
+                                        <i class="fas fa-file-pdf"></i>
+                                    </a>
+                                ` : ''}
+                                ${topic.videoUrl ? `
+                                    <a href="${topic.videoUrl}" target="_blank" class="icon-btn" title="Watch Video" style="text-decoration: none;">
+                                        <i class="fas fa-video"></i>
+                                    </a>
+                                ` : ''}
+                                <button class="icon-btn" onclick="printTopic(${index})" title="Print">
+                                    <i class="fas fa-print"></i>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="topic-content" id="topic-${index}">
+                            ${topic.content}
+                        </div>
+                    </div>
+                `;
+            });
+            
+            noteContent.innerHTML = contentHTML;
+            
+        } else {
+            // No content available
+            console.warn('⚠️ No content found for:', className, subject);
+            noteContent.innerHTML = `
+                <div style="text-align: center; padding: 3rem;">
+                    <i class="fas fa-inbox" style="font-size: 64px; color: var(--text-tertiary); margin-bottom: 1rem; display: block;"></i>
+                    <h3 style="color: var(--text-primary); margin-bottom: 0.5rem;">No notes available yet</h3>
+                    <p style="color: var(--text-secondary); margin-bottom: 1rem;">Notes for this subject will be added soon.</p>
+                    <div style="background: var(--bg-secondary); padding: 1rem; border-radius: 8px; display: inline-block; margin-top: 1rem;">
+                        <p style="color: var(--text-tertiary); font-size: 14px; margin: 0;">
+                            <strong>Class:</strong> ${className}<br>
+                            <strong>Subject:</strong> ${subject}
+                        </p>
+                    </div>
+                </div>
+            `;
+        }
+    }, 100);
+};
+
+// Print specific topic
+function printTopic(topicIndex) {
+    const topicElement = document.getElementById(`topic-${topicIndex}`);
+    if (topicElement) {
+        const printWindow = window.open('', '', 'height=600,width=800');
+        printWindow.document.write('<html><head><title>Print Notes - Gyanu Notes</title>');
+        printWindow.document.write(`
+            <style>
+                body {
+                    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+                    padding: 30px;
+                    line-height: 1.6;
+                    color: #333;
+                }
+                h2, h3, h4 {
+                    color: #000;
+                    margin-top: 1.5rem;
+                    margin-bottom: 0.5rem;
+                }
+                h2 { font-size: 24px; }
+                h3 { font-size: 20px; }
+                h4 { font-size: 16px; }
+                p {
+                    margin-bottom: 1rem;
+                }
+                ul, ol {
+                    margin-left: 2rem;
+                    margin-bottom: 1rem;
+                }
+                li {
+                    margin-bottom: 0.5rem;
+                }
+                img {
+                    max-width: 100%;
+                    height: auto;
+                    margin: 1rem 0;
+                }
+                code {
+                    background: #f4f4f4;
+                    padding: 2px 6px;
+                    border-radius: 3px;
+                    font-family: 'Courier New', monospace;
+                }
+                pre {
+                    background: #f4f4f4;
+                    padding: 1rem;
+                    border-radius: 5px;
+                    overflow-x: auto;
+                }
+                @media print {
+                    body { padding: 0; }
+                }
+            </style>
+        `);
+        printWindow.document.write('</head><body>');
+        printWindow.document.write(topicElement.innerHTML);
+        printWindow.document.write('</body></html>');
+        printWindow.document.close();
+        printWindow.print();
+    }
+}
+
+// Log that we're using static content
+console.log('📚 Notes system initialized - Using static content from content.js');
+console.log('📝 Available classes:', Object.keys(notesContent));
