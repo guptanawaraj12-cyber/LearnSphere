@@ -191,28 +191,154 @@ document.addEventListener('keydown', function(event) {
     }
 });
 
-// ==================== DOWNLOAD PDF ====================
+// ==================== DOWNLOAD PDF (FINAL WORKING VERSION) ====================
 
 function downloadPDF() {
-    const noteContent = document.getElementById('noteContent');
     const noteTitle = document.getElementById('noteTitle');
-    
-    if (!noteContent || !noteTitle) {
+    const simpleContent = document.getElementById('simpleContent');
+    const bookContent = document.getElementById('bookContent');
+
+    const contentArea =
+        simpleContent ||
+        bookContent?.querySelector('.content-wrapper');
+
+    if (!contentArea || !noteTitle) {
         alert('No content to download');
         return;
     }
-    
+
+    /* -------------------- Loading -------------------- */
+    const loadingMsg = document.createElement('div');
+    loadingMsg.style.cssText = `
+        position: fixed;
+        inset: 0;
+        background: rgba(0,0,0,0.85);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 16px;
+        z-index: 999999;
+    `;
+    loadingMsg.textContent = 'Generating PDF...';
+    document.body.appendChild(loadingMsg);
+
+    /* -------------------- Clone Content -------------------- */
+    const contentClone = contentArea.cloneNode(true);
+
+    /* -------------------- Remove sidebar / UI -------------------- */
+    contentClone.querySelectorAll(`
+        nav, aside, header, footer,
+        .sidebar, .toc, .menu,
+        .floating-toc-btn,
+        .floating-toc-panel,
+        .topic-navigation,
+        .back-btn
+    `).forEach(el => el.remove());
+
+    /* -------------------- Wrapper -------------------- */
+    const wrapper = document.createElement('div');
+    wrapper.style.cssText = `
+        width: 210mm;
+        padding: 15mm;
+        background: white;
+        font-family: Arial, sans-serif;
+    `;
+
+    wrapper.innerHTML = `
+        <style>
+            body { background: white; }
+
+            /* hide any remaining fixed UI */
+            nav, aside, header, footer {
+                display: none !important;
+            }
+
+            h1 {
+                font-size: 26px;
+                text-align: center;
+                margin-bottom: 18px;
+                border-bottom: 3px solid #0070f3;
+                padding-bottom: 12px;
+            }
+
+            h2 {
+                font-size: 22px;
+                margin: 22px 0 12px;
+                page-break-after: avoid;
+            }
+
+            h3 {
+                font-size: 18px;
+                margin: 18px 0 10px;
+                page-break-after: avoid;
+            }
+
+            p, li {
+                font-size: 14px;
+                line-height: 1.7;
+                margin-bottom: 10px;
+            }
+
+            table {
+                width: 100%;
+                border-collapse: collapse;
+                margin: 14px 0;
+                page-break-inside: avoid;
+            }
+
+            th, td {
+                border: 1px solid #ccc;
+                padding: 8px;
+            }
+
+            .content-section {
+                page-break-inside: avoid;
+            }
+        </style>
+
+        <h1>${noteTitle.textContent}</h1>
+
+        <div style="text-align:center;font-size:12px;color:#666;margin-bottom:25px;">
+            Gyanu Notes – Quality Education for Everyone
+        </div>
+
+        ${contentClone.innerHTML}
+
+        <div style="margin-top:40px;border-top:1px solid #ddd;padding-top:10px;text-align:center;font-size:11px;color:#666;">
+            © 2024 Gyanu Notes | Downloaded on ${new Date().toDateString()}
+        </div>
+    `;
+
+    /* -------------------- PDF Options -------------------- */
     const opt = {
-        margin: 1,
+        margin: 0,
         filename: `${noteTitle.textContent}.pdf`,
         image: { type: 'jpeg', quality: 0.98 },
-        html2canvas: { scale: 2 },
-        jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+        html2canvas: {
+            scale: 2,
+            useCORS: true
+        },
+        jsPDF: {
+            unit: 'mm',
+            format: 'a4',
+            orientation: 'portrait'
+        }
     };
-    
-    html2pdf().set(opt).from(noteContent).save();
-    console.log('📥 Downloading PDF...');
+
+    /* -------------------- Generate -------------------- */
+    html2pdf()
+        .set(opt)
+        .from(wrapper)
+        .save()
+        .then(() => document.body.removeChild(loadingMsg))
+        .catch(err => {
+            console.error(err);
+            document.body.removeChild(loadingMsg);
+            alert('PDF generation failed');
+        });
 }
+
 
 // ==================== PRINT NOTES ====================
 
@@ -454,3 +580,201 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 console.log('✅ Notes system initialized');
+// ==================== BOOK-STYLE READER ====================
+
+function openNotes(className, subjectName) {
+    console.log(`📖 Opening notes for: ${className} - ${subjectName}`);
+    
+    // Check if content exists
+    if (!window.notesContent) {
+        console.error('❌ Content database not loaded!');
+        alert('Content database not loaded. Please refresh the page.');
+        return;
+    }
+    
+    // Get subject data
+    const classData = window.notesContent[className];
+    
+    if (!classData) {
+        console.error(`❌ No content found for class: ${className}`);
+        alert(`No content available for ${className}`);
+        return;
+    }
+    
+    const subjectData = classData[subjectName];
+    
+    if (!subjectData) {
+        console.error(`❌ No content found for: ${className} ${subjectName}`);
+        alert(`No content available for ${subjectName} in ${className}`);
+        return;
+    }
+    
+    console.log('✅ Found subject data:', subjectData.title);
+    
+    // Update modal title
+    const modalTitle = document.getElementById('noteTitle');
+    if (modalTitle) {
+        modalTitle.textContent = subjectData.title;
+    }
+    
+    // Generate book-style content with sidebar
+    const noteContent = document.getElementById('noteContent');
+    if (noteContent) {
+        let html = `
+            <div class="book-reader">
+                <!-- Sidebar Table of Contents -->
+                <div class="book-sidebar" id="bookSidebar">
+                    <div class="sidebar-header">
+                        <h3><i class="fas fa-list"></i> Table of Contents</h3>
+                        <button class="toggle-sidebar" onclick="toggleSidebar()">
+                            <i class="fas fa-bars"></i>
+                        </button>
+                    </div>
+                    <div class="sidebar-content">
+                        <ul class="toc-list">
+        `;
+        
+        // Generate TOC
+        subjectData.topics.forEach((topic, index) => {
+            html += `
+                <li class="toc-item ${index === 0 ? 'active' : ''}" onclick="scrollToTopic('topic-${index}')">
+                    <i class="fas fa-book-open"></i>
+                    <span>${topic.title}</span>
+                </li>
+            `;
+        });
+        
+        html += `
+                        </ul>
+                    </div>
+                    
+                    <!-- Reading Progress -->
+                    <div class="reading-progress">
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="progressFill"></div>
+                        </div>
+                        <p class="progress-text" id="progressText">0% Complete</p>
+                    </div>
+                </div>
+                
+                <!-- Main Content Area -->
+                <div class="book-content" id="bookContent">
+                    <div class="content-wrapper">
+        `;
+        
+        // Generate content for each topic
+        subjectData.topics.forEach((topic, index) => {
+            html += `
+                <div class="topic-section" id="topic-${index}" data-topic-index="${index}">
+                    ${topic.content}
+                </div>
+            `;
+            
+            // Add divider between topics (except last one)
+            if (index < subjectData.topics.length - 1) {
+                html += `
+                    <div class="topic-divider">
+                        <span>• • •</span>
+                    </div>
+                `;
+            }
+        });
+        
+        html += `
+                    </div>
+                </div>
+            </div>
+        `;
+        
+        noteContent.innerHTML = html;
+        
+        // Initialize reading progress tracker
+        initializeReadingProgress();
+    }
+    
+    // Show modal
+    const modal = document.getElementById('noteModal');
+    if (modal) {
+        modal.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+        console.log('✅ Modal opened');
+    }
+}
+
+// Toggle sidebar visibility
+function toggleSidebar() {
+    const sidebar = document.getElementById('bookSidebar');
+    if (sidebar) {
+        sidebar.classList.toggle('collapsed');
+    }
+}
+
+// Scroll to specific topic
+function scrollToTopic(topicId) {
+    const topic = document.getElementById(topicId);
+    const bookContent = document.getElementById('bookContent');
+    
+    if (topic && bookContent) {
+        // Smooth scroll to topic
+        topic.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        
+        // Update active state in TOC
+        document.querySelectorAll('.toc-item').forEach(item => {
+            item.classList.remove('active');
+        });
+        
+        const topicIndex = topic.getAttribute('data-topic-index');
+        const tocItems = document.querySelectorAll('.toc-item');
+        if (tocItems[topicIndex]) {
+            tocItems[topicIndex].classList.add('active');
+        }
+    }
+}
+
+// Initialize reading progress tracker
+function initializeReadingProgress() {
+    const bookContent = document.getElementById('bookContent');
+    const progressFill = document.getElementById('progressFill');
+    const progressText = document.getElementById('progressText');
+    
+    if (!bookContent || !progressFill || !progressText) return;
+    
+    bookContent.addEventListener('scroll', function() {
+        const scrollTop = bookContent.scrollTop;
+        const scrollHeight = bookContent.scrollHeight - bookContent.clientHeight;
+        const scrollPercent = (scrollTop / scrollHeight) * 100;
+        
+        progressFill.style.width = scrollPercent + '%';
+        progressText.textContent = Math.round(scrollPercent) + '% Complete';
+        
+        // Update active TOC item based on scroll position
+        updateActiveTOC();
+    });
+}
+
+// Update active TOC item based on visible content
+function updateActiveTOC() {
+    const bookContent = document.getElementById('bookContent');
+    const topics = document.querySelectorAll('.topic-section');
+    const tocItems = document.querySelectorAll('.toc-item');
+    
+    if (!bookContent || topics.length === 0) return;
+    
+    let activeIndex = 0;
+    const scrollTop = bookContent.scrollTop + 100; // Offset for better UX
+    
+    topics.forEach((topic, index) => {
+        if (topic.offsetTop <= scrollTop) {
+            activeIndex = index;
+        }
+    });
+    
+    // Update active state
+    tocItems.forEach((item, index) => {
+        if (index === activeIndex) {
+            item.classList.add('active');
+        } else {
+            item.classList.remove('active');
+        }
+    });
+}

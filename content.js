@@ -2569,73 +2569,597 @@ const notesContent = {
             ]
         },
         
-        "Chemistry": {
-            title: "Class 12 Chemistry",
-            description: "Chemistry for Class 12 - Organic, Inorganic, Physical",
-            topics: [
-                {
-                    title: "Chapter 1: The Solid State",
-                    content: `
-                        <h2>The Solid State</h2>
-                        
-                        <h3>Types of Solids</h3>
-                        <ul>
-                            <li><strong>Crystalline:</strong> Regular arrangement (NaCl, diamond)</li>
-                            <li><strong>Amorphous:</strong> Irregular arrangement (glass, rubber)</li>
-                        </ul>
-                        
-                        <h3>Crystal Lattice</h3>
-                        <p>Regular 3D arrangement of points in space</p>
-                        
-                        <h3>Unit Cell</h3>
-                        <p>Smallest repeating unit of crystal lattice</p>
-                        
-                        <h3>Types of Unit Cells</h3>
-                        <ul>
-                            <li><strong>Simple Cubic:</strong> Z = 1</li>
-                            <li><strong>Body-Centered Cubic (BCC):</strong> Z = 2</li>
-                            <li><strong>Face-Centered Cubic (FCC):</strong> Z = 4</li>
-                        </ul>
-                        
-                        <h3>Packing Efficiency</h3>
-                        <ul>
-                            <li><strong>Simple Cubic:</strong> 52.4%</li>
-                            <li><strong>BCC:</strong> 68%</li>
-                            <li><strong>FCC/HCP:</strong> 74%</li>
-                        </ul>
-                    `
-                },
-                {
-                    title: "Chapter 2: Solutions",
-                    content: `
-                        <h2>Solutions</h2>
-                        
-                        <h3>Concentration Terms</h3>
-                        <ul>
-                            <li><strong>Molarity (M):</strong> Moles of solute / Liters of solution</li>
-                            <li><strong>Molality (m):</strong> Moles of solute / kg of solvent</li>
-                            <li><strong>Mole Fraction (X):</strong> Moles of component / Total moles</li>
-                            <li><strong>Mass Percentage:</strong> (Mass of solute / Mass of solution) × 100</li>
-                        </ul>
-                        
-                        <h3>Raoult's Law</h3>
-                        <div style="background: var(--bg-secondary); padding: 1rem; border-radius: 8px; margin: 1rem 0;">
-                            <p><strong>P = P₀ × X</strong></p>
-                            <p>where P = vapor pressure, P₀ = vapor pressure of pure solvent, X = mole fraction</p>
+    
+    "Chemistry": {
+        title: "Class 12 Chemistry",
+        description: "Complete chemistry syllabus for Class 12",
+        topics: [
+            {
+                title: "Chapter 1: Volumetric Analysis",
+                content: `
+                    <h2>Chapter 1: Volumetric Analysis</h2>
+                    
+                    <div style="background: var(--bg-secondary); padding: var(--spacing-lg); border-radius: var(--radius-lg); margin-bottom: var(--spacing-xl);">
+                        <h3>Learning Objectives</h3>
+                        <p>On completion of study of this unit the learner will be able to:</p>
+                        <ol>
+                            <li>Understand and correlate different concentration expressing terms of solution.</li>
+                            <li>Calculate equivalent weight of elements and substances.</li>
+                            <li>Understand titration and its types.</li>
+                            <li>Classify substances into primary and secondary standard.</li>
+                        </ol>
+                    </div>
+
+                    <h3>Introduction</h3>
+                    <p>In analytical chemistry, analysis of the substance is most important operation as it gives authentication for different desired parameter such as purity, assay, limit test etc. Such analysis are broadly classified into two types:</p>
+                    <ul>
+                        <li><strong>(i) Qualitative analysis</strong></li>
+                        <li><strong>(ii) Quantitative analysis</strong></li>
+                    </ul>
+
+                    <p><strong>Qualitative analysis:</strong> The presence or absence of certain groups or elements is checked. Hence qualitative analysis deals with the substance for its constituent elements, radicals or compounds. Example: Salt analysis, Foreign element detection etc.</p>
+
+                    <p><strong>Quantitative analysis:</strong> Involves analysis of the substance for the proportion of individual components or constituent particles in the given substance. Example: Titration</p>
+
+                    <div style="background: var(--bg-secondary); padding: var(--spacing-xl); border-radius: var(--radius-lg); margin: var(--spacing-xl) 0; text-align: center;">
+                        <h4>Classification of Quantitative Analysis</h4>
+                        <div style="margin-top: var(--spacing-lg);">
+                            <strong>Quantitative Analysis</strong><br>
+                            ↓<br>
+                            <div style="display: flex; justify-content: space-around; margin-top: var(--spacing-md); flex-wrap: wrap;">
+                                <div>Gravimetric<br>↓<br>Neutralisation<br>Precipitation</div>
+                                <div>Volumetric<br>↓<br>Complex Formation<br>Oxidation Reduction</div>
+                                <div>Instrumental</div>
+                            </div>
                         </div>
+                    </div>
+
+                    <h3>1.1 Equivalent Weight of Elements</h3>
+                    
+                    <h4>a) Gravimetric Analysis</h4>
+                    <p>It deals with the measurement of volume of solutions and weight of precipitate or residue obtained in chemical reaction which finally leads to amount of solute present in given sample solution.</p>
+
+                    <h4>b) Volumetric Analysis (Instrumental Analysis)</h4>
+                    <p>It deals with the measurement of volume of solution. It is taken and for colorless solution, external indicator is taken and for colored solution, self indicator is taken.</p>
+
+                    <h4>c) Instrumental Analysis</h4>
+                    <p>It involves use of different instruments not for the estimation of concentration of substance while in solution is needed with another substance which is a definite volume of one. It is prepared by taking solution must be prepared solution diluted.</p>
+
+                    <div style="background: var(--bg-secondary); padding: var(--spacing-lg); border-radius: var(--radius-lg); margin: var(--spacing-xl) 0;">
+                        <h4>Equivalent Weight of Acid</h4>
+                        <p>Equivalent weight of acid is defined as number of parts by weight of acid which is neutralized by one mole of base (OH⁻) is called as acidic base.</p>
                         
-                        <h3>Colligative Properties</h3>
+                        <p><strong>Formula:</strong></p>
+                        <p style="text-align: center; font-size: 1.1em; margin: var(--spacing-md) 0;">
+                            Eq.wt = <sup>Molecular weight of acid</sup>/<sub>Basicity</sub>
+                        </p>
+
+                        <p><strong>Example:</strong></p>
+                        <p>For NaOH: Eq.wt = M/1 = 40/1 = 40</p>
+                        <p>For Ca(OH)₂: Eq.wt = M/2 = 74/2 = 37</p>
+                    </div>
+
+                    <div style="background: var(--bg-secondary); padding: var(--spacing-lg); border-radius: var(--radius-lg); margin: var(--spacing-xl) 0;">
+                        <h4>Equivalent Weight of Base</h4>
+                        <p>Equivalent weight of base is defined as number of parts by weight of base which is neutralized by one mole of H⁺.</p>
+                        
+                        <p><strong>Formula:</strong></p>
+                        <p style="text-align: center; font-size: 1.1em; margin: var(--spacing-md) 0;">
+                            Eq.wt = <sup>Molecular weight of base</sup>/<sub>Acidity</sub>
+                        </p>
+
+                        <p><strong>Examples:</strong></p>
+                        <p>NaOH: Eq.wt = 40/1 = 40</p>
+                        <p>Ca(OH)₂: Eq.wt = 74/2 = 37</p>
+                    </div>
+
+                    <div style="background: var(--bg-secondary); padding: var(--spacing-lg); border-radius: var(--radius-lg); margin: var(--spacing-xl) 0;">
+                        <h4>Equivalent Weight of Salt</h4>
+                        <p>Equivalent weight of salt is defined as number of parts by weight of salt which is formed by complete neutralization of one gram equivalent of acid or base.</p>
+                        
+                        <p><strong>Example:</strong></p>
+                        <p>NaOH + HCl → NaCl + H₂O</p>
+                        <p>Eq.wt of NaCl = Molecular weight / Total charge = 58.5/1 = 58.5</p>
+                    </div>
+
+                    <div style="background: var(--bg-secondary); padding: var(--spacing-lg); border-radius: var(--radius-lg); margin: var(--spacing-xl) 0;">
+                        <h4>Equivalent Weight of Oxidizing and Reducing Agents</h4>
+                        
+                        <p><strong>Oxidizing Agent:</strong></p>
+                        <p>Eq.wt = <sup>Molecular weight</sup>/<sub>Total positive change in O.N.</sub></p>
+                        
+                        <p><strong>Reducing Agent:</strong></p>
+                        <p>Eq.wt = <sup>Molecular weight</sup>/<sub>Total negative change in O.N.</sub></p>
+
+                        <p><strong>Example - KMnO₄:</strong></p>
                         <ul>
-                            <li><strong>Relative Lowering of Vapor Pressure</strong></li>
-                            <li><strong>Elevation in Boiling Point:</strong> ΔTb = Kb × m</li>
-                            <li><strong>Depression in Freezing Point:</strong> ΔTf = Kf × m</li>
-                            <li><strong>Osmotic Pressure:</strong> π = CRT</li>
+                            <li>In acidic medium: Eq.wt = M/5</li>
+                            <li>In alkaline medium: Eq.wt = M/1</li>
+                            <li>In neutral medium: Eq.wt = M/3</li>
                         </ul>
-                    `
-                }
-            ]
-        },
-        
+                    </div>
+
+                    <div style="background: var(--bg-secondary); padding: var(--spacing-lg); border-radius: var(--radius-lg); margin: var(--spacing-xl) 0;">
+                        <h4>E. Relation between Equivalent Weight, Atomic Weight and Valency</h4>
+                        
+                        <p>Let us consider an element with its atomic weight 'A', equivalent weight 'E' and valency 'V'.</p>
+                        
+                        <p>From definition of valency we write, one atom of element combine with V-atoms of hydrogen.</p>
+                        
+                        <p>Now, the mass of V-atoms of hydrogen is (V × 1.008) parts by wt. of hydrogen</p>
+                        
+                        <p>(V × 1.008) parts by wt. of hydrogen combines with 'A' parts by wt. of element</p>
+                        
+                        <p>1.008 parts by wt. of hydrogen combines with (A/(V × 1.008) × 1.008) wt. of element = A/V parts by wt. of element</p>
+                        
+                        <p>According to definition of equivalent weight, the weight of element required to displace or combine 1.008 parts by weight of hydrogen is called its equivalent weight. Therefore A/V parts by weight of element is the eq. wt. of element. i.e. E.</p>
+                        
+                        <p>Hence, Eq. wt. (E) = A/V</p>
+                        
+                        <p style="text-align: center; background: white; padding: var(--spacing-md); border-radius: var(--radius-md); margin: var(--spacing-md) 0;">
+                            <strong>Thus, Eq. wt.(E) = <sup>At. wt. (A)</sup>/<sub>Valency (V)</sub></strong> or <strong>At. wt. = Eq. wt. × valency</strong>
+                        </p>
+                        
+                        <p><em>This is the required relation between at. wt., eq. wt. and valency of an element.</em></p>
+                    </div>
+
+                    <h3>1.2 Concentration Expressing Terms</h3>
+                    <p>The term concentration or strength (in quantitative sense) refers to amount of solute in solution. To express the amount of solute different amount of solvent and solution are taken as reference. On the basis of different units of solute, solvent and solution the concentration of solution is expressed in different units which are called concentration expressing terms. Some of them are listed below.</p>
+
+                    <div style="background: var(--bg-secondary); padding: var(--spacing-lg); border-radius: var(--radius-lg); margin: var(--spacing-xl) 0;">
+                        <h4>a) Gram-litre (Gm/lit)</h4>
+                        <p>It indicates the amount of solute in gram present in one liter (1000ml) of solution.</p>
+                        <p><strong>Mathematically:</strong></p>
+                        <p>Gm/lit = <sup>weight of solute (gm)</sup>/<sub>volume of solution (lit.)</sub></p>
+                        <p>or, Gm/lit = <sup>weight of solute (gm)</sup>/<sub>volume of solution (ml)</sub> × 1000</p>
+                        <p>If solution is 10gm/lit; it means it contains 10gm solute in 1 litre solution.</p>
+                    </div>
+
+                    <div style="background: var(--bg-secondary); padding: var(--spacing-lg); border-radius: var(--radius-lg); margin: var(--spacing-xl) 0;">
+                        <h4>b) Percentage</h4>
+                        
+                        <h5>(i) Percentage mass by volume (%w/v)</h5>
+                        <p>It indicates the weight of solute in gram present in 100ml of solution.</p>
+                        <p><strong>Mathematically:</strong></p>
+                        <p>%w/v = <sup>weight of solute (gm)</sup>/<sub>volume of solution (ml)</sub> × 100</p>
+                        
+                        <p><strong>Conversion:</strong></p>
+                        <p>Gm/lit = <sup>weight of solute (gm)</sup>/<sub>volume of solution (ml)</sub> × 100 × 10</p>
+                        <p>∴ Gm/lit = %w/v × 10</p>
+                        <p>If solution is 10(%w/v); it means it contains 10gm solute in 100ml solution.</p>
+                        <p>Also, Gm/lit = (%w/v) × Specific gravity × 10.</p>
+
+                        <h5>(ii) Percentage by weight (%w/w)</h5>
+                        <p>It indicates the amount of solute in gram present in 100gm solution.</p>
+                        <p><strong>Mathematically:</strong></p>
+                        <p>%w/w = <sup>weight of solute (gm)</sup>/<sub>volume of solution (gm)</sub> × 100</p>
+                        <p>If solution is 10(%w/w); it means it contains 10gm solute in 100gm solution.</p>
+
+                        <h5>(iii) Percentage by Volume (%v/v)</h5>
+                        <p>It indicates the volume of solute in ml present in 100 ml solution.</p>
+                        <p><strong>Mathematically:</strong></p>
+                        <p>%v/v = <sup>Volume of solute (ml)</sup>/<sub>volume of solution (ml)</sub> × 100</p>
+                        <p>If solution is 10(%v/v); it means it contains 10 ml solute in 100 ml solution.</p>
+                    </div>
+
+                    <div style="background: var(--bg-secondary); padding: var(--spacing-lg); border-radius: var(--radius-lg); margin: var(--spacing-xl) 0;">
+                        <h4>c) Normality</h4>
+                        <p>It indicates number of gram equivalent of solute present in 1 litre (1000ml) of solution. It is represented by N.</p>
+                        
+                        <p><strong>Mathematically:</strong></p>
+                        <p>Normality = <sup>Number of gram equivalent of solute</sup>/<sub>Volume of solution in litre</sub></p>
+                        
+                        <p>or, Normality = <sup>weight of solute (gm)</sup>/<sub>gram equivalent weight of solute</sub> × <sup>1</sup>/<sub>volume of solution in litre</sub></p>
+                        
+                        <p>or, Normality = <sup>weight of solute (gm)</sup>/<sub>gram equivalent weight of solute</sub> × <sup>1</sup>/<sub>volume of solution (ml)</sub> × 1000</p>
+                        
+                        <p>If Normality is represented by N,<br>
+                        Weight of solute by W<br>
+                        Gram equivalent weight of solute by E<br>
+                        Volume of solution in ml by V</p>
+                        
+                        <p style="text-align: center; background: white; padding: var(--spacing-md); border-radius: var(--radius-md);">
+                            W = <sup>VEN</sup>/<sub>1000</sub>
+                        </p>
+
+                        <p><strong>Conversion:</strong></p>
+                        <p>Normality = <sup>weight of solute (gm)</sup>/<sub>gram equivalent weight of solute</sub> × <sup>1</sup>/<sub>volume of solution (ml)</sub> × 1000</p>
+                        <p>Normality = <sup>gm/lit</sup>/<sub>gram equivalent weight of solute</sub></p>
+                        <p>∴ Gm/lit = Normality × gram equivalent weight of solute</p>
+                        
+                        <p><em>If solution is expressed as 1N NaOH; it means it contains 1gm. equivalent NaOH (i.e. 40gm. NaOH) in 1 litre solution.</em></p>
+                    </div>
+
+                    <div style="background: var(--bg-secondary); padding: var(--spacing-lg); border-radius: var(--radius-lg); margin: var(--spacing-xl) 0;">
+                        <h4>d) Molarity</h4>
+                        <p>It indicates number of moles of solute present in one liter solution. It is represented by M.</p>
+                        
+                        <p><strong>Mathematically:</strong></p>
+                        <p>Molarity = <sup>Number moles of solute</sup>/<sub>Volume of solution in litre</sub></p>
+                        
+                        <p>or, Molarity = <sup>weight of solute (gm)</sup>/<sub>gram molecular weight of solute</sub> × <sup>1</sup>/<sub>volume of solution (litre)</sub></p>
+                        
+                        <p>or, Molarity = <sup>weight of solute (gm)</sup>/<sub>gram molecular weight of solute</sub> × <sup>1</sup>/<sub>volume solution (ml)</sub> × 1000</p>
+                        
+                        <p>If Molarity is represented by M<br>
+                        Weight of solute is represented by W<br>
+                        Gram molecular weight of solute is represented by M_w<br>
+                        Volume of solution in ml by V</p>
+                        
+                        <p style="text-align: center; background: white; padding: var(--spacing-md); border-radius: var(--radius-md);">
+                            W = <sup>MM_wV</sup>/<sub>1000</sub>
+                        </p>
+
+                        <p><strong>Conversion:</strong></p>
+                        <p>Molarity = <sup>weight of solute (gm)</sup>/<sub>gram molecular weight of solute</sub> × <sup>1</sup>/<sub>volume of solution (ml)</sub> × 1000</p>
+                        <p>or, Molarity = <sup>gm/lit</sup>/<sub>Gram molecular weight of solute</sub></p>
+                        <p>∴ Gm/lit = Molarity × gram molecular weight of solute.</p>
+                        
+                        <p><em>If solution is expressed as 1M Na₂CO₃; it means it contains 1 mole Na₂CO₃ (i.e. 106gm. Na₂CO₃) in 1 litre solution.</em></p>
+                    </div>
+
+                    <div style="background: var(--bg-secondary); padding: var(--spacing-lg); border-radius: var(--radius-lg); margin: var(--spacing-xl) 0;">
+                        <h4>e) Molality</h4>
+                        <p>It indicates number of moles of solute present in one kilogram (1000grams) of solvent. It is represented by m.</p>
+                        
+                        <p><strong>Mathematically:</strong></p>
+                        <p>Molality = <sup>Number of moles of solute</sup>/<sub>weight of solvent in kilogram</sub></p>
+                        
+                        <p>or, Molality = <sup>weight of solute in gram</sup>/<sub>molecular weight of solute</sub> × <sup>1</sup>/<sub>weight of solvent in gram</sub> × 1000</p>
+                        
+                        <p><em>If solution is expressed as 1m (molal); it means it contains 1 mole solute in 1kg (i.e. 1000gm.) solvent.</em></p>
+                        
+                        <p>Also, d = M(<sup>1</sup>/<sub>m</sub> + <sup>Mol.wt.</sup>/<sub>1000</sub>) Where, d = density,</p>
+                        <p>m = Molality<br>M = Molarity</p>
+                        
+                        <div style="background: #fff3cd; padding: var(--spacing-md); border-radius: var(--radius-md); margin-top: var(--spacing-md);">
+                            <p><strong>N.B.</strong> It is temperature independent term because mass of solute and solvent are not affected by temperature. So, it is the best concentration expression term. Same case is applied for % (w/w) and mole fraction.</p>
+                        </div>
+                    </div>
+
+                    <div style="background: var(--bg-secondary); padding: var(--spacing-lg); border-radius: var(--radius-lg); margin: var(--spacing-xl) 0;">
+                        <h4>f) Mole fraction</h4>
+                        <p>It indicates the ratio of number of moles of one component to total number of moles of all component in solution.</p>
+                        
+                        <p>Let n be number of moles of solute and N be number moles of solvent. Then,</p>
+                        
+                        <p>Mole fraction of solute (χ_solute) = <sup>n</sup>/<sub>n + N</sub></p>
+                        
+                        <p>Mole fraction of solvent (χ_solvent) = <sup>N</sup>/<sub>n + N</sub></p>
+                        
+                        <p>Numerically, <sup>n</sup>/<sub>n + N</sub> + <sup>N</sup>/<sub>n + N</sub> = 1</p>
+                        
+                        <div style="background: #fff3cd; padding: var(--spacing-md); border-radius: var(--radius-md); margin-top: var(--spacing-md);">
+                            <p><strong>N.B.</strong> Sum of mole fraction of solute & solvent in solution is 1.</p>
+                        </div>
+                    </div>
+
+                    <div style="background: var(--bg-secondary); padding: var(--spacing-lg); border-radius: var(--radius-lg); margin: var(--spacing-xl) 0;">
+                        <h4>g) Parts per million (ppm)</h4>
+                        <p>It indicates weight of solute in gram present in 10⁶ ml of solution. It is written as ppm.</p>
+                        
+                        <p>ppm = <sup>weight of solute (gm)</sup>/<sub>volume of solution (ml)</sub> × 10⁶</p>
+                        
+                        <p>Simply milligram of solute per litre of solution.</p>
+                        
+                        <p>Also, ppm = <sup>Wt.of solute</sup>/<sub>Wt. of solution</sub> × 10⁶</p>
+                        
+                        <p><em>If solution is set to be 5ppm; it means it contains 5mg. solute in 1 litre solution.</em></p>
+                    </div>
+
+                    <div style="background: var(--bg-secondary); padding: var(--spacing-lg); border-radius: var(--radius-lg); margin: var(--spacing-xl) 0;">
+                        <h4>i) Parts per billion (ppb)</h4>
+                        <p>It indicates weight of solute in gram present in 10⁹ ml of solution. It is written as ppb.</p>
+                        
+                        <p>ppb = <sup>weight of solute (gm)</sup>/<sub>volume of solution (ml)</sub> × 10⁹</p>
+                        
+                        <p>Simply microgram (μg) of solute per litre of solution.</p>
+                        
+                        <p><em>If solution is set to be 5ppb; it means it contains 5μg. solute in 1 litre solution.</em></p>
+                        
+                        <p>Also, ppb = <sup>Wt. of solute</sup>/<sub>Wt. of solution</sub> × 10⁹</p>
+                    </div>
+
+                    <div style="background: var(--bg-secondary); padding: var(--spacing-lg); border-radius: var(--radius-lg); margin: var(--spacing-xl) 0;">
+                        <h4>h) Formality</h4>
+                        <p>It indicates number of gram formula weight of solute present in one litre of solution. It is represented by F.</p>
+                        
+                        <p><strong>Mathematically:</strong></p>
+                        <p>Formality = <sup>weight of solute in gram</sup>/<sub>formula weight of solute</sub> × <sup>1</sup>/<sub>volume of solution in ml</sub> × 1000</p>
+                        
+                        <p><strong>Conversion:</strong></p>
+                        <p>Formality = <sup>gram per lit</sup>/<sub>formula weight of solute</sub></p>
+                        
+                        <p>∴ gm/lit = Formality x formula weight of solute.</p>
+                    </div>
+
+                    <h3>1.3 Relation between Normality and Molarity</h3>
+                    <p>As we derived,</p>
+                    <p>gm/lit = Normality × Equivalent weight of solute ...... (i)</p>
+                    <p>gm/lit = Molarity × Molecular weight of solute ......... (ii)</p>
+                    <p>From equation (i) and (ii)</p>
+                    <p>Normality × Equivalent weight of solute = Molarity × Molecular weight of solute</p>
+                    
+                    <p style="text-align: center; background: var(--bg-secondary); padding: var(--spacing-md); border-radius: var(--radius-md); margin: var(--spacing-md) 0;">
+                        Normality = Molarity × <sup>M.W. of solute</sup>/<sub>E.W. of solute</sub>
+                    </p>
+                    
+                    <p>Normality = Molarity × acidity (for base)</p>
+                    <p>Normality = Molarity × basicity (for acid)</p>
+                    <p>Normality = Molarity × Total +ve or -ve charge present in a salt molecule.</p>
+                    <p>Normality = Molarity × Total change in O.N. per molecule of O.A or R.A.</p>
+
+                    <h3>1.4 Relationship between W, E, V and N</h3>
+                    <p>Here,</p>
+                    <p>W = Weight of solute required to prepare the solution</p>
+                    <p>E = Gram equivalent weight of solute</p>
+                    <p>V = Volume of solution</p>
+                    <p>N = Normality of solution.</p>
+                    
+                    <p>As, To prepare 1000ml 1N solution E gm. of Solute is required.</p>
+                    <p>To prepare 1ml 1N solution (<sup>E</sup>/<sub>1000</sub>) gm. of solute is required.</p>
+                    <p>To prepare Vml, N normal solution (<sup>E</sup>/<sub>1000</sub> × V × N) gm. of solute is required.</p>
+                    <p>Weight required to prepare Vml, N normal solution is <sup>VEN</sup>/<sub>1000</sub></p>
+                    
+                    <p style="text-align: center; background: var(--bg-secondary); padding: var(--spacing-md); border-radius: var(--radius-md); margin: var(--spacing-md) 0;">
+                        i.e. W = <sup>VEN</sup>/<sub>1000</sub>
+                    </p>
+
+                    <h3>1.5 Principle of Volumetric Analysis (Law of Equivalence and Normality Equation)</h3>
+                    <p>It states that during completion of a chemical reaction, Number of gram equivalent of both species must be equal. i.e</p>
+                    
+                    <p>Number of gram equivalent of A = Number of gram equivalent of B.</p>
+                    
+                    <p>or, (<sup>W</sup>/<sub>E</sub>)_A = (<sup>W</sup>/<sub>E</sub>)_B [∵ Number of gram equivalent = <sup>weight in gm</sup>/<sub>gram equivalent weight</sub>]</p>
+                    
+                    <p>If solutions are used, (<sup>NV</sup>/<sub>1000</sub>)_A = (<sup>NV</sup>/<sub>1000</sub>)_B [∵ <sup>W</sup>/<sub>E</sub> = <sup>NV</sup>/<sub>1000</sub> from W = <sup>VEN</sup>/<sub>1000</sub>]</p>
+                    
+                    <p>or, N_AV_A = N_BN_B</p>
+                    <p>or, N₁V₁ = N₂V₂</p>
+                    
+                    <p><strong>This equation is also called Normality equation.</strong></p>
+
+                    <h3>1.6 Standard Solution</h3>
+                    <p>The solution of known concentration is called standard solution. Standard solution are of two types.</p>
+                    <ol>
+                        <li>Primary standard solution and</li>
+                        <li>Secondary standard solution.</li>
+                    </ol>
+
+                    <h4>A. Primary Standard Solution</h4>
+                    <p>The solution prepared by dissolving known amount of primary standard substance in known volume of solvent is called primary standard solution.</p>
+                    
+                    <p><strong>Prerequisites of primary standard:</strong></p>
+                    <ul>
+                        <li>It should be available in pure and dry state.</li>
+                        <li>It should be easily available.</li>
+                        <li>It should be stable.</li>
+                        <li>It should not be hygroscopic.</li>
+                        <li>Its equivalent weight should be high.</li>
+                        <li>It should be soluble in water.</li>
+                        <li>Its solution should be stable.</li>
+                    </ul>
+                    
+                    <p><strong>Examples:</strong> Anhydrous Sodium carbonate, Oxalic acid, Potassium dichromate etc.</p>
+
+                    <h4>B. Secondary Standard Solution</h4>
+                    <p>These substances which are not easily obtained in pure and dry state and are easily affected by atmospheric condition are called secondary standard substances. Solution of these substances can be prepared by titrating with another standard solution. Such solution is called secondary standard solution.</p>
+                    
+                    <p><strong>Example:</strong> NaOH, KOH, HCl etc.</p>
+
+                    <h3>1.7 Preparation of Standard Solution of Solid Substances</h3>
+                    <p>For the preparation of standard solution of any solid substances, weight of solute required is calculated using formula W = <sup>VEN</sup>/<sub>1000</sub>. Calculated weight is weighed on and transferred into volumetric flask of desired volume. Then, water is added to dissolve the substance. After complete dissolution, water is added upto the mark. By adding water, the solution is of required strength (Specific) if normality factor is 1.</p>
+
+                    <h3>1.8 Common Standard Solution Used for Analytical Purpose</h3>
+                    <div style="text-align: center; margin: var(--spacing-xl) 0;">
+                        <p><strong>Volumetric Flask</strong></p>
+                        <p>[Diagram showing a volumetric flask with narrow neck and wide bottom]</p>
+                    </div>
+                    
+                    <p>It is the solution prepared by dissolving one gram equivalent weight of solute in one litre (1000ml) solution is called normal solution.</p>
+                    
+                    <p>Here, the solution is denoted by N or simply N. Example:</p>
+                    <p>The solution prepared by dissolving one gram equivalent of oxalic acid crystals in one litre solution is denoted as 1N oxalic acid or simply 1N.</p>
+                    
+                    <p>It is the solution prepared by dissolving half (½) parts of gram equivalent of solute in one litre solution.</p>
+                    
+                    <p>It is the solution prepared by dissolving 1/10 parts of gram equivalent of solute in one litre solution.</p>
+                    
+                    <p>The solution prepared by dissolving 31.5 gm of oxalic acid crystals in one litre solution is seminormal.</p>
+                    
+                    <p>It is seminormal solution.</p>
+                    
+                    <p>Cannot be solution prepared by dissolving 100 parts of gram equivalent weight of solute in one litre solution.</p>
+                    
+                    <p>It is the solution prepared by dissolving N/10 Example</p>
+                    
+                    <p>In other line solution it is represented by <sup>1</sup>/<sub>10</sub> Example</p>
+                    
+                    <p>The solution prepared by dissolving 6.3 gm of oxalic acid crystals in one litre solution is decinormal solution.</p>
+
+                    <h3>1.9 Normality Factor (f)</h3>
+                    <p>It is the solution prepared by taking <sup>1</sup>/<sub>n</sub> gram normality factor</p>
+                    
+                    <p>Substances, it becomes difficult (with the actual weight of solute to prepare standard solution must be prepared by taking solution must be prepared solution diluted.</p>
+                    
+                    <p>Normality factor indicates N how many times concentration of prepared solution differs from desired solution.</p>
+                    
+                    <p>Mathematically,</p>
+                    <p>Normality factor (f) = <sup>Actual normality</sup>/<sub>Desired normality</sub></p>
+                    
+                    <p>or, f = <sup>Actual concentration</sup>/<sub>Desired concentration</sub></p>
+                    
+                    <p>or, f = <sup>Actual weight of solute taken</sup>/<sub>Theoretical weight of solute</sub></p>
+                    
+                    <p><strong>Example:</strong></p>
+                    <p>To prepare <sup>N</sup>/<sub>10</sub> H₂SO₄, 25 × 6.3 = 157.5gm</p>
+                    <p>If solution is prepared by taking <sup>1</sup>/<sub>n</sub> gram normality factor</p>
+                    <p>V = 157.5<br>VEN = 25 × 6.3 × 10L = 157.5gm</p>
+                    <p>If solution is prepared by taking 155gm, normality factor</p>
+                    <p>F = <sup>155</sup>/<sub>157.5</sub> = 0.98</p>
+
+                    <h3>1.10 Titration</h3>
+                    <p>The process of volumetric analysis for determination of unknown concentration is called titration.</p>
+                    
+                    <p>During Titration one of the solution is filled in burette and another solution is pipetted out in the conical flask. All the reaction is carried out in the conical flask and another solution is pipetted out in the conical flask. All the reaction is carried out in the conical flask. If the reaction is complete, neutralization of one gram equivalent of acid by one gram equivalent of base or vice-versa is called end point.</p>
+                    
+                    <div style="text-align: center; margin: var(--spacing-xl) 0;">
+                        <p><strong>Titration Setup</strong></p>
+                        <p>[Diagram showing burette, conical flask, and titration apparatus]</p>
+                        <p>Components: Burette, Conical Flask, Pinch cock, Burette stand</p>
+                    </div>
+                    
+                    <p>Exact strength = Desired strength × f = 10 × 0.98 = 9.8N.</p>
+                    
+                    <p>Conservation of solution is expressed as <sup>N</sup>/<sub>10</sub> (0.98)</p>
+                    
+                    <p>W = <sup>VEN</sup>/<sub>1000</sub></p>
+                    <p>V = 1.575 × 98</p>
+
+                    <h3>1.11 Common Terms Involved in Titration</h3>
+                    
+                    <h4>i) End point</h4>
+                    <p>The point at which reaction between two solution is completed, a visualized end point during titration which is indicated by change of indicator. Therefore, it is practical point during titration.</p>
+
+                    <h4>ii) Equivalence point</h4>
+                    <p>The point at which reaction between two solution is completed theoretically is called equivalence point. It is theoretical point during titration which is indicated by change of indicator. Therefore, it is practical point during titration.</p>
+
+                    <h4>iii) Titrant</h4>
+                    <p>Titrant is the solution of known concentration standard solution used during titration.</p>
+
+                    <h4>iv) Titrand</h4>
+                    <p>Titrand is the solution of unknown concentration whose concentration is to be determined by titration.</p>
+
+                    <h4>v) Neutral point</h4>
+                    <p>Neutral point is the point during acid base titration at which the pH of resulting solution becomes exactly 7.</p>
+
+                    <h4>vi) Indicator</h4>
+                    <p>Indicator is a weak organic acid or base used in titration which indicates the completion of reaction by changing its own colour.</p>
+
+                    <h4>vii) Burette</h4>
+                    <p>Burette is a glass apparatus used to measure the volume of solution during titration.</p>
+
+                    <h3>1.12 Types of Titration</h3>
+                    <p>The common types of titration are listed below:</p>
+
+                    <h4>i. Redox titration</h4>
+                    <p>The titration in which concentration of oxidizing agent is determined by using standard solution of reducing agent or vice-versa is called redox titration.</p>
+                    
+                    <p><strong>Example:</strong></p>
+                    <p>Potassium permanganate solution can be titrated against standard solution of oxalic acid.</p>
+                    
+                    <p>Example of reducing agent or vice-versa is called redox titration.</p>
+                    
+                    <p>The titration in which concentration of oxidizing agent is determined by using standard solution of reducing agent or vice-versa is called redox titration.</p>
+
+                    <h4>ii. Permanganometric titration</h4>
+                    <p>Eg. KMnO₄ → NaCl + H₂O + CO₂</p>
+                    
+                    <p>Preparation of 250ml decinormalized solution of oxalic acid</p>
+                    
+                    <p>Weight of oxalic acid required = <sup>VEN</sup>/<sub>1000</sub></p>
+                    
+                    <p>= <sup>250 × 63 × 0.1</sup>/<sub>1000</sub> = 1.575 gm</p>
+                    
+                    <p>Volumetric Analysis • 17</p>
+                    
+                    <p>2KMnO₄ + 3H₂SO₄ → K₂SO₄ + 2MnSO₄ + 3H₂O + 5[O]</p>
+                    
+                    <div style="background: var(--bg-secondary); padding: var(--spacing-lg); border-radius: var(--radius-lg); margin: var(--spacing-xl) 0;">
+                        <p>COOH<br>|<br>COOH + [O] ——→ 2CO₂ + H₂O] × 5</p>
+                        <p>2KMnO₄ + 3H₂SO₄ + COOH ——Δ→ K₂SO₄ + 2MnSO₄ + 10CO₂ + 8H₂O</p>
+                        <p style="text-align: right;">COOH</p>
+                    </div>
+                    
+                    <p>In this titration KMnO₄ itself acts as indicator and is called as <strong>self indicator titration</strong>. Sometimes it is also called as permanganometric titration due to the presence of permanganate (MnO₄⁻) ion.</p>
+                    
+                    <div style="background: #fff3cd; padding: var(--spacing-md); border-radius: var(--radius-md); margin: var(--spacing-md) 0;">
+                        <p><strong>N.R.</strong></p>
+                        <ol>
+                            <li>If HCl is used for acidification, KMnO₄ oxidizes HCl into Cl₂.</li>
+                            <li>The reaction of oxalic acid and potassium permanganate is <strong>considerably slow</strong>. To fasten the reaction rate, oxalic acid should be heated at about 60°C to increase the kinetic energy of the molecules and increase the reaction rate.</li>
+                        </ol>
+                    </div>
+
+                    <h4>iii. Iodometric titration</h4>
+                    <p>The titration process where the iodine liberated from iodide salt (KI) as a result of chemical reaction is titrated called iodometric titration. It is also called as iodometry.</p>
+                    
+                    <p><strong>Example:</strong> CuSO₄ is titrated against standard sodium thiosulphate.</p>
+                    
+                    <p><strong>Here,</strong></p>
+                    <p>Iodine is first liberated by reacting CuSO₄ and KI, Which is then titrated with Standard sodiumthiosulphate (hypo) solution.</p>
+                    
+                    <p>2CuSO₄ + 4KI ——→ 2K₂SO₄ + Cu₂I₂ + I₂</p>
+                    <p>2Na₂S₂O₃ + I₂ ——→ Na₂S₄O₆ + 2NaI</p>
+
+                    <h4>iv. Iodimetric titration</h4>
+                    <p>The titration where the direct iodine is titrated against other reducing agents is called iodimetric titration. It is also called as iodimetry.</p>
+                    
+                    <p><strong>Example:</strong></p>
+                    <p>Titration between iodine solution and hypo solution.</p>
+                    <p>2Na₂S₂O₃ + I₂ ——→2NaI + Na₂S₄O₆</p>
+
+                    <h3>Applications of Titration</h3>
+                    <p>Titration is widely used analytical technique applicable in different fields. It is quantitative technique used to determine the concentration level in</p>
+                    <ul>
+                        <li>Food Industry.</li>
+                        <li>Cosmetic Industry.</li>
+                        <li>Wine Industry.</li>
+                        <li>Pharmaceutical Industry.</li>
+                        <li>Biodiesel Manufacturing.</li>
+                        <li>Wastewater Management.</li>
+                        <li>Medical Diagnosis.</li>
+                        <li>Acid Rain Analysis.</li>
+                    </ul>
+
+                    <p><strong>Specifically, it is used</strong></p>
+                    <ol>
+                        <li>To discover the amount of salt or sugar in a product or the concentration of vitamin C or E, which has an effect on product colour.</li>
+                        <li>To determine the magnitude of contamination and the requirements that should be put in place in terms of filtering and cleaning the water.</li>
+                        <li>To determine the iso-electric point when surface charge becomes zero, achieved by changing the pH or adding surfactant.</li>
+                        <li>To determine the extent of contamination in the natural rainwater or snow.</li>
+                        <li>To determine the levels of glucose in those diagnosed with diabetes and also conducted to define the amount of the HCG hormone that is present in the blood.</li>
+                    </ol>
+
+                    <h3>1.13 Formulae for Numericals</h3>
+                    <ol>
+                        <li>Use W = <sup>VEN</sup>/<sub>1000</sub> if solution of solid solute is made.</li>
+                        <li>Use N₁V₁ = N₂N₂ if neutralization (reaction completes) takes place.</li>
+                        <li>Use V₁N₁ = V₂N₂ or, V₁M₁ = V₂M₂ if solution is diluted.</li>
+                        <li>For completion of reaction if (principle of volumetric analysis)
+                            <ul>
+                                <li>a. Volume of both species are involved use V₁N₁ = V₂N₂</li>
+                                <li>b. Volume of one species and weight of another is involved use<br>
+                                (<sup>W</sup>/<sub>E</sub>)_A = (<sup>NV</sup>/<sub>1000</sub>)_B</li>
+                                <li>c. Weight of both species are involved use (<sup>W</sup>/<sub>E</sub>)_A = (<sup>W</sup>/<sub>E</sub>)_B</li>
+                            </ul>
+                        </li>
+                        <li>If certain solution is added twice or more to neutralize the single solution, calculate the concentration of solution added multiple times and apply principle of volumetric analysis.</li>
+                        <li>If solution taken initially is not consumed completely by the solution added, then
+                            <ul>
+                                <li>a. Remaining solution may be titrated at once</li>
+                                <li>b. Remaining solution may be diluted and titrated (diluted volume is remaining volume but concentration is changed).</li>
+                                <li>c. Remaining solution may be titrated using certain volume of remaining solution without dilution (Initial volume is remaining volume but concentration is changed)</li>
+                            </ul>
+                            <p><em>In any of these three situation.</em></p>
+                            <p><strong>Calculate</strong></p>
+                            <p>i) Solution taken initially &nbsp;&nbsp;&nbsp; ii) Solution that remains &nbsp;&nbsp;&nbsp; iii) Solution that reacts</p>
+                            <p>and apply principle of volumetric analysis between solution that reacts and the original solution taken.</p>
+                        </li>
+                        <li>To compare the solution convert the given concentration to 1N.</li>
+                    </ol>
+
+                    <div style="background: var(--bg-secondary); padding: var(--spacing-xl); border-radius: var(--radius-lg); margin-top: var(--spacing-2xl); text-align: center;">
+                        <h3>End of Chapter 1</h3>
+                        <p style="margin-top: var(--spacing-md);">📚 Volumetric Analysis Complete</p>
+                    </div>
+                `
+            }
+        ]
+    },
+    
+    // ... other Class 12 subjects (Physics, Mathematics, Biology, etc.)
+
         "Biology": {
             title: "Class 12 Biology",
             description: "Biology for Class 12 - Reproduction, Genetics, Evolution",
